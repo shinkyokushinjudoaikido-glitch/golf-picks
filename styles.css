@@ -1,0 +1,183 @@
+/* ============================================================
+   Golf Picks — Design tokens & shared styles
+   ============================================================ */
+:root {
+  /* Brand — white / green / orange */
+  --gold: #F26419;
+  --gold-deep: #D5500D;
+  --green: #23A35B;
+  --green-deep: #18803F;
+  --green-ink: #0E3322;
+  --green-soft: #E4F6E2;
+  --gray: #767676;
+  --cream: #FDE6D6;
+  --cream-soft: #FFF5EE;
+
+  /* Ink & surfaces */
+  --ink: #16241c;
+  --ink-soft: #3c4a41;
+  --muted: #6c7a70;
+  --line: #dde7dd;
+  --line-soft: #e7efe6;
+  --bg: #eaf3e8;
+  --bg-soft: #e0ece0;
+  --bg-warm: #f0f6ee;
+
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(31,32,36,.06), 0 1px 3px rgba(31,32,36,.05);
+  --shadow-md: 0 4px 14px rgba(31,32,36,.08), 0 2px 4px rgba(31,32,36,.04);
+  --shadow-lg: 0 18px 48px rgba(31,32,36,.16), 0 6px 16px rgba(31,32,36,.07);
+  --shadow-gold: 0 8px 24px rgba(242,100,25,.30);
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-pill: 999px;
+
+  --maxw: 1240px;
+  --gut: 28px;
+
+  --ff-jp: "Noto Sans JP", system-ui, sans-serif;
+  --ff-display: "Outfit", "Noto Sans JP", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--ff-jp);
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 3px solid rgba(242,100,25,.5); outline-offset: 2px; border-radius: 6px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+.eyebrow {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  color: var(--gold-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.eyebrow::before {
+  content: ""; width: 22px; height: 2px; background: var(--gold); border-radius: 2px;
+}
+.section { padding: 92px 0; }
+.section-head { max-width: 720px; margin-bottom: 40px; }
+.section-head h2 {
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  font-weight: 800;
+  margin: 14px 0 12px;
+}
+.section-head p { color: var(--ink-soft); font-size: 16.5px; margin: 0; }
+.num { font-family: var(--ff-display); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  font-weight: 700; font-size: 15px; line-height: 1;
+  padding: 14px 24px; border-radius: var(--r-pill);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--gold); color: #fff; box-shadow: var(--shadow-gold); }
+.btn-primary:hover { background: var(--gold-deep); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(242,100,25,.42); }
+.btn-green { background: var(--green); color: #fff; box-shadow: 0 8px 22px rgba(35,163,91,.32); }
+.btn-green:hover { background: var(--green-deep); transform: translateY(-2px); }
+.btn-ghost { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--gold); color: var(--gold-deep); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #000; transform: translateY(-2px); }
+.btn-sm { padding: 10px 16px; font-size: 13.5px; }
+.btn-lg { padding: 17px 30px; font-size: 16px; }
+
+/* Chips / tabs */
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 16px; border-radius: var(--r-pill);
+  font-size: 14px; font-weight: 600; color: var(--ink-soft);
+  background: #fff; box-shadow: inset 0 0 0 1.4px var(--line);
+  transition: all .16s ease; white-space: nowrap;
+}
+.chip:hover { box-shadow: inset 0 0 0 1.4px var(--gold); color: var(--gold-deep); }
+.chip.active { background: var(--ink); color: #fff; box-shadow: none; }
+.chip.active.gold { background: var(--gold); }
+.chip.active.green { background: var(--green); }
+
+/* Cards */
+.card { background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+
+/* Photo placeholders ------------------------------------------------ */
+.ph {
+  position: relative; overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.0) 0%, rgba(255,255,255,.0) 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.10) 0 14px, rgba(255,255,255,0) 14px 28px);
+  display: grid; place-items: center;
+}
+/* scenic = golf course vibe (sky -> fairway) */
+.ph-scenic {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 16px, rgba(255,255,255,0) 16px 32px),
+    radial-gradient(120% 80% at 70% 18%, #cfeafe 0%, #aee0f5 28%, transparent 52%),
+    linear-gradient(180deg, #bfe6f7 0%, #d8f0e2 42%, #8fce72 60%, #62b04a 100%);
+}
+.ph-scenic.dusk {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 16px, rgba(255,255,255,0) 16px 32px),
+    radial-gradient(120% 90% at 78% 12%, #ffe7b3 0%, #ffd07a 24%, transparent 55%),
+    linear-gradient(180deg, #ffd9a1 0%, #ffc98e 26%, #aacf86 55%, #5fa84a 100%);
+}
+.ph-product {
+  background:
+    repeating-linear-gradient(45deg, #f0f0ee 0 10px, #f7f7f5 10px 20px);
+}
+.ph-label {
+  position: absolute; left: 12px; bottom: 12px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 10.5px; letter-spacing: .03em;
+  color: rgba(31,32,36,.62);
+  background: rgba(255,255,255,.78); backdrop-filter: blur(4px);
+  padding: 4px 9px; border-radius: 6px;
+}
+.ph-scenic .ph-label { color: rgba(255,255,255,.92); background: rgba(31,40,30,.32); }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .02em;
+  padding: 4px 10px; border-radius: var(--r-pill);
+}
+.badge-gold { background: var(--cream); color: var(--gold-deep); }
+.badge-green { background: #e4f6df; color: var(--green-deep); }
+.badge-gray { background: #f0f0f0; color: var(--gray); }
+.badge-rank {
+  width: 26px; height: 26px; border-radius: 50%; justify-content: center; padding: 0;
+  font-family: var(--ff-display); font-size: 13px; color: #fff;
+}
+
+/* utility */
+.stack { display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; }
+.spread { display: flex; align-items: center; justify-content: space-between; }
+.tag-soft { color: var(--muted); font-size: 13px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@media (max-width: 860px) {
+  .section { padding: 60px 0; }
+  :root { --gut: 18px; }
+}
