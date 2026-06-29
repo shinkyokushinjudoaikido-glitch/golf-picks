@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>楽天API ブラウザテスト</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;line-height:1.7;color:#172a1f;}
+  h1{font-size:20px;}
+  .box{background:#f5fbf3;border:1px solid #e3efe3;border-radius:12px;padding:16px;margin:16px 0;}
+  button{background:#16C46A;color:#fff;border:0;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:700;cursor:pointer;}
+  button:hover{background:#10A256;}
+  pre{background:#0c1f14;color:#9ff5c4;padding:14px;border-radius:10px;overflow:auto;font-size:13px;white-space:pre-wrap;word-break:break-all;}
+  .item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #eef6ee;align-items:center;}
+  .item img{width:60px;height:60px;object-fit:cover;border-radius:8px;}
+  .price{color:#F0610E;font-weight:800;}
+  input{width:100%;padding:10px;border:1px solid #e3efe3;border-radius:8px;font-size:14px;box-sizing:border-box;}
+  label{font-weight:700;font-size:13px;display:block;margin:12px 0 4px;}
+</style>
+</head>
+<body>
+  <h1>🏌️ 楽天API ブラウザ実行テスト</h1>
+  <p>このページは「ブラウザから楽天を呼べば403が消えるか」を確認するためのテストです。</p>
+
+  <div class="box">
+    <strong>STEP 1：あなたのキーを入力</strong>
+    <label>アプリID（applicationId / UUID形式）</label>
+    <input id="appId" placeholder="0a2e6455-9e92-... を貼り付け" />
+    <label>アクセスキー（Access Key / pk_ で始まる）</label>
+    <input id="accessKey" placeholder="pk_... を貼り付け" />
+    <label>アフィリエイトID</label>
+    <input id="affId" placeholder="5529f321... を貼り付け" />
+  </div>
+
+  <button onclick="runTest()">STEP 2：中古ドライバーを検索してみる</button>
+
+  <div class="box">
+    <strong>結果</strong>
+    <div id="status">↑ キーを入れてボタンを押してください</div>
+    <div id="items"></div>
+  </div>
+
+  <details>
+    <summary>生レスポンス（デバッグ用）</summary>
+    <pre id="raw"></pre>
+  </details>
+
+<script>
+async function runTest(){
+  const appId = document.getElementById('appId').value.trim();
+  const accessKey = document.getElementById('accessKey').value.trim();
+  const affId = document.getElementById('affId').value.trim();
+  const status = document.getElementById('status');
+  const itemsEl = document.getElementById('items');
+  const raw = document.getElementById('raw');
+
+  if(!appId || !accessKey){
+    status.innerHTML = '⚠️ アプリIDとアクセスキーを入れてください';
+    return;
+  }
+
+  status.innerHTML = '⏳ 楽天に問い合わせ中...';
+  itemsEl.innerHTML = '';
+  raw.textContent = '';
+
+  const params = new URLSearchParams({
+    applicationId: appId,
+    accessKey: accessKey,
+    affiliateId: affId,
+    keyword: '中古 ゴルフ ドライバー',
+    hits: '5',
+    format: 'json'
+  });
+
+  const url = 'https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20220601?' + params;
+
+  try{
+    const res = await fetch(url);
+    const text = await res.text();
+    raw.textContent = 'HTTP ' + res.status + '\n\n' + text;
+
+    if(!res.ok){
+      status.innerHTML = '❌ HTTP ' + res.status + ' エラー（下の生レスポンスを確認）';
+      return;
+    }
+
+    const data = JSON.parse(text);
+    const items = data.Items || [];
+    status.innerHTML = '✅ 成功！ ' + items.length + '件取得できました。403は出ていません！';
+
+    items.forEach(w => {
+      const it = w.Item;
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML =
+        '<img src="' + (it.mediumImageUrls?.[0]?.imageUrl || '') + '" />' +
+        '<div><div>' + it.itemName.slice(0,60) + '</div>' +
+        '<div class="price">¥' + Number(it.itemPrice).toLocaleString() + '</div></div>';
+      itemsEl.appendChild(div);
+    });
+  }catch(e){
+    status.innerHTML = '❌ 通信エラー: ' + e.message;
+    raw.textContent = e.toString();
+  }
+}
+</script>
+</body>
+</html>
