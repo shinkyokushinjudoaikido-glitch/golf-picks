@@ -89,7 +89,7 @@ a{color:inherit;text-decoration:none;}
 .pager-info b{color:var(--gold-deep);font-weight:900;}
 
 /* ★ 知っておきたいこと */
-.know-sec{padding:6px 0 4px;}
+.know-block{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);}
 .know-toggle{width:100%;display:flex;align-items:center;gap:11px;background:var(--cream-soft);border:1.5px solid var(--cream);border-radius:var(--r-md);padding:14px 16px;cursor:pointer;text-align:left;transition:background .15s;}
 .know-toggle:hover{background:#fdf3e3;}
 .know-ico{flex:none;color:var(--gold-deep);display:flex;}
@@ -405,28 +405,6 @@ a{color:inherit;text-decoration:none;}
   </button>
 
   <!-- ⑨ 専用入口：レフティ / レディース / シニア -->
-  <section class="know-sec">
-    <div class="wrap">
-      <button class="know-toggle" id="knowToggle" aria-expanded="false">
-        <span class="know-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-        <span class="know-ttl">初めてクラブを選ぶ前に、知っておきたいこと</span>
-        <span class="know-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </button>
-      <div class="know-body" id="knowBody" hidden>
-        <div class="know-lead">
-          結論から言うと、<b>最初から「自分に完璧に合う1本」を探さなくて大丈夫</b>です。
-        </div>
-        <p>ゴルフクラブは、ボールを打つ<b>ヘッド</b>と、棒の部分である<b>シャフト</b>の組み合わせでできています。このヘッドとシャフトには、それぞれ重さ・硬さ・長さ・角度などの違いが無数にあり、組み合わせは事実上きりがありません。</p>
-        <p>そして、どの組み合わせが本当に自分に合うかは、<b>自分のスイングが固まって初めて分かる</b>ものです。始めたばかりの段階では、そもそも振り方が毎回変わるので、「合う・合わない」を判断する土台がまだありません。</p>
-        <div class="know-point">
-          <span class="know-point-no">だから</span>
-          <p>初心者はまず、<b>無理なく始められるクラブ</b>で十分です。練習を重ねてスイングができあがってくると、自然と「自分はこういう球を打ちたい」「ここが合わない」と感じるようになります。<b>そのときに、自分に合う1本を選べばいい</b>のです。</p>
-        </div>
-        <p class="know-foot">レビューの評価は参考になりますが、それはあくまで「他の人にとって」の評価です。クラブ選びは、上達してからが本番。まずは気軽に1本、始めてみてください。</p>
-      </div>
-    </div>
-  </section>
-
   <div class="filter">
     <div class="wrap">
       <!-- 検索窓（Enterで楽天に再検索） -->
@@ -570,6 +548,27 @@ a{color:inherit;text-decoration:none;}
 
   <!-- セットカード一覧 -->
   <div class="starter-set" id="starterSet"></div>
+
+  <!-- 知っておきたいこと（ポップアップ内に統合） -->
+  <div class="know-block">
+    <button class="know-toggle" id="knowToggle" aria-expanded="false">
+      <span class="know-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="know-ttl">クラブを選ぶ前に、知っておきたいこと</span>
+      <span class="know-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </button>
+    <div class="know-body" id="knowBody" hidden>
+      <div class="know-lead">
+        結論から言うと、<b>最初から「自分に完璧に合う1本」を探さなくて大丈夫</b>です。
+      </div>
+      <p>ゴルフクラブは、ボールを打つ<b>ヘッド</b>と、棒の部分である<b>シャフト</b>の組み合わせでできています。このヘッドとシャフトには、それぞれ重さ・硬さ・長さ・角度などの違いが無数にあり、組み合わせは事実上きりがありません。</p>
+      <p>そして、どの組み合わせが本当に自分に合うかは、<b>自分のスイングが固まって初めて分かる</b>ものです。始めたばかりの段階では、そもそも振り方が毎回変わるので、「合う・合わない」を判断する土台がまだありません。</p>
+      <div class="know-point">
+        <span class="know-point-no">だから</span>
+        <p>初心者はまず、<b>無理なく始められるクラブ</b>で十分です。練習を重ねてスイングができあがってくると、自然と「自分はこういう球を打ちたい」「ここが合わない」と感じるようになります。<b>そのときに、自分に合う1本を選べばいい</b>のです。</p>
+      </div>
+      <p class="know-foot">レビューの評価は参考になりますが、それはあくまで「他の人にとって」の評価です。クラブ選びは、上達してからが本番。まずは気軽に1本、始めてみてください。</p>
+    </div>
+  </div>
 </div>
 
 <script>
