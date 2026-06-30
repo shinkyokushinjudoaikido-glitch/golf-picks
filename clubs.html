@@ -256,9 +256,12 @@ a{color:inherit;text-decoration:none;}
 
 /* リスト */
 .list{padding:24px 0 60px;}
-.list-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
-.list-head .count{font-size:13px;color:var(--muted);}
+.list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.list-head .count{flex:1 1 100%;line-height:1.5;}
+@media(min-width:680px){.list-head .count{flex:1 1 auto;}}
+.list-head .count{font-size:13px;color:var(--ink-soft);}
 .list-head .count b{color:var(--gold-deep);font-family:var(--ff-display);font-size:17px;}
+.list-head .count-sub{color:var(--muted);font-size:12px;margin-left:4px;}
 .sort{font-size:13px;font-weight:600;color:var(--ink-soft);background:#fff;padding:7px 12px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);}
 
 .grid{display:grid;grid-template-columns:1fr;gap:14px;}
@@ -448,25 +451,13 @@ a{color:inherit;text-decoration:none;}
           <div class="refine-chips" id="specialChips"></div>
         </div>
       </div>
-      <!-- ★ 検索状態バー：絞り込みの結果として下に表示 -->
-      <div id="searchStatus" class="search-status"></div>
     </div>
   </div>
-
-  <!-- ⑤ 用語ヘルプバー（タップで説明） -->
-  <section class="termbar-sec">
-    <div class="wrap">
-      <div class="termbar reveal">
-        <span class="termbar-lead"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 3.5M12 17h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> 用語解説</span>
-        <div class="termbar-chips" id="termChips"></div>
-      </div>
-    </div>
-  </section>
 
   <section class="list">
     <div class="wrap">
       <div class="list-head">
-        <div class="count"><b id="resultCount">0</b> 件のモデル</div>
+        <div class="count" id="resultSummary"><b id="resultCount">0</b> 件のモデル</div>
         <div class="list-actions">
           <button class="fav-toggle" id="favToggle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-8.5C.5 9 2 5 5.5 5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3C17 5 18.5 9 16.5 12.5 14 16.5 12 18 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> お気に入り <span id="favCount">0</span></button>
           <div class="sort-wrap">
@@ -815,20 +806,16 @@ async function fetchAllClubs(){
 
 /* 「今、何を検索した結果か」の見出しを更新 */
 function updateSearchHeader(isLoading, isError){
-  var bar = document.getElementById("searchStatus");
-  if(!bar) return;
-  var icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-  var srcLabel = currentSearch.source==="keyword" ? "キーワード検索" : "カテゴリ";
-  var cond = (mustOpts.gender==="ladies"?"レディース":"メンズ") + (mustOpts.hand==="left"?"・左利き":"");
+  var el = document.getElementById("resultSummary");
+  if(!el) return;
   if(isError){
-    bar.innerHTML = icon + '<span>楽天市場の検索でエラーが発生しました</span>';
+    el.innerHTML = '<b>—</b> 件 / 検索エラー';
   } else if(isLoading){
-    bar.innerHTML = icon + '<span>楽天市場で「<b>'+escapeHtml(currentSearch.label)+'</b>」（'+cond+'）を検索中...</span>';
+    el.innerHTML = '楽天市場を検索中...';
   } else {
     var total = currentSearch.totalHits.toLocaleString("ja-JP");
-    bar.innerHTML = icon +
-      '<span>楽天市場（'+srcLabel+'）：「<b>'+escapeHtml(currentSearch.label)+'</b>」（'+cond+'）で <b>'+total+'</b> 件ヒット ／ '+
-      'うち <b>'+currentSearch.shownCount+'</b> 件を表示中（'+currentSearch.page+' / '+currentSearch.pageCount+' ページ）</span>';
+    el.innerHTML = '楽天市場で <b>'+total+'</b> 件ヒット ／ <b>'+currentSearch.shownCount+'</b> 件を表示中'+
+      '<span class="count-sub">（'+currentSearch.page+' / '+currentSearch.pageCount+' ページ）</span>';
   }
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
@@ -1071,7 +1058,6 @@ function render(){
     return a.popRank-b.popRank; // pop
   });
 
-  document.getElementById("resultCount").textContent = items.length;
   grid.innerHTML = "";
 
   if(!items.length){
