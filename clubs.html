@@ -71,14 +71,12 @@ a{color:inherit;text-decoration:none;}
 .search-status b{color:var(--gold-deep);font-weight:800;}
 
 /* ★ 必須セレクタ（利き手・性別） */
-.must-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:11px;padding:11px 14px;background:#fff;border:1.5px solid var(--green-soft);border-radius:var(--r-md);}
-.must-grp{display:flex;align-items:center;gap:9px;}
-.must-lbl{font-size:12px;font-weight:800;color:var(--green-deep);display:flex;align-items:center;gap:5px;}
-.must-lbl i{font-size:9px;font-style:normal;font-weight:800;color:#fff;background:var(--gold);padding:1px 6px;border-radius:var(--r-pill);}
+.refine-divider{height:1px;background:var(--line);margin:3px 0;}
+.rchip-more{color:var(--gold-deep)!important;box-shadow:inset 0 0 0 1.5px var(--cream)!important;background:var(--cream-soft)!important;}
 .must-chips{display:flex;gap:6px;}
-.mchip{font-size:12.5px;font-weight:700;color:var(--ink-soft);background:var(--bg-soft);padding:7px 14px;border-radius:var(--r-pill);transition:all .15s;cursor:pointer;}
-.mchip:active{transform:scale(.94);}
-.mchip.on{background:var(--green);color:#fff;box-shadow:0 4px 12px rgba(35,163,91,.25);}
+.mchip{font-size:13px;font-weight:700;color:var(--ink-soft);background:#fff;padding:8px 16px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .16s;cursor:pointer;}
+.mchip:active{transform:scale(.95);}
+.mchip.on{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(35,163,91,.28);}
 
 /* ★ ページ送り */
 .pager{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px 0 4px;}
@@ -132,7 +130,7 @@ a{color:inherit;text-decoration:none;}
 
 /* ★ 予算帯タブ */
 .budget-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.budget-tab{flex:1;min-width:78px;font-size:13px;font-weight:800;color:var(--green-deep);background:#fff;padding:11px 8px;border-radius:var(--r-md);box-shadow:inset 0 0 0 1.5px #b8eccb;transition:all .15s;cursor:pointer;}
+.budget-tab{flex:1;min-width:78px;font-size:13px;font-weight:700;color:var(--ink-soft);background:#fff;padding:11px 8px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .16s;cursor:pointer;}
 .budget-tab:active{transform:scale(.96);}
 .budget-tab.on{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(35,163,91,.28);}
 
@@ -227,9 +225,9 @@ a{color:inherit;text-decoration:none;}
 .refine-grp{display:flex;align-items:flex-start;gap:10px;}
 .refine-lbl{flex:none;width:64px;font-size:11px;font-weight:800;color:var(--muted);padding-top:7px;letter-spacing:.02em;}
 .refine-chips{flex:1;display:flex;flex-wrap:wrap;gap:6px;}
-.rchip{font-size:12px;font-weight:600;color:var(--ink-soft);background:#fff;padding:6px 13px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.3px var(--line);transition:all .15s;}
-.rchip:active{transform:scale(.94);}
-.rchip.on{background:var(--green);color:#fff;box-shadow:0 5px 14px rgba(35,163,91,.26);}
+.rchip{font-size:13px;font-weight:700;color:var(--ink-soft);background:#fff;padding:8px 16px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .16s;}
+.rchip:active{transform:scale(.95);}
+.rchip.on{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(35,163,91,.28);}
 .rchip.rk-S.on{background:var(--rankS);}
 .rchip.rk-A.on{background:var(--rankA);}
 .rchip.rk-B.on{background:var(--rankB);}
@@ -413,29 +411,26 @@ a{color:inherit;text-decoration:none;}
         <input id="ucKw" placeholder="楽天市場を検索（例：Qi10、ゼクシオ アイアン）Enterで検索">
         <button id="ucKwClear" class="uc-clear" style="display:none" aria-label="クリア"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       </div>
-      <!-- ★ 必須の絞り込み：利き手・性別 -->
-      <div class="must-row">
-        <div class="must-grp">
-          <span class="must-lbl">利き手<i>必須</i></span>
-          <div class="must-chips" id="handChips">
-            <button class="mchip on" data-val="right">右利き</button>
-            <button class="mchip" data-val="left">左利き</button>
-          </div>
-        </div>
-        <div class="must-grp">
-          <span class="must-lbl">性別<i>必須</i></span>
-          <div class="must-chips" id="genderChips">
-            <button class="mchip on" data-val="mens">メンズ</button>
-            <button class="mchip" data-val="ladies">レディース</button>
-          </div>
-        </div>
-      </div>
-      <!-- 種類チップ -->
-      <div class="filter-row" id="filterRow"></div>
-      <!-- ★ 検索状態バー：今、何を検索した結果かを表示 -->
-      <div id="searchStatus" class="search-status"></div>
-      <!-- 詳細絞り込み（価格帯・状態・メーカー） -->
+      <!-- 統一された絞り込みパネル（すべての絞り込みをここにまとめる） -->
       <div class="uc-refine" id="ucRefine">
+        <div class="refine-grp">
+          <span class="refine-lbl">利き手</span>
+          <div class="refine-chips" id="handChips">
+            <button class="rchip on" data-val="right">右利き</button>
+            <button class="rchip" data-val="left">左利き</button>
+          </div>
+        </div>
+        <div class="refine-grp">
+          <span class="refine-lbl">性別</span>
+          <div class="refine-chips" id="genderChips">
+            <button class="rchip on" data-val="mens">メンズ</button>
+            <button class="rchip" data-val="ladies">レディース</button>
+          </div>
+        </div>
+        <div class="refine-grp">
+          <span class="refine-lbl">種類</span>
+          <div class="refine-chips" id="filterRow"></div>
+        </div>
         <div class="refine-grp">
           <span class="refine-lbl">価格帯</span>
           <div class="refine-chips" id="priceChips"></div>
@@ -453,6 +448,8 @@ a{color:inherit;text-decoration:none;}
           <div class="refine-chips" id="specialChips"></div>
         </div>
       </div>
+      <!-- ★ 検索状態バー：絞り込みの結果として下に表示 -->
+      <div id="searchStatus" class="search-status"></div>
     </div>
   </div>
 
@@ -862,17 +859,35 @@ function rebuildBrandChips(){
   var brandList = [];
   clubs.forEach(function(c){ if(brandList.indexOf(c.brand)<0 && c.brand!=="その他") brandList.push(c.brand); });
   brandList.sort();
-  brandList.forEach(function(br){
+
+  var LIMIT = 8;
+  function makeChip(br){
     var b = document.createElement("button");
     b.className = "rchip"; b.textContent = br;
+    if(activeBrand===br) b.classList.add("on");
     b.onclick = function(){
       activeBrand = (activeBrand===br)?null:br;
       brandChips.querySelectorAll(".rchip").forEach(function(c){c.classList.remove("on");});
       if(activeBrand) b.classList.add("on");
       render();
     };
-    brandChips.appendChild(b);
-  });
+    return b;
+  }
+
+  /* 最初の8個 */
+  brandList.slice(0, LIMIT).forEach(function(br){ brandChips.appendChild(makeChip(br)); });
+
+  /* 残りがあれば「もっと見る」 */
+  if(brandList.length > LIMIT){
+    var more = document.createElement("button");
+    more.className = "rchip rchip-more";
+    more.textContent = "もっと見る +" + (brandList.length - LIMIT);
+    more.onclick = function(){
+      more.remove();
+      brandList.slice(LIMIT).forEach(function(br){ brandChips.appendChild(makeChip(br)); });
+    };
+    brandChips.appendChild(more);
+  }
 }
 
 var types = [
@@ -910,11 +925,11 @@ var priceBands = [
 var filterRow = document.getElementById("filterRow");
 types.forEach(function(t){
   var b = document.createElement("button");
-  b.className = "chip" + (t.id==="all"?" on":"");
+  b.className = "rchip" + (t.id==="all"?" on":"");
   b.textContent = t.label;
   b.onclick = function(){
     activeType = t.id;
-    document.querySelectorAll("#filterRow .chip").forEach(function(c){c.classList.remove("on");});
+    document.querySelectorAll("#filterRow .rchip").forEach(function(c){c.classList.remove("on");});
     b.classList.add("on");
     /* 検索窓はクリアして、種類カテゴリで楽天を再検索 */
     kw = "";
@@ -974,7 +989,7 @@ ucKw.addEventListener("keydown", function(e){
     if(!q) return;
     /* 種類タブの選択を解除して「すべて」に戻す（キーワード検索が主役になる） */
     activeType = "all";
-    document.querySelectorAll("#filterRow .chip").forEach(function(c,i){c.classList.toggle("on", i===0);});
+    document.querySelectorAll("#filterRow .rchip").forEach(function(c,i){c.classList.toggle("on", i===0);});
     kw = "";  /* 手元絞り込みはリセット（楽天側で絞るため） */
     currentSearch.source  = "keyword";
     currentSearch.label   = q;
@@ -1137,7 +1152,7 @@ window.resetFilters = function(){
   ucKw.value=""; ucKwClear.style.display="none";
   document.getElementById("sortSel").value="pop"; sortMode="pop";
   favToggle.classList.remove("on");
-  document.querySelectorAll("#filterRow .chip").forEach(function(c,i){c.classList.toggle("on",i===0);});
+  document.querySelectorAll("#filterRow .rchip").forEach(function(c,i){c.classList.toggle("on",i===0);});
   document.querySelectorAll("#priceChips .rchip,#rankChips .rchip,#brandChips .rchip").forEach(function(c){c.classList.remove("on");});
   /* 検索条件も「すべて」に戻して楽天を取り直す */
   currentSearch.source  = "type";
