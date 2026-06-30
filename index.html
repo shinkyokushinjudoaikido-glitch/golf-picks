@@ -183,6 +183,11 @@ a{color:inherit;text-decoration:none;}
 
 @media(min-width:620px){.entry-grid{grid-template-columns:1fr 1fr;}}
 @media(min-width:980px){.entry-grid{grid-template-columns:repeat(4,1fr);}.entry{min-height:230px;}}
+/* 2カラム版（中古クラブ＋初めての方） */
+.entry-grid-2{grid-template-columns:1fr;}
+@media(min-width:620px){.entry-grid-2{grid-template-columns:1fr 1fr;max-width:760px;margin:0 auto;}}
+@media(min-width:980px){.entry-grid-2{grid-template-columns:1fr 1fr;}.entry-grid-2 .entry{min-height:230px;}}
+.bg-starter{background:linear-gradient(150deg,#2fae6e,#10a256 72%);}
 
 /* ============================================================
    PRバンド
@@ -244,12 +249,6 @@ a{color:inherit;text-decoration:none;}
   *{animation:none!important;transition-duration:.01ms!important;}
   .reveal,.fade-up{opacity:1!important;transform:none!important;}
 }
-
-/* 準備中エントリーカード（最小公開時） */
-.entry.is-soon{opacity:.62;cursor:default;position:relative;}
-.entry.is-soon:hover{transform:none;}
-.entry.is-soon .entry-go{color:var(--ink-soft);}
-.entry.is-soon::after{content:"準備中";position:absolute;top:14px;right:14px;background:rgba(23,42,31,.78);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;z-index:3;letter-spacing:.04em;}
 </style>
 </head>
 <body>
@@ -262,10 +261,10 @@ a{color:inherit;text-decoration:none;}
       <span class="logo-text">Golf <span>Picks</span></span>
     </a>
     <nav class="hd-nav">
-      <a href="#clubs">中古クラブ</a><a href="#tour">大会</a><a href="#practice">練習場</a><a href="#course">ゴルフ場</a>
+      <a href="clubs.html">中古クラブ</a>
     </nav>
     <div class="hd-actions">
-      <button class="btn btn-primary hd-cta" style="padding:10px 18px;font-size:14px;">はじめる</button>
+      <a href="clubs.html" class="btn btn-primary hd-cta" style="padding:10px 18px;font-size:14px;">中古クラブを探す</a>
       <button class="burger" id="burger" aria-label="メニュー"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="6" width="16" height="2" rx="1" fill="currentColor"/><rect x="3" y="10" width="16" height="2" rx="1" fill="currentColor"/><rect x="3" y="14" width="16" height="2" rx="1" fill="currentColor"/></svg></button>
     </div>
   </div>
@@ -274,10 +273,7 @@ a{color:inherit;text-decoration:none;}
 <div class="drawer-bd" id="drawerBd"></div>
 <aside class="drawer" id="drawer">
   <a href="clubs.html">中古クラブを探す <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  <a href="#tour">ゴルフ大会 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  <a href="#practice">練習場マップ <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  <a href="#course">ゴルフ場マップ <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  <button class="btn btn-primary btn-block" style="margin-top:18px;">はじめる</button>
+  <a href="clubs.html" class="btn btn-primary btn-block" style="margin-top:18px;">中古クラブを探す</a>
 </aside>
 
 <main id="top">
@@ -287,66 +283,44 @@ a{color:inherit;text-decoration:none;}
     <div class="wrap hero-in">
       <div class="hero-grid">
         <div>
-          <span class="hero-pill fade-up d1"><span class="dot"></span> 毎日、最新情報を更新中</span>
-          <h1 class="fade-up d2">日本中のゴルフが、<br><span class="hl">ここから始まる。</span></h1>
-          <p class="hero-lead fade-up d3">旅先のコースも、いつもの練習場も、次の一本も。Golf Picks で見つけて、比べて、出かけよう。</p>
+          <span class="hero-pill fade-up d1"><span class="dot"></span> 楽天市場の最新在庫から検索</span>
+          <h1 class="fade-up d2">あなたの次の一本が、<br><span class="hl">きっと見つかる。</span></h1>
+          <p class="hero-lead fade-up d3">中古ゴルフクラブを、メーカー・価格・状態で。初めての方には、予算からのセット提案も。Golf Picks で見つけて、比べて、始めよう。</p>
         </div>
         <div class="fade-up d4">
           <div class="search">
-            <div class="search-tabs" id="searchTabs">
-              <button class="s-tab on" data-tab="clubs"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M6 6v13a1 1 0 001 1h10a1 1 0 001-1V6M9 11v5M15 11v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> 中古クラブ</button>
-              <button class="s-tab" data-tab="course"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 3v18M7 4h10l-3 3 3 3H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> ゴルフ場</button>
-              <button class="s-tab" data-tab="practice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.3-7-11a7 7 0 0114 0c0 4.7-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg> 練習場</button>
-            </div>
             <div class="search-body">
-              <label class="s-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="col"><em id="f1label">キーワード</em><input id="f1input" placeholder="メーカー・モデル名"></span></label>
-              <label class="s-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20.6 7.3l-9 9-4.6-4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="col"><em id="f2label">目的</em><input id="f2input" placeholder="やさしさ / 飛び など"></span></label>
-              <button class="btn btn-primary s-go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> 検索</button>
+              <label class="s-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="col"><em>中古クラブを検索</em><input id="heroSearch" placeholder="メーカー・モデル名（例：Qi10、ゼクシオ）"></span></label>
+              <button class="btn btn-primary s-go" id="heroGo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> 検索</button>
             </div>
             <div class="search-quick">
               <span>人気:</span>
-              <button class="s-quick">Qi10 ドライバー</button><button class="s-quick">初心者セット</button><button class="s-quick">レディース</button><button class="s-quick">関東のゴルフ場</button>
+              <button class="s-quick">ドライバー</button><button class="s-quick">アイアン セット</button><button class="s-quick">初心者セット</button><button class="s-quick">レディース</button>
             </div>
-          </div>
-          <div class="hero-stats">
-            <div class="h-stat"><span class="num" data-count="3782">0</span><small>全国の練習場</small></div>
-            <div class="h-stat"><span class="num" data-count="2813">0</span><small>掲載ゴルフ場</small></div>
-            <div class="h-stat"><span class="num" data-count="48200">0</span><small>中古クラブ</small></div>
-            <div class="h-stat"><span class="num">毎日</span><small>情報更新</small></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- サービス一覧 -->
+  <!-- サービス導線 -->
   <section class="section">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Explore Golf Picks</span>
-        <h2>使いたい機能を選ぶ</h2>
-        <p>中古クラブ・ゴルフ大会・練習場・ゴルフ場。それぞれの専用ページで、じっくり探せます。</p>
+        <h2>中古クラブを、かしこく選ぶ</h2>
+        <p>実在モデルを楽天市場の最新在庫から。状態・価格・メーカーで絞り込んで比較できます。</p>
       </div>
-      <div class="entry-grid">
-        <a class="entry reveal" id="clubs" href="clubs.html">
+      <div class="entry-grid entry-grid-2">
+        <a class="entry reveal" href="clubs.html">
           <div class="entry-bg bg-clubs"></div><div class="entry-scrim"></div>
-          <div class="entry-top"><span class="entry-k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M6 6v13a1 1 0 001 1h10a1 1 0 001-1V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> 中古クラブ</span><span class="entry-n">48,200<small>件</small></span></div>
-          <div class="entry-body"><strong>中古クラブを探す</strong><p>実在モデルをメーカー・価格・状態で絞り込み、最安値を比較。</p><span class="entry-go">比較する <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="entry-top"><span class="entry-k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M6 6v13a1 1 0 001 1h10a1 1 0 001-1V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> 中古クラブ</span><span class="entry-n" id="clubsCount">—</span></div>
+          <div class="entry-body"><strong>中古クラブを探す</strong><p>ドライバー・アイアン・パターを、メーカーや価格・状態ランクで絞って比較。</p><span class="entry-go">比較する <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
         </a>
-        <a class="entry reveal is-soon" id="tour" href="#" onclick="return false;">
-          <div class="entry-bg bg-tour"></div><div class="entry-scrim"></div>
-          <div class="entry-top"><span class="entry-k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 4h12v4a6 6 0 01-12 0V4zM9 14h6M10 18h4M8 22h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> ゴルフ大会</span><span class="entry-n">日米欧</span></div>
-          <div class="entry-body"><strong>大会スケジュール</strong><p>日本・米国・欧州の男子／女子大会の日程・結果をひとつに。</p><span class="entry-go">大会を見る <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-        </a>
-        <a class="entry reveal is-soon" id="practice" href="#" onclick="return false;">
-          <div class="entry-bg bg-practice"></div><div class="entry-scrim"></div>
-          <div class="entry-top"><span class="entry-k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.3-7-11a7 7 0 0114 0c0 4.7-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/></svg> 練習場</span><span class="entry-n">3,782<small>件</small></span></div>
-          <div class="entry-body"><strong>全国練習場マップ</strong><p>近くの打ちっぱなしを地図から。打席数・ナイター対応で探せる。</p><span class="entry-go">地図を見る <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-        </a>
-        <a class="entry reveal is-soon" id="course" href="#" onclick="return false;">
-          <div class="entry-bg bg-course"></div><div class="entry-scrim"></div>
-          <div class="entry-top"><span class="entry-k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 3v18M7 4h10l-3 3 3 3H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> ゴルフ場</span><span class="entry-n">2,813<small>件</small></span></div>
-          <div class="entry-body"><strong>全国ゴルフ場マップ</strong><p>行きたいコースを景色で探す。エリアを選ぶとすぐ見つかる。</p><span class="entry-go">地図を見る <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <a class="entry reveal" href="clubs.html">
+          <div class="entry-bg bg-starter"></div><div class="entry-scrim"></div>
+          <div class="entry-top"><span class="entry-k"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> 初めての方へ</span><span class="entry-n">予算で選ぶ</span></div>
+          <div class="entry-body"><strong>はじめてのクラブセット</strong><p>予算を選ぶと、その範囲で始められる初心者向けセットと相場がわかります。</p><span class="entry-go">セットを見る <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
         </a>
       </div>
     </div>
@@ -356,15 +330,10 @@ a{color:inherit;text-decoration:none;}
   <section class="reveal">
     <div class="pr">
       <div class="pr-in">
-        <span class="badge badge-gold">PR ・ 今週の注目</span>
-        <h3>買い替えシーズン。人気ドライバーが<span class="hl">最大47%オフ</span>。</h3>
-        <p>各ショップの在庫から、状態の良い中古クラブを目的別にピックアップ。今すぐ比較できます。</p>
-        <button class="btn btn-primary btn-lg">中古クラブを比較する</button>
-        <div class="pr-cards">
-          <div class="pr-mini"><div class="pr-mini-thumb"></div><div class="pr-mini-body"><strong>TaylorMade Qi10 MAX</strong><span class="badge badge-green">A・美品</span><span class="pr-mini-price">¥48,800</span></div></div>
-          <div class="pr-mini"><div class="pr-mini-thumb"></div><div class="pr-mini-body"><strong>PING G430 MAX 10K</strong><span class="badge badge-green">S・極上</span><span class="pr-mini-price">¥52,000</span></div></div>
-          <div class="pr-mini"><div class="pr-mini-thumb"></div><div class="pr-mini-body"><strong>Titleist T100 アイアン</strong><span class="badge badge-green">S</span><span class="pr-mini-price">¥96,000</span></div></div>
-        </div>
+        <span class="badge badge-gold">中古という選択</span>
+        <h3>新品より、<span class="hl">かしこく</span>。<br>状態の良い中古から始めよう。</h3>
+        <p>中古クラブなら、同じ予算でワンランク上のモデルに手が届きます。状態ランクで安心して選べて、初めての一本にぴったりです。</p>
+        <a href="clubs.html" class="btn btn-primary btn-lg">中古クラブを探す</a>
       </div>
     </div>
   </section>
@@ -375,13 +344,14 @@ a{color:inherit;text-decoration:none;}
       <div class="reveal">
         <span class="eyebrow">Why Golf Picks</span>
         <h2>探す時代から、<br>見つかる時代へ。</h2>
-        <p>これまで練習場・ゴルフ場・中古ショップ・大会情報は別々のサイトに散らばっていました。Golf Picks は日本中のゴルフ情報をひとつに集約。比較も検討も購入導線も、ひとつの場所で完結します。</p>
+        <p>中古クラブは、お店やサイトによって価格も状態もバラバラ。Golf Picks は楽天市場の最新在庫を、メーカー・価格・状態でまとめて比較できるようにしました。初めての方には、予算からのセット提案も用意しています。</p>
+        <a href="clubs.html" class="btn btn-green btn-lg" style="margin-top:20px;">中古クラブを探す</a>
       </div>
       <div class="about-stats reveal">
-        <div class="about-stat"><span class="num" data-count="3782">0</span><small>練習場</small></div>
-        <div class="about-stat"><span class="num" data-count="2813">0</span><small>ゴルフ場</small></div>
-        <div class="about-stat"><span class="num" data-count="48200">0</span><small>中古クラブ</small></div>
-        <div class="about-stat"><span class="num">日米欧</span><small>大会日程</small></div>
+        <div class="about-stat"><span class="num" id="aboutClubsCount">—</span><small>中古クラブ掲載数</small></div>
+        <div class="about-stat"><span class="num">楽天</span><small>市場と連携</small></div>
+        <div class="about-stat"><span class="num">毎日</span><small>在庫を更新</small></div>
+        <div class="about-stat"><span class="num">無料</span><small>会員登録不要</small></div>
       </div>
     </div>
   </section>
@@ -394,12 +364,11 @@ a{color:inherit;text-decoration:none;}
     <div class="ft-top">
       <div>
         <span class="ft-logo"><span class="logo-mark" style="width:30px;height:30px;"><svg width="17" height="17" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#fff" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="#fff"/></svg></span> Golf <span>Picks</span></span>
-        <p class="ft-tagline">日本中のゴルフ情報を、ひとつに。見つけて、比べて、出かけよう。</p>
+        <p class="ft-tagline">中古ゴルフクラブを、見つけて、比べて、始めよう。</p>
       </div>
       <div class="ft-cols">
-        <div class="ft-col"><h5>探す</h5><a href="#clubs">中古クラブ</a><a href="#course">ゴルフ場</a><a href="#practice">練習場</a></div>
-        <div class="ft-col"><h5>知る</h5><a href="#tour">大会日程</a><a href="#">ニュース</a><a href="#">初心者ガイド</a></div>
-        <div class="ft-col"><h5>運営</h5><a href="#">運営会社</a><a href="#">お問い合わせ</a><a href="#">利用規約</a></div>
+        <div class="ft-col"><h5>探す</h5><a href="clubs.html">中古クラブ</a><a href="clubs.html">初めての方へ</a></div>
+        <div class="ft-col"><h5>Golf Picks について</h5><a href="clubs.html">使い方</a></div>
       </div>
     </div>
     <div class="ft-bottom">© 2026 Golf Picks. All rights reserved.</div>
@@ -425,23 +394,34 @@ burger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('
 drawerBd.addEventListener('click', () => toggleDrawer(false));
 drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleDrawer(false)));
 
-/* 検索タブ切替 */
-const tabConfig = {
-  clubs:    { f1l:'キーワード', f1p:'メーカー・モデル名',   f2l:'目的', f2p:'やさしさ / 飛び など' },
-  course:   { f1l:'エリア',    f1p:'都道府県・コース名',   f2l:'条件', f2p:'プレー日・予算' },
-  practice: { f1l:'エリア',    f1p:'エリア・駅名',         f2l:'条件', f2p:'打ち放題 / 弾道計測 など' },
-};
-document.getElementById('searchTabs').addEventListener('click', e => {
-  const btn = e.target.closest('.s-tab');
-  if (!btn) return;
-  document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('on'));
-  btn.classList.add('on');
-  const c = tabConfig[btn.dataset.tab];
-  document.getElementById('f1label').textContent = c.f1l;
-  document.getElementById('f1input').placeholder = c.f1p;
-  document.getElementById('f2label').textContent = c.f2l;
-  document.getElementById('f2input').placeholder = c.f2p;
+/* ヒーロー検索：clubs.html へキーワードを渡して遷移 */
+function goSearch(q){
+  var url = "clubs.html" + (q ? ("?q=" + encodeURIComponent(q)) : "");
+  location.href = url;
+}
+var heroInput = document.getElementById('heroSearch');
+var heroGo = document.getElementById('heroGo');
+if(heroGo) heroGo.addEventListener('click', function(){ goSearch(heroInput.value.trim()); });
+if(heroInput) heroInput.addEventListener('keydown', function(e){ if(e.key==='Enter') goSearch(heroInput.value.trim()); });
+/* 人気クイックボタン */
+document.querySelectorAll('.s-quick').forEach(function(b){
+  b.addEventListener('click', function(){ goSearch(b.textContent.trim()); });
 });
+
+/* 楽天の中古クラブ総件数を取得して表示 */
+(async function(){
+  try{
+    var res = await fetch('/api/clubs?keyword=' + encodeURIComponent('中古 ゴルフ クラブ'));
+    var data = await res.json();
+    if(res.ok && data.count){
+      var n = data.count.toLocaleString('ja-JP');
+      var c1 = document.getElementById('clubsCount');
+      var c2 = document.getElementById('aboutClubsCount');
+      if(c1) c1.innerHTML = n + '<small>件</small>';
+      if(c2) c2.textContent = n;
+    }
+  }catch(e){ /* 取得失敗時は「—」のまま */ }
+})();
 
 /* スクロールリビール */
 const io = new IntersectionObserver((entries) => {
