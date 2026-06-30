@@ -70,6 +70,46 @@ a{color:inherit;text-decoration:none;}
 .search-status svg{color:var(--gold-deep);}
 .search-status b{color:var(--gold-deep);font-weight:800;}
 
+/* ★ 必須セレクタ（利き手・性別） */
+.must-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:11px;padding:11px 14px;background:#fff;border:1.5px solid var(--green-soft);border-radius:var(--r-md);}
+.must-grp{display:flex;align-items:center;gap:9px;}
+.must-lbl{font-size:12px;font-weight:800;color:var(--green-deep);display:flex;align-items:center;gap:5px;}
+.must-lbl i{font-size:9px;font-style:normal;font-weight:800;color:#fff;background:var(--gold);padding:1px 6px;border-radius:var(--r-pill);}
+.must-chips{display:flex;gap:6px;}
+.mchip{font-size:12.5px;font-weight:700;color:var(--ink-soft);background:var(--bg-soft);padding:7px 14px;border-radius:var(--r-pill);transition:all .15s;cursor:pointer;}
+.mchip:active{transform:scale(.94);}
+.mchip.on{background:var(--green);color:#fff;box-shadow:0 4px 12px rgba(35,163,91,.25);}
+
+/* ★ ページ送り */
+.pager{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px 0 4px;}
+.pager-btn{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:800;color:var(--green-deep);background:#fff;padding:10px 18px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);cursor:pointer;transition:all .15s;}
+.pager-btn:active{transform:scale(.96);}
+.pager-btn:disabled{opacity:.4;cursor:not-allowed;color:var(--muted);}
+.pager-info{font-size:13px;font-weight:700;color:var(--ink-soft);min-width:120px;text-align:center;}
+.pager-info b{color:var(--gold-deep);font-weight:900;}
+
+/* ★ 知っておきたいこと */
+.know-sec{padding:6px 0 4px;}
+.know-toggle{width:100%;display:flex;align-items:center;gap:11px;background:var(--cream-soft);border:1.5px solid var(--cream);border-radius:var(--r-md);padding:14px 16px;cursor:pointer;text-align:left;transition:background .15s;}
+.know-toggle:hover{background:#fdf3e3;}
+.know-ico{flex:none;color:var(--gold-deep);display:flex;}
+.know-ttl{flex:1;font-size:13.5px;font-weight:800;color:var(--gold-deep);line-height:1.4;}
+.know-arrow{flex:none;color:var(--gold-deep);display:flex;transition:transform .25s;}
+.know-toggle[aria-expanded="true"] .know-arrow{transform:rotate(180deg);}
+.know-body{background:#fff;border:1.5px solid var(--cream);border-top:none;border-radius:0 0 var(--r-md) var(--r-md);padding:18px 18px 20px;margin-top:-2px;}
+.know-body p{font-size:13.5px;line-height:1.8;color:var(--ink);margin-bottom:13px;}
+.know-body b{color:var(--green-deep);font-weight:800;}
+.know-lead{font-size:15px;line-height:1.7;color:var(--ink);background:var(--green-soft);border-radius:var(--r-md);padding:13px 15px;margin-bottom:15px;font-weight:600;}
+.know-lead b{color:var(--green-deep);font-weight:900;}
+.know-point{display:flex;gap:12px;align-items:flex-start;background:var(--cream-soft);border-radius:var(--r-md);padding:14px 15px;margin:4px 0 14px;}
+.know-point-no{flex:none;font-size:12px;font-weight:900;color:#fff;background:var(--gold);padding:4px 12px;border-radius:var(--r-pill);margin-top:2px;}
+.know-point p{margin:0;}
+.know-foot{font-size:12.5px;color:var(--ink-soft);background:var(--bg-soft);border-radius:var(--r-md);padding:12px 14px;margin-bottom:0!important;}
+.pager-btn:active{transform:scale(.96);}
+.pager-btn:disabled{opacity:.4;cursor:not-allowed;color:var(--muted);}
+.pager-info{font-size:13px;font-weight:700;color:var(--ink-soft);min-width:120px;text-align:center;}
+.pager-info b{color:var(--gold-deep);font-weight:900;}
+
 /* ① 予算スライダー */
 .starter{padding:18px 0 4px;}
 .starter-card{background:linear-gradient(160deg,#eafaf0,#dff6e8);border:1.5px solid #b8eccb;border-radius:var(--r-lg);padding:20px 18px;}
@@ -87,23 +127,43 @@ a{color:inherit;text-decoration:none;}
 .opt.on{background:var(--green);color:#fff;box-shadow:0 5px 14px rgba(35,163,91,.26);}
 .budget-label{font-size:12px;font-weight:700;color:var(--ink-soft);}
 .budget-val{font-family:var(--ff-display);font-weight:900;font-size:26px;color:var(--green-deep);}
-input[type=range]#budgetRange{width:100%;-webkit-appearance:none;appearance:none;height:7px;border-radius:4px;background:linear-gradient(90deg,var(--green) 0%,var(--green) 30%,var(--bg-soft) 30%);outline:none;}
-input[type=range]#budgetRange::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--green);box-shadow:var(--sh-md);cursor:pointer;}
-input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--green);box-shadow:var(--sh-md);cursor:pointer;}
 .budget-ticks{display:flex;justify-content:space-between;margin-top:7px;font-size:10.5px;color:var(--muted);font-weight:600;}
 .starter-set{margin-top:14px;}
-.set-empty{text-align:center;font-size:13px;color:var(--ink-soft);padding:18px 0;}
-.set-total{display:flex;align-items:baseline;justify-content:space-between;background:#fff;border-radius:var(--r-md);padding:13px 15px;box-shadow:var(--sh-sm);margin-bottom:10px;}
-.set-total small{font-size:12px;color:var(--ink-soft);font-weight:700;}
-.set-total b{font-family:var(--ff-display);font-weight:900;font-size:22px;color:var(--gold-deep);}
-.set-total b i{font-size:12px;font-style:normal;color:var(--muted);font-weight:600;margin-left:3px;}
-.set-row{display:flex;align-items:center;gap:11px;background:#fff;border-radius:var(--r-md);padding:11px 13px;box-shadow:var(--sh-sm);margin-bottom:8px;}
-.set-kind{flex:none;font-size:10.5px;font-weight:800;color:var(--green-deep);background:var(--green-soft);padding:3px 9px;border-radius:var(--r-pill);width:62px;text-align:center;}
-.set-info{flex:1;min-width:0;}
-.set-name{font-size:13px;font-weight:700;line-height:1.3;}
-.set-brand{font-size:10.5px;color:var(--muted);}
-.set-price{font-family:var(--ff-display);font-weight:800;font-size:14px;color:var(--gold-deep);flex:none;}
-.set-note{font-size:11px;color:var(--muted);text-align:center;margin-top:6px;}
+
+/* ★ 予算帯タブ */
+.budget-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.budget-tab{flex:1;min-width:78px;font-size:13px;font-weight:800;color:var(--green-deep);background:#fff;padding:11px 8px;border-radius:var(--r-md);box-shadow:inset 0 0 0 1.5px #b8eccb;transition:all .15s;cursor:pointer;}
+.budget-tab:active{transform:scale(.96);}
+.budget-tab.on{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(35,163,91,.28);}
+
+/* ★ 相場ライン */
+.market-line{display:flex;align-items:stretch;gap:0;background:#fff;border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:14px;}
+.market-line.loading{padding:16px;justify-content:center;color:var(--ink-soft);font-size:12.5px;font-weight:600;}
+.ml-cell{flex:1;padding:12px 10px;text-align:center;border-right:1px solid var(--bg-soft);}
+.ml-cell:last-child{border-right:none;}
+.ml-cell .ml-lbl{display:block;font-size:10.5px;color:var(--muted);font-weight:700;margin-bottom:3px;}
+.ml-cell .ml-num{font-family:var(--ff-display);font-weight:900;font-size:17px;color:var(--green-deep);line-height:1;}
+.ml-cell .ml-num.gold{color:var(--gold-deep);}
+.ml-cell .ml-sub{font-size:9.5px;color:var(--muted);font-weight:600;}
+
+/* ★ セットカード */
+.set-card{display:flex;gap:12px;background:#fff;border-radius:var(--r-md);padding:12px;box-shadow:var(--sh-sm);margin-bottom:10px;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s;}
+.set-card:active{transform:scale(.99);}
+.set-card:hover{box-shadow:var(--sh-md);}
+.set-card-thumb{flex:none;width:84px;height:84px;border-radius:10px;background:var(--bg-soft);overflow:hidden;display:grid;place-items:center;}
+.set-card-thumb img{width:100%;height:100%;object-fit:contain;padding:5px;}
+.set-card-body{flex:1;min-width:0;display:flex;flex-direction:column;}
+.set-card-tags{display:flex;gap:5px;margin-bottom:4px;flex-wrap:wrap;}
+.set-card-tag{font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:var(--r-pill);}
+.set-card-tag.new{color:#fff;background:var(--green);}
+.set-card-tag.used{color:var(--gold-deep);background:var(--cream-soft);}
+.set-card-tag.review{color:var(--ink-soft);background:var(--bg-soft);}
+.set-card-name{font-size:13px;font-weight:700;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:auto;}
+.set-card-foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:6px;}
+.set-card-price{font-family:var(--ff-display);font-weight:900;font-size:19px;color:var(--gold-deep);line-height:1;}
+.set-card-go{font-size:11px;font-weight:800;color:var(--green-deep);background:var(--green-soft);padding:6px 12px;border-radius:var(--r-pill);flex:none;}
+.set-empty{text-align:center;font-size:13px;color:var(--ink-soft);padding:24px 16px;background:#fff;border-radius:var(--r-md);box-shadow:var(--sh-sm);}
+.set-note{font-size:11px;color:var(--muted);text-align:center;margin-top:6px;line-height:1.5;}
 
 /* ⑨ 専用入口 */
 .entries-sec{padding:14px 0 4px;}
@@ -302,63 +362,45 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
     <div class="wrap">
       <div class="starter-card reveal">
         <span class="starter-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> はじめての方へ</span>
-        <h2>予算で選ぶ、はじめての一式</h2>
-        <p>あなたに合わせて、その予算でラウンドに行ける組み合わせをご提案します。</p>
-        <div class="starter-opts">
-          <div class="opt-grp">
-            <span class="opt-lbl">性別</span>
-            <div class="opt-chips" data-key="gender">
-              <button class="opt on" data-val="any">指定なし</button>
-              <button class="opt" data-val="mens">男性</button>
-              <button class="opt" data-val="ladies">女性</button>
-            </div>
-          </div>
-          <div class="opt-grp">
-            <span class="opt-lbl">年齢</span>
-            <div class="opt-chips" data-key="age">
-              <button class="opt on" data-val="any">指定なし</button>
-              <button class="opt" data-val="young">〜30代</button>
-              <button class="opt" data-val="mid">40〜50代</button>
-              <button class="opt" data-val="senior">60代〜</button>
-            </div>
-          </div>
-          <div class="opt-grp">
-            <span class="opt-lbl">利き手</span>
-            <div class="opt-chips" data-key="hand">
-              <button class="opt on" data-val="right">右利き</button>
-              <button class="opt" data-val="left">左利き（レフティ）</button>
-            </div>
-          </div>
+        <h2>予算で選ぶ、はじめてのクラブセット</h2>
+        <p>予算を選ぶと、その範囲で始められる初心者向けセットと、価格の相場感がわかります。</p>
+
+        <!-- 予算帯タブ -->
+        <div class="budget-tabs" id="budgetTabs">
+          <button class="budget-tab on" data-band="b1">〜2万円</button>
+          <button class="budget-tab" data-band="b2">2〜3万円台</button>
+          <button class="budget-tab" data-band="b3">4〜5万円台</button>
+          <button class="budget-tab" data-band="b4">6万円〜</button>
         </div>
-        <div class="budget">
-          <div class="budget-head">
-            <span class="budget-label">ご予算</span>
-            <span class="budget-val" id="budgetVal">¥50,000</span>
-          </div>
-          <input type="range" id="budgetRange" min="20000" max="200000" step="5000" value="50000">
-          <div class="budget-ticks"><span>2万</span><span>5万</span><span>10万</span><span>20万</span></div>
-        </div>
+
+        <!-- 相場ライン -->
+        <div class="market-line" id="marketLine"></div>
+
+        <!-- セットカード一覧 -->
         <div class="starter-set" id="starterSet"></div>
       </div>
     </div>
   </section>
 
   <!-- ⑨ 専用入口：レフティ / レディース / シニア -->
-  <section class="entries-sec">
+  <section class="know-sec">
     <div class="wrap">
-      <div class="entries-grid">
-        <button class="ent-card ent-lefty reveal" data-entry="lefty">
-          <span class="ent-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 4v8m0 0l5 2v6H5v-6l5-2V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <strong>レフティ（左利き）</strong><small>左利き対応モデルだけ表示</small>
-        </button>
-        <button class="ent-card ent-ladies reveal" data-entry="ladies">
-          <span class="ent-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="5" stroke="currentColor" stroke-width="1.8"/><path d="M12 13v8M9 18h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-          <strong>レディース</strong><small>女性向けの軽量モデル</small>
-        </button>
-        <button class="ent-card ent-senior reveal" data-entry="senior">
-          <span class="ent-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 21l1.5-7M15 21l-1.5-7M7 12h10M16 21l-1-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <strong>シニア</strong><small>やさしく振れる軽量設計</small>
-        </button>
+      <button class="know-toggle" id="knowToggle" aria-expanded="false">
+        <span class="know-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="know-ttl">初めてクラブを選ぶ前に、知っておきたいこと</span>
+        <span class="know-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="know-body" id="knowBody" hidden>
+        <div class="know-lead">
+          結論から言うと、<b>最初から「自分に完璧に合う1本」を探さなくて大丈夫</b>です。
+        </div>
+        <p>ゴルフクラブは、ボールを打つ<b>ヘッド</b>と、棒の部分である<b>シャフト</b>の組み合わせでできています。このヘッドとシャフトには、それぞれ重さ・硬さ・長さ・角度などの違いが無数にあり、組み合わせは事実上きりがありません。</p>
+        <p>そして、どの組み合わせが本当に自分に合うかは、<b>自分のスイングが固まって初めて分かる</b>ものです。始めたばかりの段階では、そもそも振り方が毎回変わるので、「合う・合わない」を判断する土台がまだありません。</p>
+        <div class="know-point">
+          <span class="know-point-no">だから</span>
+          <p>初心者はまず、<b>無理なく始められるクラブ</b>で十分です。練習を重ねてスイングができあがってくると、自然と「自分はこういう球を打ちたい」「ここが合わない」と感じるようになります。<b>そのときに、自分に合う1本を選べばいい</b>のです。</p>
+        </div>
+        <p class="know-foot">レビューの評価は参考になりますが、それはあくまで「他の人にとって」の評価です。クラブ選びは、上達してからが本番。まずは気軽に1本、始めてみてください。</p>
       </div>
     </div>
   </section>
@@ -370,6 +412,23 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         <input id="ucKw" placeholder="楽天市場を検索（例：Qi10、ゼクシオ アイアン）Enterで検索">
         <button id="ucKwClear" class="uc-clear" style="display:none" aria-label="クリア"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <!-- ★ 必須の絞り込み：利き手・性別 -->
+      <div class="must-row">
+        <div class="must-grp">
+          <span class="must-lbl">利き手<i>必須</i></span>
+          <div class="must-chips" id="handChips">
+            <button class="mchip on" data-val="right">右利き</button>
+            <button class="mchip" data-val="left">左利き</button>
+          </div>
+        </div>
+        <div class="must-grp">
+          <span class="must-lbl">性別<i>必須</i></span>
+          <div class="must-chips" id="genderChips">
+            <button class="mchip on" data-val="mens">メンズ</button>
+            <button class="mchip" data-val="ladies">レディース</button>
+          </div>
+        </div>
       </div>
       <!-- 種類チップ -->
       <div class="filter-row" id="filterRow"></div>
@@ -424,6 +483,8 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
         </div>
       </div>
       <div class="grid" id="grid"></div>
+      <!-- ★ ページ送り -->
+      <div class="pager" id="pager"></div>
     </div>
   </section>
 </main>
@@ -467,10 +528,30 @@ var TYPE_KEYWORDS = {
 /* 現在の検索状態（画面表示と再検索に使う） */
 var currentSearch = {
   label: "すべての中古クラブ",   /* 画面に出す見出し */
-  keyword: TYPE_KEYWORDS.all,    /* 楽天に投げる実際の言葉 */
+  baseKeyword: TYPE_KEYWORDS.all, /* 種類/キーワードの素の言葉 */
   source: "type",               /* "type"=種類タブ / "keyword"=検索窓 */
-  sort: "standard"              /* 楽天側の並び順 */
+  sort: "standard",             /* 楽天側の並び順 */
+  page: 1,                      /* 現在のページ */
+  pageCount: 1,                 /* 総ページ数（楽天から取得） */
+  totalHits: 0,                 /* 総ヒット件数（楽天から取得） */
+  shownCount: 0                 /* このページで表示中の件数 */
 };
+
+/* 必須条件（利き手・性別） */
+var mustOpts = { hand:"right", gender:"mens" };
+
+/* 利き手・性別を楽天キーワードに変換 */
+function mustKeywords(){
+  var parts = [];
+  parts.push(mustOpts.gender==="ladies" ? "レディース" : "メンズ");
+  if(mustOpts.hand==="left") parts.push("左利き");
+  return parts.join(" ");
+}
+
+/* 実際に楽天へ投げるキーワード（素の言葉＋必須条件） */
+function fullKeyword(){
+  return (currentSearch.baseKeyword + " " + mustKeywords()).trim();
+}
 
 /* 並び替えモード → 楽天APIのsort値 */
 var SORT_MAP = {
@@ -613,7 +694,7 @@ async function fetchAllClubs(){
   _idSeq = 0;
 
   try {
-    var url = buildApiUrl(currentSearch.keyword, 1, currentSearch.sort);
+    var url = buildApiUrl(fullKeyword(), currentSearch.page, currentSearch.sort);
     var res = await fetch(url);
     var data = await res.json();
     if(!res.ok){
@@ -627,6 +708,11 @@ async function fetchAllClubs(){
 
     clubsLoaded = true;
 
+    /* 楽天が返した総件数・総ページ数を保存 */
+    currentSearch.totalHits = data.count || 0;
+    currentSearch.pageCount = Math.min(data.pageCount || 1, 100); /* 楽天上限100 */
+    currentSearch.page      = data.page || currentSearch.page;
+
     /* 重複除去（商品名が近いもの） */
     var seen = {};
     clubs = clubs.filter(function(c){
@@ -636,6 +722,8 @@ async function fetchAllClubs(){
       return true;
     });
 
+    currentSearch.shownCount = clubs.length;
+
     /* popRankをリセット */
     clubs.forEach(function(c,i){ c.popRank = i+1; });
 
@@ -644,11 +732,17 @@ async function fetchAllClubs(){
 
     /* 件数表示更新 */
     var heroCount = document.getElementById("heroCount");
-    if(heroCount) heroCount.textContent = clubs.length.toLocaleString("ja-JP");
+    if(heroCount) heroCount.textContent = currentSearch.totalHits.toLocaleString("ja-JP");
 
     render();
-    buildStarter();
     updateSearchHeader(false);  /* 検索完了：件数つき表示 */
+    renderPager();              /* ページ送り描画 */
+
+    /* ページ移動時はリストの先頭へスクロール */
+    if(currentSearch.page > 1){
+      var list = document.querySelector(".list");
+      if(list) list.scrollIntoView({behavior:"smooth", block:"start"});
+    }
 
   } catch(e) {
     console.error(e);
@@ -663,15 +757,37 @@ function updateSearchHeader(isLoading, isError){
   if(!bar) return;
   var icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   var srcLabel = currentSearch.source==="keyword" ? "キーワード検索" : "カテゴリ";
+  var cond = (mustOpts.gender==="ladies"?"レディース":"メンズ") + (mustOpts.hand==="left"?"・左利き":"");
   if(isError){
     bar.innerHTML = icon + '<span>楽天市場の検索でエラーが発生しました</span>';
   } else if(isLoading){
-    bar.innerHTML = icon + '<span>楽天市場で「<b>'+escapeHtml(currentSearch.label)+'</b>」を検索中...</span>';
+    bar.innerHTML = icon + '<span>楽天市場で「<b>'+escapeHtml(currentSearch.label)+'</b>」（'+cond+'）を検索中...</span>';
   } else {
-    bar.innerHTML = icon + '<span>楽天市場（'+srcLabel+'）：「<b>'+escapeHtml(currentSearch.label)+'</b>」の検索結果 <b>'+clubs.length+'</b> 件</span>';
+    var total = currentSearch.totalHits.toLocaleString("ja-JP");
+    bar.innerHTML = icon +
+      '<span>楽天市場（'+srcLabel+'）：「<b>'+escapeHtml(currentSearch.label)+'</b>」（'+cond+'）で <b>'+total+'</b> 件ヒット ／ '+
+      'うち <b>'+currentSearch.shownCount+'</b> 件を表示中（'+currentSearch.page+' / '+currentSearch.pageCount+' ページ）</span>';
   }
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+/* ページ送りを描画 */
+function renderPager(){
+  var pager = document.getElementById("pager");
+  if(!pager) return;
+  if(currentSearch.pageCount <= 1){ pager.innerHTML = ""; return; }
+  var p = currentSearch.page, pc = currentSearch.pageCount;
+  pager.innerHTML =
+    '<button class="pager-btn" id="pagerPrev" '+(p<=1?"disabled":"")+'>'+
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>前へ</button>'+
+    '<span class="pager-info"><b>'+p+'</b> / '+pc+' ページ</span>'+
+    '<button class="pager-btn" id="pagerNext" '+(p>=pc?"disabled":"")+'>'+
+      '次へ<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+  var prev = document.getElementById("pagerPrev");
+  var next = document.getElementById("pagerNext");
+  if(prev) prev.onclick = function(){ if(currentSearch.page>1){ currentSearch.page--; fetchAllClubs(); } };
+  if(next) next.onclick = function(){ if(currentSearch.page<currentSearch.pageCount){ currentSearch.page++; fetchAllClubs(); } };
+}
 
 /* メーカーチップを動的再構築 */
 function rebuildBrandChips(){
@@ -717,7 +833,6 @@ var activeRanks = {};       // 状態ランク（複数可）
 var activeBrand = null;     // メーカー
 var sortMode = "pop";
 var favOnly = false;
-var activeEntry = null;     // lefty / ladies / senior
 
 var priceBands = [
   {id:"p1",label:"〜2万円",min:0,max:20000},
@@ -742,7 +857,8 @@ types.forEach(function(t){
     if(ucKwClear){ ucKwClear.style.display="none"; }
     currentSearch.source  = "type";
     currentSearch.label   = t.label;
-    currentSearch.keyword = TYPE_KEYWORDS[t.id] || TYPE_KEYWORDS.all;
+    currentSearch.baseKeyword = TYPE_KEYWORDS[t.id] || TYPE_KEYWORDS.all;
+    currentSearch.page = 1;
     fetchAllClubs();
   };
   filterRow.appendChild(b);
@@ -797,11 +913,30 @@ ucKw.addEventListener("keydown", function(e){
     kw = "";  /* 手元絞り込みはリセット（楽天側で絞るため） */
     currentSearch.source  = "keyword";
     currentSearch.label   = q;
-    currentSearch.keyword = "中古 ゴルフ " + q;  /* ゴルフ用品に限定するため前置 */
+    currentSearch.baseKeyword = "ゴルフ " + q;  /* ゴルフ用品に限定するため前置 */
+    currentSearch.page = 1;
     fetchAllClubs();
   }
 });
 ucKwClear.onclick = function(){ ucKw.value=""; kw=""; ucKwClear.style.display="none"; render(); ucKw.focus(); };
+
+/* 必須セレクタ（利き手・性別）：変更したら楽天に再検索 */
+function bindMustChips(containerId, key){
+  var box = document.getElementById(containerId);
+  if(!box) return;
+  box.querySelectorAll(".mchip").forEach(function(b){
+    b.onclick = function(){
+      box.querySelectorAll(".mchip").forEach(function(c){c.classList.remove("on");});
+      b.classList.add("on");
+      mustOpts[key] = b.dataset.val;
+      currentSearch.page = 1;  /* 条件が変わるので1ページ目から */
+      fetchAllClubs();
+      loadStarterSets(true);   /* セット提案も条件に合わせて取り直す */
+    };
+  });
+}
+bindMustChips("handChips", "hand");
+bindMustChips("genderChips", "gender");
 
 /* 並び替え：価格順・新着順は楽天に投げ直し、人気順は手元並び替え */
 document.getElementById("sortSel").addEventListener("change", function(e){
@@ -846,10 +981,6 @@ function render(){
     if(activeBrand && c.brand!==activeBrand) return false;
     // お気に入りのみ
     if(favOnly && !favs[c.id]) return false;
-    // 専用入口（レフティ/レディース/シニア）
-    if(activeEntry==="lefty" && !c.lefty) return false;
-    if(activeEntry==="ladies" && c.gender!=="ladies") return false;
-    if(activeEntry==="senior" && !c.senior) return false;
     return true;
   });
 
@@ -938,8 +1069,7 @@ function bindCards(){
 
 /* 条件リセット */
 window.resetFilters = function(){
-  activeType="all"; kw=""; activePrice=null; activeRanks={}; activeBrand=null; favOnly=false; activeEntry=null;
-  document.querySelectorAll(".ent-card").forEach(function(b){b.classList.remove("on");});
+  activeType="all"; kw=""; activePrice=null; activeRanks={}; activeBrand=null; favOnly=false;
   ucKw.value=""; ucKwClear.style.display="none";
   document.getElementById("sortSel").value="pop"; sortMode="pop";
   favToggle.classList.remove("on");
@@ -948,8 +1078,9 @@ window.resetFilters = function(){
   /* 検索条件も「すべて」に戻して楽天を取り直す */
   currentSearch.source  = "type";
   currentSearch.label   = "すべての中古クラブ";
-  currentSearch.keyword = TYPE_KEYWORDS.all;
+  currentSearch.baseKeyword = TYPE_KEYWORDS.all;
   currentSearch.sort    = "standard";
+  currentSearch.page    = 1;
   fetchAllClubs();
 };
 
@@ -1010,117 +1141,147 @@ document.querySelectorAll("[data-count]").forEach(function(el){cio.observe(el);}
 addEventListener("scroll",function(){document.getElementById("hd").classList.toggle("scrolled",scrollY>8);},{passive:true});
 
 /* ============================================================
-   ① 予算スライダー：この範囲で揃う一式
+   ① 予算帯で選ぶ：初心者向けセット提案＋相場ライン
 ============================================================ */
-var budgetRange = document.getElementById("budgetRange");
-var budgetVal = document.getElementById("budgetVal");
 var starterSet = document.getElementById("starterSet");
-var starterOpts = { gender:"any", age:"any", hand:"right" };
+var marketLine = document.getElementById("marketLine");
 
-/* 選択ラベルの切替 */
-document.querySelectorAll(".opt-chips").forEach(function(grp){
-  var key = grp.dataset.key;
-  grp.querySelectorAll(".opt").forEach(function(b){
-    b.onclick = function(){
-      grp.querySelectorAll(".opt").forEach(function(o){o.classList.remove("on");});
-      b.classList.add("on");
-      starterOpts[key] = b.dataset.val;
-      buildStarter();
-    };
-  });
-});
+/* 予算帯の定義 */
+var BUDGET_BANDS = {
+  b1: { label:"〜2万円",     min:0,     max:20000  },
+  b2: { label:"2〜3万円台",  min:20000, max:40000  },
+  b3: { label:"4〜5万円台",  min:40000, max:60000  },
+  b4: { label:"6万円以上",   min:60000, max:Infinity }
+};
+var activeBand = "b1";
 
-/* 条件に合うか判定（性別・利き手） */
-function matchOpts(c){
-  if(starterOpts.hand==="left" && !c.lefty) return false;
-  if(starterOpts.gender==="ladies" && c.gender!=="ladies") return false;
-  if(starterOpts.gender==="mens" && c.gender==="ladies") return false;
-  return true;
-}
-/* 年齢によるやさしさ加点（高年齢ほど、やさしい・軽いモデルを優先） */
-function ageBonus(c){
-  if(starterOpts.age==="senior") return c.senior ? 14 : (c.ease>=80?6:0);
-  if(starterOpts.age==="mid") return c.ease>=78 ? 5 : 0;
-  return 0;
-}
-function score(c){ return c.ease + ageBonus(c); }
+/* セット商品のキャッシュ（一度取得したら使い回す） */
+var starterSets = null;
+var starterLoading = false;
 
-function pickCheapest(type, max){
-  var list = clubs.filter(function(c){return c.type===type && c.lowest<=max && matchOpts(c);})
-                  .sort(function(a,b){return score(b)-score(a) || a.lowest-b.lowest;});
-  return list[0]||null;
-}
-function buildStarter(){
-  var budget = +budgetRange.value;
-  budgetVal.textContent = yen(budget);
-  var pct = (budget-budgetRange.min)/(budgetRange.max-budgetRange.min)*100;
-  budgetRange.style.background = "linear-gradient(90deg,var(--green) 0%,var(--green) "+pct+"%,var(--bg-soft) "+pct+"%)";
-
-  var fullSet = clubs.filter(function(c){return c.type==="set" && c.lowest<=budget && matchOpts(c);})
-                     .sort(function(a,b){return score(b)-score(a);})[0];
-  var rows = [], total = 0, note = "";
-
-  // 選んだ条件の説明
-  var cond = [];
-  if(starterOpts.gender==="ladies") cond.push("女性向け");
-  if(starterOpts.gender==="mens") cond.push("男性向け");
-  if(starterOpts.hand==="left") cond.push("左利き対応");
-  if(starterOpts.age==="senior") cond.push("シニアにやさしい");
-  var condText = cond.length ? "（"+cond.join("・")+"）" : "";
-
-  if(fullSet){
-    rows.push({kind:"セット",c:fullSet});
-    total = fullSet.lowest;
-    note = "オールインワンセットなら、これ一式でラウンドに行けます。"+condText;
-  }else{
-    var dr = pickCheapest("driver", budget*0.5);
-    var ir = pickCheapest("iron", budget*0.55);
-    var pt = pickCheapest("putter", budget*0.35);
-    [["ドライバー",dr],["アイアン",ir],["パター",pt]].forEach(function(p){
-      if(p[1]){ rows.push({kind:p[0],c:p[1]}); total+=p[1].lowest; }
-    });
-    note = "中古を組み合わせれば、予算内で主要3本がそろいます。"+condText;
-  }
-
-  if(!rows.length || total>budget){
-    var fallback = clubs.filter(function(c){return c.lowest<=budget && matchOpts(c);})
-                        .sort(function(a,b){return a.lowest-b.lowest;})[0];
-    if(fallback){
-      starterSet.innerHTML = '<div class="set-total"><small>この条件・予算でおすすめ</small><b>'+yen(fallback.lowest)+'</b></div>'+
-        '<div class="set-row"><span class="set-kind">'+typeLabel(fallback.type)+'</span><div class="set-info"><div class="set-name">'+fallback.model+'</div><div class="set-brand">'+fallback.brand+'</div></div><span class="set-price">'+yen(fallback.lowest)+'</span></div>';
-    }else{
-      starterSet.innerHTML = '<div class="set-empty">この条件・予算で揃う組み合わせが見つかりませんでした。条件をゆるめるか、予算を上げてお試しください。</div>';
-    }
-    return;
-  }
-
-  var html = '<div class="set-total"><small>合計（最安値）'+condText+'</small><b>'+yen(total)+'<i>〜</i></b></div>';
-  rows.forEach(function(r){
-    html += '<div class="set-row"><span class="set-kind">'+r.kind+'</span><div class="set-info"><div class="set-name">'+r.c.model+'</div><div class="set-brand">'+r.c.brand+' ・ やさしさ '+r.c.ease+'</div></div><span class="set-price">'+yen(r.c.lowest)+'</span></div>';
-  });
-  html += '<div class="set-note">'+note+'</div>';
-  starterSet.innerHTML = html;
-}
-function typeLabel(t){return {driver:"ドライバー",iron:"アイアン",wedge:"ウェッジ",putter:"パター",set:"セット"}[t]||t;}
-budgetRange.addEventListener("input", buildStarter);
-
-/* ============================================================
-   ⑨ 専用入口：レフティ / レディース / シニア
-============================================================ */
-document.querySelectorAll(".ent-card").forEach(function(btn){
-  btn.onclick = function(){
-    var e = btn.dataset.entry;
-    if(activeEntry===e){ activeEntry=null; btn.classList.remove("on"); }
-    else{
-      activeEntry = e;
-      document.querySelectorAll(".ent-card").forEach(function(b){b.classList.remove("on");});
-      btn.classList.add("on");
-      // リストへスクロール
-      document.querySelector(".list").scrollIntoView({behavior:"smooth",block:"start"});
-    }
-    render();
+/* 予算帯タブのクリック */
+document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(tab){
+  tab.onclick = function(){
+    activeBand = tab.dataset.band;
+    document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(t){t.classList.remove("on");});
+    tab.classList.add("on");
+    renderStarter();
   };
 });
+
+/* 初心者向けセットを楽天から取得（セクション専用・1回だけ） */
+async function loadStarterSets(force){
+  if((starterSets && !force) || starterLoading) return;
+  if(force) starterSets = null;
+  starterLoading = true;
+  marketLine.className = "market-line loading";
+  marketLine.textContent = "初心者向けセットの相場を調べています...";
+  starterSet.innerHTML = "";
+
+  try {
+    /* 利き手・性別を反映したキーワード */
+    var setKeyword = "ゴルフ クラブ セット 初心者 " + mustKeywords();
+    /* 価格順で広めに2ページ取得して予算帯ごとに振り分ける */
+    var all = [];
+    for(var pg=1; pg<=2; pg++){
+      var url = buildApiUrl(setKeyword, pg, "+itemPrice");
+      var res = await fetch(url);
+      var data = await res.json();
+      if(!res.ok) throw new Error(data.error || ("HTTP "+res.status));
+      (data.Items||[]).forEach(function(w){
+        var it = w.Item || w;
+        all.push(convertItem(it));
+      });
+    }
+    /* 重複除去 */
+    var seen = {};
+    starterSets = all.filter(function(c){
+      var k = c.model.slice(0,30);
+      if(seen[k]) return false; seen[k]=true; return true;
+    });
+    starterLoading = false;
+    renderStarter();
+  } catch(e){
+    starterLoading = false;
+    marketLine.className = "market-line loading";
+    marketLine.textContent = "セット情報の取得に失敗しました。時間をおいて再度お試しください。";
+    console.error(e);
+  }
+}
+
+/* 現在の予算帯でセットと相場を描画 */
+function renderStarter(){
+  if(!starterSets){ loadStarterSets(); return; }
+  var band = BUDGET_BANDS[activeBand];
+  var inBand = starterSets.filter(function(c){ return c.lowest>=band.min && c.lowest<band.max; })
+                          .sort(function(a,b){ return (b.rating-a.rating) || (a.lowest-b.lowest); });
+
+  /* 相場ライン（この予算帯の平均・最安・件数） */
+  if(inBand.length){
+    var prices = inBand.map(function(c){return c.lowest;});
+    var min = Math.min.apply(null, prices);
+    var avg = Math.round(prices.reduce(function(a,b){return a+b;},0)/prices.length);
+    marketLine.className = "market-line";
+    marketLine.innerHTML =
+      '<div class="ml-cell"><span class="ml-lbl">最安</span><span class="ml-num gold">'+yen(min)+'</span><span class="ml-sub">この予算帯から</span></div>'+
+      '<div class="ml-cell"><span class="ml-lbl">平均価格</span><span class="ml-num">'+yen(avg)+'</span><span class="ml-sub">セット商品の目安</span></div>'+
+      '<div class="ml-cell"><span class="ml-lbl">見つかった数</span><span class="ml-num">'+inBand.length+'<span style="font-size:11px">件</span></span><span class="ml-sub">初心者向けセット</span></div>';
+  } else {
+    marketLine.className = "market-line loading";
+    marketLine.textContent = "この予算帯のセットは見つかりませんでした。別の予算帯をお試しください。";
+  }
+
+  /* セットカード（上位5件） */
+  if(!inBand.length){
+    starterSet.innerHTML = "";
+    return;
+  }
+  var html = "";
+  inBand.slice(0,5).forEach(function(c){
+    var link = c.affiliateUrl || c.itemUrl || "#";
+    var isUsed = /中古|used/i.test(c.modelFull||c.model);
+    var condTag = isUsed
+      ? '<span class="set-card-tag used">中古</span>'
+      : '<span class="set-card-tag new">新品</span>';
+    var reviewTag = c.rating>0
+      ? '<span class="set-card-tag review">★'+c.rating.toFixed(1)+'（'+c.reviews+'）</span>'
+      : '';
+    var thumb = c.imageUrl
+      ? '<img src="'+c.imageUrl+'" alt="" loading="lazy">'
+      : (typeIcon.set||"");
+    html +=
+      '<a class="set-card" href="'+link+'" target="_blank" rel="noopener">'+
+        '<div class="set-card-thumb">'+thumb+'</div>'+
+        '<div class="set-card-body">'+
+          '<div class="set-card-tags">'+condTag+reviewTag+'</div>'+
+          '<div class="set-card-name">'+escapeHtml(c.model)+'</div>'+
+          '<div class="set-card-foot">'+
+            '<span class="set-card-price">'+yen(c.lowest)+'</span>'+
+            '<span class="set-card-go">楽天で見る →</span>'+
+          '</div>'+
+        '</div>'+
+      '</a>';
+  });
+  starterSet.innerHTML = html;
+}
+
+/* buildStarter は他所から呼ばれているので互換のため残す（中身は新ロジック） */
+function buildStarter(){ if(!starterSets){ loadStarterSets(); } else { renderStarter(); } }
+function typeLabel(t){return {driver:"ドライバー",iron:"アイアン",wedge:"ウェッジ",putter:"パター",set:"セット"}[t]||t;}
+
+/* ============================================================
+   ⑨ 「知っておきたいこと」開閉トグル
+============================================================ */
+(function(){
+  var toggle = document.getElementById("knowToggle");
+  var body = document.getElementById("knowBody");
+  if(!toggle || !body) return;
+  toggle.onclick = function(){
+    var open = toggle.getAttribute("aria-expanded")==="true";
+    toggle.setAttribute("aria-expanded", open ? "false" : "true");
+    body.hidden = open;
+  };
+})();
 
 /* ============================================================
    ⑤ 用語ホバー辞典
@@ -1193,7 +1354,8 @@ document.addEventListener("click", function(e){
     /* 渡されたキーワードで楽天を検索する状態にする */
     currentSearch.source  = "keyword";
     currentSearch.label   = q;
-    currentSearch.keyword = "中古 ゴルフ " + q;
+    currentSearch.baseKeyword = "ゴルフ " + q;
+    currentSearch.page = 1;
   }
 })();
 
