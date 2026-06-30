@@ -440,43 +440,22 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
 
 <script>
 /* ===================================================
-   楽天API設定（ブラウザ直接呼び出し・道B方式）
+   楽天API（サーバー経由・キーはブラウザに露出しない）
+   ブラウザは自分のサイトの /api/clubs を叩くだけ
 =================================================== */
-var RAKUTEN_APP_ID = "";      // ← あとでLocalStorageから読む or 直接書く
-var RAKUTEN_ACCESS_KEY = "";
-var RAKUTEN_AFFILIATE_ID = "";
-
-/* LocalStorageからキーを読み込む */
-(function(){
-  RAKUTEN_APP_ID      = localStorage.getItem("r_app_id") || "";
-  RAKUTEN_ACCESS_KEY  = localStorage.getItem("r_access_key") || "";
-  RAKUTEN_AFFILIATE_ID= localStorage.getItem("r_affiliate_id") || "";
-})();
-
-var clubs = [];   /* 楽天APIから取得したデータを入れる */
+var clubs = [];   /* サーバー経由で取得したデータを入れる */
 var clubsLoaded = false;
-
-/* ===================================================
-   楽天APIから中古クラブを取得
-=================================================== */
-var RAKUTEN_ENDPOINT = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20220601";
 
 /* キーワードリスト：複数キーワードで順に取得してマージ */
 var SEARCH_KEYWORDS = ["中古 ドライバー", "中古 アイアン", "中古 ウェッジ", "中古 パター", "中古 ゴルフ セット"];
 
-function buildRakutenUrl(keyword, page){
-  var params = [
-    "applicationId=" + encodeURIComponent(RAKUTEN_APP_ID),
-    "accessKey="     + encodeURIComponent(RAKUTEN_ACCESS_KEY),
-    "affiliateId="   + encodeURIComponent(RAKUTEN_AFFILIATE_ID),
-    "keyword="       + encodeURIComponent(keyword),
-    "genreId=101070",   /* スポーツ＞ゴルフ */
-    "hits=30",
-    "page=" + (page||1),
-    "sort=+itemPrice",
-    "imageFlag=1"
-  ];
-  return RAKUTEN_ENDPOINT + "?" + params.join("&");
+/* 自分のサイトのAPIエンドポイントURLを作る */
+function buildApiUrl(keyword, page){
+  var params = new URLSearchParams({
+    keyword: keyword,
+    page: page || 1
+  });
+  return "/api/clubs?" + params.toString();
 }
 
 /* 商品名からクラブ種別を推定 */
@@ -591,66 +570,23 @@ function showApiError(msg){
     '<div class="uc-empty">'+
     '<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--line)" stroke-width="1.6"/><path d="M12 8v5M12 16h.01" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/></svg>'+
     '<b>データ取得エラー</b><span>'+msg+'</span>'+
-    '<div><button onclick="showApiKeyModal()" style="margin-top:14px;font-size:13px;font-weight:700;color:var(--gold-deep);background:var(--cream-soft);padding:9px 18px;border-radius:999px;">APIキーを設定する</button></div></div>';
+    '<div><button onclick="fetchAllClubs()" style="margin-top:14px;font-size:13px;font-weight:700;color:var(--gold-deep);background:var(--cream-soft);padding:9px 18px;border-radius:999px;">再読み込み</button></div></div>';
 }
 
-/* APIキー設定モーダル */
-function showApiKeyModal(){
-  var modal = document.getElementById("apiKeyModal");
-  if(!modal){
-    modal = document.createElement("div");
-    modal.id = "apiKeyModal";
-    modal.style.cssText = "position:fixed;inset:0;z-index:400;background:rgba(12,68,41,.5);display:flex;align-items:flex-end;justify-content:center;";
-    modal.innerHTML =
-      '<div style="background:#fff;border-radius:24px 24px 0 0;padding:28px 22px 40px;width:100%;max-width:480px;box-shadow:0 -10px 40px rgba(0,0,0,.2)">'+
-      '<div style="width:40px;height:4px;background:#e3efe3;border-radius:2px;margin:0 auto 20px;"></div>'+
-      '<h3 style="font-family:Outfit,sans-serif;font-weight:800;font-size:18px;margin-bottom:6px;">楽天APIキー設定</h3>'+
-      '<p style="font-size:12.5px;color:#7c8d81;margin-bottom:18px;">webservice.rakuten.co.jp で確認できます</p>'+
-      '<label style="font-size:12px;font-weight:800;color:#46594d;display:block;margin-bottom:5px;">Application ID</label>'+
-      '<input id="m_appid" value="'+RAKUTEN_APP_ID+'" placeholder="0a2e6455-..." style="width:100%;border:1.5px solid #e3efe3;border-radius:10px;padding:10px 13px;font-size:14px;margin-bottom:12px;font-family:monospace;outline:none;">'+
-      '<label style="font-size:12px;font-weight:800;color:#46594d;display:block;margin-bottom:5px;">Access Key</label>'+
-      '<input id="m_key" value="'+RAKUTEN_ACCESS_KEY+'" placeholder="pk_..." style="width:100%;border:1.5px solid #e3efe3;border-radius:10px;padding:10px 13px;font-size:14px;margin-bottom:12px;font-family:monospace;outline:none;">'+
-      '<label style="font-size:12px;font-weight:800;color:#46594d;display:block;margin-bottom:5px;">Affiliate ID（任意）</label>'+
-      '<input id="m_aff" value="'+RAKUTEN_AFFILIATE_ID+'" placeholder="5529f321..." style="width:100%;border:1.5px solid #e3efe3;border-radius:10px;padding:10px 13px;font-size:14px;margin-bottom:20px;font-family:monospace;outline:none;">'+
-      '<button onclick="saveApiKeys()" style="width:100%;background:var(--green);color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:12px;border:none;cursor:pointer;">保存して取得開始</button>'+
-      '<button onclick="document.getElementById(\'apiKeyModal\').remove()" style="width:100%;margin-top:10px;color:#7c8d81;font-size:13px;padding:10px;background:none;border:none;cursor:pointer;">キャンセル</button>'+
-      '</div>';
-    document.body.appendChild(modal);
-  } else {
-    modal.style.display = "flex";
-  }
-}
-
-function saveApiKeys(){
-  RAKUTEN_APP_ID       = document.getElementById("m_appid").value.trim();
-  RAKUTEN_ACCESS_KEY   = document.getElementById("m_key").value.trim();
-  RAKUTEN_AFFILIATE_ID = document.getElementById("m_aff").value.trim();
-  localStorage.setItem("r_app_id",       RAKUTEN_APP_ID);
-  localStorage.setItem("r_access_key",   RAKUTEN_ACCESS_KEY);
-  localStorage.setItem("r_affiliate_id", RAKUTEN_AFFILIATE_ID);
-  document.getElementById("apiKeyModal").remove();
-  fetchAllClubs();
-}
-
-/* 全キーワードを順番に取得してclubsを埋める */
+/* 全キーワードを順番に取得してclubsを埋める（サーバー /api/clubs 経由） */
 async function fetchAllClubs(){
-  if(!RAKUTEN_APP_ID || !RAKUTEN_ACCESS_KEY){
-    showApiError("APIキーが未設定です。右上の⚙️ボタンから設定してください。");
-    return;
-  }
   showLoading();
   clubs = [];
   _idSeq = 0;
 
   try {
     for(var ki=0; ki<SEARCH_KEYWORDS.length; ki++){
-      var url = buildRakutenUrl(SEARCH_KEYWORDS[ki], 1);
+      var url = buildApiUrl(SEARCH_KEYWORDS[ki], 1);
       var res = await fetch(url);
-      if(!res.ok){
-        var errData = await res.json().catch(function(){return {};});
-        throw new Error("HTTP "+res.status+" : "+JSON.stringify(errData));
-      }
       var data = await res.json();
+      if(!res.ok){
+        throw new Error(data.error || ("HTTP "+res.status));
+      }
       var items = (data.Items || []);
       items.forEach(function(wrapper){
         var item = wrapper.Item || wrapper;
@@ -1177,22 +1113,9 @@ document.addEventListener("click", function(e){
 
 updateFavCount();
 /* buildStarter / render は fetchAllClubs の完了後に呼ばれる */
-/* ページ読み込み時に楽天APIを自動起動 */
+/* ページ読み込み時にサーバー経由で商品を自動取得 */
 fetchAllClubs();
 observeReveals();
-
-/* ⚙️ APIキー設定ボタンをヘッダーに追加 */
-(function(){
-  var actions = document.querySelector(".hd-actions");
-  if(actions){
-    var btn = document.createElement("button");
-    btn.title = "APIキー設定";
-    btn.style.cssText = "width:38px;height:38px;border-radius:10px;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-soft);cursor:pointer;font-size:18px;margin-right:6px;";
-    btn.innerHTML = "⚙️";
-    btn.onclick = showApiKeyModal;
-    actions.insertBefore(btn, actions.firstChild);
-  }
-})();
 </script>
 </body>
 </html>
