@@ -262,6 +262,8 @@ a{color:inherit;text-decoration:none;}
 .list-head .count{font-size:13px;color:var(--ink-soft);}
 .list-head .count b{color:var(--gold-deep);font-family:var(--ff-display);font-size:17px;}
 .list-head .count-sub{color:var(--muted);font-size:12px;margin-left:4px;}
+.list-head .count-slash{color:var(--muted);margin:0 1px;}
+.list-head .count-loading{color:var(--muted);}
 .sort{font-size:13px;font-weight:600;color:var(--ink-soft);background:#fff;padding:7px 12px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);}
 
 .grid{display:grid;grid-template-columns:1fr;gap:14px;}
@@ -457,7 +459,7 @@ a{color:inherit;text-decoration:none;}
   <section class="list">
     <div class="wrap">
       <div class="list-head">
-        <div class="count" id="resultSummary"><b id="resultCount">0</b> 件のモデル</div>
+        <div class="count" id="resultSummary"><b>—</b> 件</div>
         <div class="list-actions">
           <button class="fav-toggle" id="favToggle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-8.5C.5 9 2 5 5.5 5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3C17 5 18.5 9 16.5 12.5 14 16.5 12 18 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> お気に入り <span id="favCount">0</span></button>
           <div class="sort-wrap">
@@ -811,10 +813,11 @@ function updateSearchHeader(isLoading, isError){
   if(isError){
     el.innerHTML = '<b>—</b> 件 / 検索エラー';
   } else if(isLoading){
-    el.innerHTML = '楽天市場を検索中...';
+    el.innerHTML = '<span class="count-loading">楽天市場を検索中...</span>';
   } else {
     var total = currentSearch.totalHits.toLocaleString("ja-JP");
-    el.innerHTML = '楽天市場で <b>'+total+'</b> 件ヒット ／ <b>'+currentSearch.shownCount+'</b> 件を表示中'+
+    el.innerHTML = '<b>'+currentSearch.shownCount+'</b> 件 <span class="count-slash">/</span> '+
+      total+' 件中'+
       '<span class="count-sub">（'+currentSearch.page+' / '+currentSearch.pageCount+' ページ）</span>';
   }
 }
