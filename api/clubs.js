@@ -31,7 +31,12 @@ export default async function handler(req, res) {
   if (AFFILIATE_ID) params.set("affiliateId", AFFILIATE_ID);
 
   try {
-    const r = await fetch(`${ENDPOINT}?${params.toString()}`);
+    const r = await fetch(`${ENDPOINT}?${params.toString()}`, {
+      headers: {
+        // 楽天に登録済みの許可Webサイトと一致させる（これがないと403になる）
+        "Referer": "https://golf-picks-web.vercel.app/"
+      }
+    });
     const data = await r.json();
 
     if (!r.ok) {
