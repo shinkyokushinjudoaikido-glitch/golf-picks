@@ -33,8 +33,11 @@ export default async function handler(req, res) {
   try {
     const r = await fetch(`${ENDPOINT}?${params.toString()}`, {
       headers: {
-        // 楽天に登録済みの許可Webサイトと一致させる（これがないと403になる）
-        "Referer": "https://golf-picks-web.vercel.app/"
+        // 楽天に登録済みの許可Webサイトと一致させる
+        // Refererだけでは弾かれるため Origin も必須（楽天の新仕様）
+        "Referer": "https://golf-picks-web.vercel.app/",
+        "Origin":  "https://golf-picks-web.vercel.app",
+        "User-Agent": "GolfPicks/1.0"
       }
     });
     const data = await r.json();
