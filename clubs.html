@@ -65,6 +65,11 @@ a{color:inherit;text-decoration:none;}
 .filter-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .filter-row::-webkit-scrollbar{display:none;}
 
+/* ★ 検索状態バー */
+.search-status{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 14px;background:var(--cream-soft);border:1px solid var(--cream);border-radius:var(--r-md);font-size:12.5px;color:var(--ink-soft);font-weight:600;line-height:1.5;}
+.search-status svg{color:var(--gold-deep);}
+.search-status b{color:var(--gold-deep);font-weight:800;}
+
 /* ① 予算スライダー */
 .starter{padding:18px 0 4px;}
 .starter-card{background:linear-gradient(160deg,#eafaf0,#dff6e8);border:1.5px solid #b8eccb;border-radius:var(--r-lg);padding:20px 18px;}
@@ -360,14 +365,16 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
 
   <div class="filter">
     <div class="wrap">
-      <!-- 検索窓 -->
+      <!-- 検索窓（Enterで楽天に再検索） -->
       <div class="uc-search">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <input id="ucKw" placeholder="メーカー・モデル名で検索（例：Qi10、アイアン）">
+        <input id="ucKw" placeholder="楽天市場を検索（例：Qi10、ゼクシオ アイアン）Enterで検索">
         <button id="ucKwClear" class="uc-clear" style="display:none" aria-label="クリア"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       </div>
       <!-- 種類チップ -->
       <div class="filter-row" id="filterRow"></div>
+      <!-- ★ 検索状態バー：今、何を検索した結果かを表示 -->
+      <div id="searchStatus" class="search-status"></div>
       <!-- 詳細絞り込み（価格帯・状態・メーカー） -->
       <div class="uc-refine" id="ucRefine">
         <div class="refine-grp">
@@ -446,14 +453,39 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
 var clubs = [];   /* サーバー経由で取得したデータを入れる */
 var clubsLoaded = false;
 
-/* キーワードリスト：複数キーワードで順に取得してマージ */
-var SEARCH_KEYWORDS = ["中古 ドライバー", "中古 アイアン", "中古 ウェッジ", "中古 パター", "中古 ゴルフ セット"];
+/* 種類タブ → 楽天検索キーワードの対応表 */
+var TYPE_KEYWORDS = {
+  all:      "中古 ゴルフ クラブ",
+  beginner: "中古 ゴルフ クラブ 初心者",
+  driver:   "中古 ゴルフ ドライバー",
+  iron:     "中古 ゴルフ アイアン セット",
+  wedge:    "中古 ゴルフ ウェッジ",
+  putter:   "中古 ゴルフ パター",
+  set:      "中古 ゴルフ クラブ セット"
+};
+
+/* 現在の検索状態（画面表示と再検索に使う） */
+var currentSearch = {
+  label: "すべての中古クラブ",   /* 画面に出す見出し */
+  keyword: TYPE_KEYWORDS.all,    /* 楽天に投げる実際の言葉 */
+  source: "type",               /* "type"=種類タブ / "keyword"=検索窓 */
+  sort: "standard"              /* 楽天側の並び順 */
+};
+
+/* 並び替えモード → 楽天APIのsort値 */
+var SORT_MAP = {
+  pop:       "standard",
+  priceAsc:  "+itemPrice",
+  priceDesc: "-itemPrice",
+  new:       "-updateTimestamp"
+};
 
 /* 自分のサイトのAPIエンドポイントURLを作る */
-function buildApiUrl(keyword, page){
+function buildApiUrl(keyword, page, sort){
   var params = new URLSearchParams({
     keyword: keyword,
-    page: page || 1
+    page: page || 1,
+    sort: sort || "standard"
   });
   return "/api/clubs?" + params.toString();
 }
@@ -573,26 +605,25 @@ function showApiError(msg){
     '<div><button onclick="fetchAllClubs()" style="margin-top:14px;font-size:13px;font-weight:700;color:var(--gold-deep);background:var(--cream-soft);padding:9px 18px;border-radius:999px;">再読み込み</button></div></div>';
 }
 
-/* 全キーワードを順番に取得してclubsを埋める（サーバー /api/clubs 経由） */
+/* 現在の検索状態（currentSearch）で楽天から取得（サーバー /api/clubs 経由） */
 async function fetchAllClubs(){
   showLoading();
+  updateSearchHeader(true);  /* 「検索中」表示 */
   clubs = [];
   _idSeq = 0;
 
   try {
-    for(var ki=0; ki<SEARCH_KEYWORDS.length; ki++){
-      var url = buildApiUrl(SEARCH_KEYWORDS[ki], 1);
-      var res = await fetch(url);
-      var data = await res.json();
-      if(!res.ok){
-        throw new Error(data.error || ("HTTP "+res.status));
-      }
-      var items = (data.Items || []);
-      items.forEach(function(wrapper){
-        var item = wrapper.Item || wrapper;
-        clubs.push(convertItem(item));
-      });
+    var url = buildApiUrl(currentSearch.keyword, 1, currentSearch.sort);
+    var res = await fetch(url);
+    var data = await res.json();
+    if(!res.ok){
+      throw new Error(data.error || ("HTTP "+res.status));
     }
+    var items = (data.Items || []);
+    items.forEach(function(wrapper){
+      var item = wrapper.Item || wrapper;
+      clubs.push(convertItem(item));
+    });
 
     clubsLoaded = true;
 
@@ -617,12 +648,30 @@ async function fetchAllClubs(){
 
     render();
     buildStarter();
+    updateSearchHeader(false);  /* 検索完了：件数つき表示 */
 
   } catch(e) {
     console.error(e);
     showApiError(e.message || "通信エラーが発生しました");
+    updateSearchHeader(false, true);  /* エラー表示 */
   }
 }
+
+/* 「今、何を検索した結果か」の見出しを更新 */
+function updateSearchHeader(isLoading, isError){
+  var bar = document.getElementById("searchStatus");
+  if(!bar) return;
+  var icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  var srcLabel = currentSearch.source==="keyword" ? "キーワード検索" : "カテゴリ";
+  if(isError){
+    bar.innerHTML = icon + '<span>楽天市場の検索でエラーが発生しました</span>';
+  } else if(isLoading){
+    bar.innerHTML = icon + '<span>楽天市場で「<b>'+escapeHtml(currentSearch.label)+'</b>」を検索中...</span>';
+  } else {
+    bar.innerHTML = icon + '<span>楽天市場（'+srcLabel+'）：「<b>'+escapeHtml(currentSearch.label)+'</b>」の検索結果 <b>'+clubs.length+'</b> 件</span>';
+  }
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 
 /* メーカーチップを動的再構築 */
 function rebuildBrandChips(){
@@ -677,7 +726,7 @@ var priceBands = [
   {id:"p4",label:"10万円〜",min:100000,max:Infinity}
 ];
 
-/* 種類チップ描画 */
+/* 種類チップ描画（押すと楽天に再検索） */
 var filterRow = document.getElementById("filterRow");
 types.forEach(function(t){
   var b = document.createElement("button");
@@ -687,7 +736,14 @@ types.forEach(function(t){
     activeType = t.id;
     document.querySelectorAll("#filterRow .chip").forEach(function(c){c.classList.remove("on");});
     b.classList.add("on");
-    render();
+    /* 検索窓はクリアして、種類カテゴリで楽天を再検索 */
+    kw = "";
+    if(ucKw){ ucKw.value=""; }
+    if(ucKwClear){ ucKwClear.style.display="none"; }
+    currentSearch.source  = "type";
+    currentSearch.label   = t.label;
+    currentSearch.keyword = TYPE_KEYWORDS[t.id] || TYPE_KEYWORDS.all;
+    fetchAllClubs();
   };
   filterRow.appendChild(b);
 });
@@ -722,18 +778,42 @@ var rankChips = document.getElementById("rankChips");
 /* メーカーチップは fetchAllClubs 完了後に rebuildBrandChips() で生成 */
 var brandChips = document.getElementById("brandChips");
 
-/* 検索窓 */
+/* 検索窓：入力中は手元の結果を絞り込み、Enterで楽天に再検索 */
 var ucKw = document.getElementById("ucKw");
 var ucKwClear = document.getElementById("ucKwClear");
 ucKw.addEventListener("input", function(){
   kw = ucKw.value.trim();
   ucKwClear.style.display = kw ? "grid" : "none";
-  render();
+  render();  /* 手元の一覧をリアルタイム絞り込み */
+});
+/* Enterキーで楽天に再検索 */
+ucKw.addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    var q = ucKw.value.trim();
+    if(!q) return;
+    /* 種類タブの選択を解除して「すべて」に戻す（キーワード検索が主役になる） */
+    activeType = "all";
+    document.querySelectorAll("#filterRow .chip").forEach(function(c,i){c.classList.toggle("on", i===0);});
+    kw = "";  /* 手元絞り込みはリセット（楽天側で絞るため） */
+    currentSearch.source  = "keyword";
+    currentSearch.label   = q;
+    currentSearch.keyword = "中古 ゴルフ " + q;  /* ゴルフ用品に限定するため前置 */
+    fetchAllClubs();
+  }
 });
 ucKwClear.onclick = function(){ ucKw.value=""; kw=""; ucKwClear.style.display="none"; render(); ucKw.focus(); };
 
-/* 並び替え */
-document.getElementById("sortSel").addEventListener("change", function(e){ sortMode = e.target.value; render(); });
+/* 並び替え：価格順・新着順は楽天に投げ直し、人気順は手元並び替え */
+document.getElementById("sortSel").addEventListener("change", function(e){
+  sortMode = e.target.value;
+  var rakutenSort = SORT_MAP[sortMode] || "standard";
+  if(rakutenSort !== currentSearch.sort){
+    currentSearch.sort = rakutenSort;
+    fetchAllClubs();  /* 並び順が変わるので楽天に取り直し */
+  } else {
+    render();
+  }
+});
 
 /* お気に入りのみ表示 */
 var favToggle = document.getElementById("favToggle");
@@ -751,10 +831,8 @@ function updateFavCount(){
 var grid = document.getElementById("grid");
 function render(){
   var items = clubs.filter(function(c){
-    // 種類
-    if(activeType==="beginner"){ if(!c.beginner) return false; }
-    else if(activeType!=="all"){ if(c.type!==activeType) return false; }
-    // キーワード
+    // 種類フィルターは楽天側の検索で済んでいるため、ここでは絞り込まない
+    // キーワード（手元での絞り込み用。Enter検索とは別）
     if(kw && (c.brand+" "+c.model).toLowerCase().indexOf(kw.toLowerCase())<0) return false;
     // 価格帯
     if(activePrice){
@@ -867,7 +945,12 @@ window.resetFilters = function(){
   favToggle.classList.remove("on");
   document.querySelectorAll("#filterRow .chip").forEach(function(c,i){c.classList.toggle("on",i===0);});
   document.querySelectorAll("#priceChips .rchip,#rankChips .rchip,#brandChips .rchip").forEach(function(c){c.classList.remove("on");});
-  render();
+  /* 検索条件も「すべて」に戻して楽天を取り直す */
+  currentSearch.source  = "type";
+  currentSearch.label   = "すべての中古クラブ";
+  currentSearch.keyword = TYPE_KEYWORDS.all;
+  currentSearch.sort    = "standard";
+  fetchAllClubs();
 };
 
 /* 比較シート */
@@ -1105,9 +1188,12 @@ document.addEventListener("click", function(e){
   var params = new URLSearchParams(location.search);
   var q = params.get("q");
   if(q){
-    kw = q;
     ucKw.value = q;
     ucKwClear.style.display = "grid";
+    /* 渡されたキーワードで楽天を検索する状態にする */
+    currentSearch.source  = "keyword";
+    currentSearch.label   = q;
+    currentSearch.keyword = "中古 ゴルフ " + q;
   }
 })();
 
