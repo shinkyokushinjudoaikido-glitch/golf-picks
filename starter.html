@@ -81,6 +81,21 @@ img{max-width:100%;display:block;}
 
 .market-line{display:flex;background:#fff;border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:16px;}
 .market-line.loading{padding:18px;justify-content:center;color:var(--ink-soft);font-size:13px;font-weight:600;}
+
+/* 件数ヘッダー＋並び替え */
+.set-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.set-count{font-size:13px;color:var(--ink-soft);font-weight:600;}
+.set-count b{color:var(--gold-deep);font-family:var(--ff-display);font-weight:900;font-size:16px;}
+.set-count .count-slash{color:var(--muted);margin:0 2px;}
+.set-sort{font-size:13px;font-weight:700;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:var(--r-pill);padding:9px 32px 9px 15px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%2346594d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+
+/* ページ送り */
+.pager{display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0 4px;}
+.pager-btn{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:800;color:var(--green-deep);background:#fff;padding:10px 18px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);cursor:pointer;transition:transform .15s;}
+.pager-btn:active{transform:scale(.96);}
+.pager-btn:disabled{opacity:.4;cursor:not-allowed;color:var(--muted);}
+.pager-info{font-size:13px;font-weight:700;color:var(--ink-soft);min-width:110px;text-align:center;}
+.pager-info b{color:var(--gold-deep);font-weight:900;}
 .ml-cell{flex:1;padding:13px 10px;text-align:center;border-right:1px solid var(--bg-soft);}
 .ml-cell:last-child{border-right:none;}
 .ml-cell .ml-lbl{display:block;font-size:10.5px;color:var(--muted);font-weight:700;margin-bottom:3px;}
@@ -214,13 +229,13 @@ img{max-width:100%;display:block;}
   </div>
 </section>
 
-<!-- ① 予算で選ぶクラブセット -->
+<!-- ① クラブセットを探す -->
 <section class="section">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Step 1</span>
-      <h2>予算で選ぶ、クラブセット</h2>
-      <p>初めての一式は、必要なクラブがまとまった「セット」が手軽でおすすめ。予算を選ぶと、その範囲で始められるセットと価格の相場がわかります。</p>
+      <h2>クラブセットを探す</h2>
+      <p>初めての一式は、必要なクラブがまとまった「セット」が手軽でおすすめ。利き手・性別を選んで、価格順に並べ替えながら探せます。</p>
     </div>
     <!-- 利き手・性別 -->
     <div class="st-must reveal">
@@ -239,17 +254,21 @@ img{max-width:100%;display:block;}
         </div>
       </div>
     </div>
-    <!-- 予算帯タブ -->
-    <div class="budget-tabs reveal" id="budgetTabs">
-      <button class="budget-tab on" data-band="b1">〜2万円</button>
-      <button class="budget-tab" data-band="b2">2〜3万円台</button>
-      <button class="budget-tab" data-band="b3">4〜5万円台</button>
-      <button class="budget-tab" data-band="b4">6万円〜</button>
+    <!-- 件数ヘッダー＋並び替え -->
+    <div class="set-head reveal">
+      <div class="set-count" id="setCount">—</div>
+      <div class="sort-wrap">
+        <select id="setSort" class="set-sort">
+          <option value="priceAsc">価格が安い順</option>
+          <option value="priceDesc">価格が高い順</option>
+          <option value="pop">人気順</option>
+        </select>
+      </div>
     </div>
-    <!-- 相場ライン -->
-    <div class="market-line reveal" id="marketLine"></div>
     <!-- セットカード -->
     <div class="starter-set" id="starterSet"></div>
+    <!-- ページ送り -->
+    <div class="pager" id="setPager"></div>
     <p class="set-note">価格・在庫は変動します。最新情報は各商品ページでご確認ください。</p>
   </div>
 </section>
@@ -434,17 +453,12 @@ function isClubSet(c){
 }
 
 /* ===================================================
-   予算で選ぶクラブセット
+   クラブセットを探す（価格順ソート＋ページ送り）
 =================================================== */
 var starterSet = document.getElementById("starterSet");
-var marketLine = document.getElementById("marketLine");
-var BUDGET_BANDS = {
-  b1: { label:"〜2万円",     rMin:0,     rMax:19999 },
-  b2: { label:"2〜3万円台",  rMin:20000, rMax:39999 },
-  b3: { label:"4〜5万円台",  rMin:40000, rMax:59999 },
-  b4: { label:"6万円以上",   rMin:60000, rMax:0 }
-};
-var activeBand = "b1";
+var setCountEl = document.getElementById("setCount");
+var setPager = document.getElementById("setPager");
+
 var starterOpts = { hand:"right", gender:"mens" };
 function starterKeywords(){
   var parts = [];
@@ -452,9 +466,19 @@ function starterKeywords(){
   if(starterOpts.hand==="left") parts.push("左利き");
   return parts.join(" ");
 }
-var starterCache = {};
-var starterLoading = false;
-function starterCacheKey(){ return activeBand + "|" + starterOpts.gender + "|" + starterOpts.hand; }
+
+/* 並び替えモード → 楽天sort値 */
+var SET_SORT_MAP = { priceAsc:"+itemPrice", priceDesc:"-itemPrice", pop:"standard" };
+
+/* 検索状態 */
+var setState = {
+  sort: "priceAsc",   /* 画面の並び替え */
+  page: 1,            /* 現在ページ */
+  pageCount: 1,       /* 総ページ数 */
+  totalHits: 0,       /* 楽天の総ヒット数 */
+  shown: 0            /* このページで表示中の件数 */
+};
+var setLoading = false;
 
 /* 利き手・性別チップ */
 function bindStarterChips(containerId, key){
@@ -465,6 +489,7 @@ function bindStarterChips(containerId, key){
       box.querySelectorAll(".mchip").forEach(function(c){c.classList.remove("on");});
       b.classList.add("on");
       starterOpts[key] = b.dataset.val;
+      setState.page = 1;
       loadStarterSets();
     };
   });
@@ -472,80 +497,70 @@ function bindStarterChips(containerId, key){
 bindStarterChips("stHandChips", "hand");
 bindStarterChips("stGenderChips", "gender");
 
-/* 予算帯タブ */
-document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(tab){
-  tab.onclick = function(){
-    activeBand = tab.dataset.band;
-    document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(t){t.classList.remove("on");});
-    tab.classList.add("on");
+/* 並び替えセレクト */
+var setSortSel = document.getElementById("setSort");
+if(setSortSel){
+  setSortSel.value = setState.sort;
+  setSortSel.onchange = function(){
+    setState.sort = setSortSel.value;
+    setState.page = 1;
     loadStarterSets();
   };
-});
+}
 
 async function loadStarterSets(){
-  var key = starterCacheKey();
-  if(starterCache[key]){ renderStarter(); return; }
-  if(starterLoading) return;
-  starterLoading = true;
-  marketLine.className = "market-line loading";
-  marketLine.textContent = "この予算帯のセットを調べています...";
+  if(setLoading) return;
+  setLoading = true;
+  setCountEl.innerHTML = '<span style="color:var(--muted)">クラブセットを探しています...</span>';
   starterSet.innerHTML = "";
+  setPager.innerHTML = "";
   try {
-    var band = BUDGET_BANDS[activeBand];
-    /* 「クラブセット」を1語にし、一式が出やすいキーワードに */
+    /* クラブセットに絞ったキーワード */
     var setKeyword = "ゴルフ クラブセット フルセット " + starterKeywords();
-    /* クラブセットは1万円以上が中心。安すぎる小物セットを避ける */
-    var floor = activeBand==="b1" ? 8000 : band.rMin;
-    var priceOpts = { minPrice: Math.max(floor, 8000), maxPrice: band.rMax };
+    var sort = SET_SORT_MAP[setState.sort] || "+itemPrice";
+    /* 安すぎる小物セットを避けるため8,000円以上 */
+    var priceOpts = { minPrice: 8000, maxPrice: 0 };
+    var url = buildApiUrl(setKeyword, setState.page, sort, priceOpts);
+    var res = await fetch(url);
+    var data = await res.json();
+    if(!res.ok) throw new Error(data.error || ("HTTP "+res.status));
+
     var all = [];
-    for(var pg=1; pg<=3; pg++){
-      var url = buildApiUrl(setKeyword, pg, "+itemPrice", priceOpts);
-      var res = await fetch(url);
-      var data = await res.json();
-      if(!res.ok) throw new Error(data.error || ("HTTP "+res.status));
-      var items = (data.Items||[]);
-      items.forEach(function(w){ var it = w.Item || w; all.push(convertItem(it)); });
-      if(items.length < 30) break;
-    }
-    /* クラブセットらしい商品だけ残す（靴下・ボール等の小物セットを除外） */
+    (data.Items||[]).forEach(function(w){ var it = w.Item || w; all.push(convertItem(it)); });
+    /* クラブセットらしい商品だけ残す（靴下・ボール等を除外） */
     all = all.filter(isClubSet);
+    /* 重複除去 */
     var seen = {};
     var list = all.filter(function(c){ var k=c.model.slice(0,30); if(seen[k]) return false; seen[k]=true; return true; });
-    starterCache[key] = list;
-    starterLoading = false;
-    renderStarter();
+
+    setState.totalHits = data.count || 0;
+    setState.pageCount = Math.min(data.pageCount || 1, 100);
+    setState.page      = data.page || setState.page;
+    setState.shown     = list.length;
+
+    setLoading = false;
+    renderStarter(list);
   } catch(e){
-    starterLoading = false;
-    marketLine.className = "market-line loading";
-    marketLine.textContent = "セット情報の取得に失敗しました。時間をおいて再度お試しください。";
+    setLoading = false;
+    setCountEl.innerHTML = '<span style="color:var(--muted)">取得に失敗しました。時間をおいて再度お試しください。</span>';
     console.error(e);
   }
 }
 
-function renderStarter(){
-  var list = starterCache[starterCacheKey()];
-  if(!list){ loadStarterSets(); return; }
-  var inBand = list.slice().sort(function(a,b){
-    if(a.hasReview !== b.hasReview) return a.hasReview ? -1 : 1;
-    if(b.rating !== a.rating) return b.rating - a.rating;
-    return a.lowest - b.lowest;
-  });
-  if(inBand.length){
-    var prices = inBand.map(function(c){return c.lowest;});
-    var min = Math.min.apply(null, prices);
-    var avg = Math.round(prices.reduce(function(a,b){return a+b;},0)/prices.length);
-    marketLine.className = "market-line";
-    marketLine.innerHTML =
-      '<div class="ml-cell"><span class="ml-lbl">最安</span><span class="ml-num gold">'+yen(min)+'</span><span class="ml-sub">この予算帯から</span></div>'+
-      '<div class="ml-cell"><span class="ml-lbl">平均価格</span><span class="ml-num">'+yen(avg)+'</span><span class="ml-sub">セット商品の目安</span></div>'+
-      '<div class="ml-cell"><span class="ml-lbl">見つかった数</span><span class="ml-num">'+inBand.length+'<span style="font-size:11px">件</span></span><span class="ml-sub">この予算帯のセット</span></div>';
+function renderStarter(list){
+  /* 件数ヘッダー */
+  if(list.length){
+    setCountEl.innerHTML = '<b>'+setState.shown+'</b> 件 <span class="count-slash">/</span> '+
+      setState.totalHits.toLocaleString("ja-JP")+' 件中';
   } else {
-    marketLine.className = "market-line loading";
-    marketLine.textContent = "この予算帯のセットは見つかりませんでした。別の予算帯をお試しください。";
+    setCountEl.innerHTML = '<span style="color:var(--muted)">クラブセットが見つかりませんでした。条件を変えてお試しください。</span>';
+    starterSet.innerHTML = "";
+    setPager.innerHTML = "";
+    return;
   }
-  if(!inBand.length){ starterSet.innerHTML = ""; return; }
+  /* カード描画 */
   var html = "";
-  inBand.slice(0,30).forEach(function(c){
+  list.forEach(function(c){
     var link = c.affiliateUrl || c.itemUrl || "#";
     var isUsed = /中古|used/i.test(c.modelFull||c.model);
     var condTag = isUsed ? '<span class="set-card-tag used">中古</span>' : '<span class="set-card-tag new">新品</span>';
@@ -565,7 +580,24 @@ function renderStarter(){
       '</a>';
   });
   starterSet.innerHTML = html;
+  renderSetPager();
 }
+
+function renderSetPager(){
+  if(setState.pageCount <= 1){ setPager.innerHTML = ""; return; }
+  var p = setState.page, pc = setState.pageCount;
+  setPager.innerHTML =
+    '<button class="pager-btn" id="setPrev" '+(p<=1?"disabled":"")+'>'+
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>前へ</button>'+
+    '<span class="pager-info"><b>'+p+'</b> / '+pc+' ページ</span>'+
+    '<button class="pager-btn" id="setNext" '+(p>=pc?"disabled":"")+'>'+
+      '次へ<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+  var prev = document.getElementById("setPrev");
+  var next = document.getElementById("setNext");
+  if(prev) prev.onclick = function(){ if(setState.page>1){ setState.page--; loadStarterSets(); scrollToSet(); } };
+  if(next) next.onclick = function(){ if(setState.page<setState.pageCount){ setState.page++; loadStarterSets(); scrollToSet(); } };
+}
+function scrollToSet(){ var el=document.querySelector(".st-must"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); }
 
 /* 初回ロード */
 loadStarterSets();
