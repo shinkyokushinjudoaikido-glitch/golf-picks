@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>初めてのゴルフ｜Golf Picks</title>
+<meta name="description" content="ゴルフを始めたい人のための入門ガイド。予算で選ぶクラブセット、最初にそろえる物、クラブの種類、よくある疑問まで。Golf Picks。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FF7A2F; --gold-deep:#F0610E;
+  --green:#16C46A; --green-deep:#10A256; --green-ink:#0c4429; --green-soft:#dcf7e7;
+  --cream:#FFE7D6; --cream-soft:#FFF5EE;
+  --ink:#172a1f; --ink-soft:#46594d; --muted:#7c8d81;
+  --line:#e3efe3; --line-soft:#eef6ee;
+  --bg:#f5fbf3; --bg-soft:#eaf6e8; --bg-warm:#f8fdf6;
+  --rankS:#16C46A; --rankA:#FF7A2F; --rankB:#8a9a8f;
+  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-pill:999px;
+  --sh-sm:0 1px 3px rgba(14,61,39,.08);
+  --sh-md:0 6px 22px rgba(14,61,39,.10);
+  --sh-lg:0 22px 60px rgba(14,61,39,.16);
+  --sh-gold:0 10px 30px rgba(242,100,25,.30);
+  --ff-jp:"Noto Sans JP",system-ui,sans-serif;
+  --ff-display:"Outfit","Noto Sans JP",sans-serif;
+  --gut:18px; --maxw:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{font-family:var(--ff-jp);color:var(--ink);background:var(--bg);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);}
+.num{font-family:var(--ff-display);font-weight:800;font-variant-numeric:tabular-nums;}
+
+/* ヘッダー */
+.hd{position:sticky;top:0;z-index:100;background:rgba(245,251,243,.85);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;}
+.hd.scrolled{border-color:var(--line);box-shadow:var(--sh-sm);}
+.hd-in{display:flex;align-items:center;justify-content:space-between;height:62px;}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:var(--ff-display);font-weight:800;font-size:18px;}
+.logo-mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));display:grid;place-items:center;box-shadow:var(--sh-gold);}
+.logo-text span{color:var(--gold-deep);}
+.hd-nav{display:flex;gap:6px;}
+.hd-nav{display:flex;gap:4px;flex:none;}
+.hd-nav a{font-size:13px;font-weight:700;color:var(--ink-soft);padding:7px 11px;border-radius:var(--r-pill);transition:all .15s;white-space:nowrap;}
+@media(max-width:400px){.hd-nav a{font-size:12px;padding:6px 9px;}}
+.hd-nav a:hover,.hd-nav a.on{color:var(--green-deep);background:var(--green-soft);}
+
+/* ヒーロー */
+.hero{position:relative;padding:46px 0 38px;background:linear-gradient(180deg,var(--green-soft),transparent);overflow:hidden;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:var(--green-deep);background:#fff;padding:7px 15px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);margin-bottom:18px;}
+.hero h1{font-family:var(--ff-display);font-weight:900;font-size:clamp(28px,7.5vw,46px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px;}
+.hero h1 .hl{color:var(--gold-deep);}
+.hero-lead{font-size:clamp(14px,3.6vw,16px);color:var(--ink-soft);max-width:560px;line-height:1.75;}
+.hero-steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.hero-step{display:flex;align-items:center;gap:8px;background:#fff;border-radius:var(--r-pill);padding:9px 16px 9px 11px;box-shadow:var(--sh-sm);font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+.hero-step b{width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-family:var(--ff-display);font-size:12px;}
+
+/* セクション共通 */
+.section{padding:40px 0;}
+.section-head{margin-bottom:24px;}
+.eyebrow{display:inline-block;font-family:var(--ff-display);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px;}
+.section-head h2{font-family:var(--ff-display);font-weight:900;font-size:clamp(22px,5vw,30px);letter-spacing:-.01em;line-height:1.2;margin-bottom:8px;}
+.section-head p{font-size:14px;color:var(--ink-soft);max-width:580px;line-height:1.7;}
+.section-num{font-family:var(--ff-display);font-weight:900;font-size:13px;color:var(--gold);letter-spacing:.05em;margin-right:8px;}
+
+/* ① 予算で選ぶ（セット提案） */
+.budget-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.budget-tab{flex:1;min-width:84px;font-size:13.5px;font-weight:700;color:var(--ink-soft);background:#fff;padding:13px 10px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .16s;}
+.budget-tab:active{transform:scale(.96);}
+.budget-tab.on{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(35,163,91,.28);}
+.st-must{display:flex;gap:16px;flex-wrap:wrap;background:#fff;border-radius:var(--r-md);padding:14px 16px;margin-bottom:16px;box-shadow:var(--sh-sm);}
+.st-must-grp{display:flex;align-items:center;gap:9px;}
+.st-must-lbl{font-size:12.5px;font-weight:800;color:var(--green-deep);}
+.st-must-chips{display:flex;gap:6px;}
+.mchip{font-size:13px;font-weight:700;color:var(--ink-soft);background:#fff;padding:8px 16px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--line);transition:all .16s;}
+.mchip:active{transform:scale(.95);}
+.mchip.on{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(35,163,91,.28);}
+
+.market-line{display:flex;background:#fff;border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:16px;}
+.market-line.loading{padding:18px;justify-content:center;color:var(--ink-soft);font-size:13px;font-weight:600;}
+.ml-cell{flex:1;padding:13px 10px;text-align:center;border-right:1px solid var(--bg-soft);}
+.ml-cell:last-child{border-right:none;}
+.ml-cell .ml-lbl{display:block;font-size:10.5px;color:var(--muted);font-weight:700;margin-bottom:3px;}
+.ml-cell .ml-num{font-family:var(--ff-display);font-weight:900;font-size:18px;color:var(--green-deep);line-height:1;}
+.ml-cell .ml-num.gold{color:var(--gold-deep);}
+.ml-cell .ml-sub{font-size:9.5px;color:var(--muted);font-weight:600;}
+
+.starter-set{display:flex;flex-direction:column;gap:11px;}
+.set-card{display:flex;gap:13px;background:#fff;border-radius:var(--r-md);padding:13px;box-shadow:var(--sh-sm);transition:transform .15s,box-shadow .15s;}
+.set-card:active{transform:scale(.99);}
+.set-card:hover{box-shadow:var(--sh-md);}
+.set-card-thumb{flex:none;width:92px;height:92px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px var(--line-soft);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.set-card-thumb img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;}
+.set-card-body{flex:1;min-width:0;display:flex;flex-direction:column;}
+.set-card-tags{display:flex;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
+.set-card-tag{font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:var(--r-pill);}
+.set-card-tag.new{color:#fff;background:var(--green);}
+.set-card-tag.used{color:var(--gold-deep);background:var(--cream-soft);}
+.set-card-tag.review{color:var(--ink-soft);background:var(--bg-soft);}
+.set-card-name{font-size:13px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:auto;}
+.set-card-foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:7px;}
+.set-card-price{font-family:var(--ff-display);font-weight:900;font-size:20px;color:var(--gold-deep);line-height:1;}
+.set-card-go{font-size:11px;font-weight:800;color:var(--green-deep);background:var(--green-soft);padding:7px 13px;border-radius:var(--r-pill);flex:none;}
+.set-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5;}
+
+/* ② クラブの構造（図解） */
+.struct-wrap{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-sm);padding:24px 20px 20px;}
+.struct-list{display:grid;grid-template-columns:1fr;gap:11px;margin-top:18px;}
+@media(min-width:560px){.struct-list{grid-template-columns:1fr 1fr;}}
+.struct-item{display:flex;gap:11px;align-items:flex-start;background:var(--bg-warm);border-radius:var(--r-md);padding:13px 15px;}
+.struct-no{flex:none;width:24px;height:24px;border-radius:7px;background:var(--green);color:#fff;font-family:var(--ff-display);font-weight:900;font-size:12px;display:grid;place-items:center;margin-top:1px;}
+.struct-item h4{font-size:13.5px;font-weight:800;margin-bottom:2px;}
+.struct-item h4 em{font-style:normal;font-family:var(--ff-display);font-size:10px;font-weight:700;color:var(--muted);margin-left:6px;letter-spacing:.04em;text-transform:uppercase;}
+.struct-item p{font-size:12px;color:var(--ink-soft);line-height:1.55;}
+.struct-note{display:flex;gap:11px;align-items:flex-start;background:var(--green-soft);border-radius:var(--r-md);padding:14px 16px;margin-top:16px;}
+.struct-note svg{flex:none;color:var(--green-deep);margin-top:2px;}
+.struct-note p{font-size:13px;line-height:1.7;color:var(--ink);}
+.struct-note b{color:var(--green-deep);}
+
+/* ③ クラブの種類 */
+.types-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+@media(min-width:560px){.types-grid{grid-template-columns:1fr 1fr;}}
+.type-card{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:var(--r-md);padding:16px 18px;box-shadow:var(--sh-sm);}
+.type-ico{flex:none;width:46px;height:46px;border-radius:12px;background:var(--green-soft);display:grid;place-items:center;color:var(--green-deep);}
+.type-card h3{font-size:15px;font-weight:800;margin-bottom:3px;}
+.type-card .type-en{font-family:var(--ff-display);font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+.type-card p{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:5px;}
+
+/* ③ そろえる物リスト */
+.gear-cols{display:grid;grid-template-columns:1fr;gap:14px;}
+@media(min-width:640px){.gear-cols{grid-template-columns:1fr 1fr;}}
+.gear-col{background:#fff;border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--sh-sm);}
+.gear-col-head{display:flex;align-items:center;gap:9px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line);}
+.gear-col-head .gear-badge{font-size:11px;font-weight:800;padding:4px 11px;border-radius:var(--r-pill);}
+.gear-badge.must{color:#fff;background:var(--green);}
+.gear-badge.nice{color:var(--gold-deep);background:var(--cream-soft);}
+.gear-col-head h3{font-size:15px;font-weight:800;}
+.gear-list{display:flex;flex-direction:column;gap:11px;}
+.gear-item{display:flex;gap:11px;align-items:flex-start;}
+.gear-check{flex:none;width:20px;height:20px;border-radius:6px;background:var(--green-soft);display:grid;place-items:center;color:var(--green-deep);margin-top:1px;}
+.gear-item strong{font-size:13.5px;font-weight:700;display:block;}
+.gear-item span{font-size:12px;color:var(--ink-soft);line-height:1.5;}
+
+/* ④ Q&A */
+.qa-list{display:flex;flex-direction:column;gap:10px;}
+.qa{background:#fff;border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden;}
+.qa-q{width:100%;display:flex;align-items:center;gap:12px;padding:16px 18px;text-align:left;}
+.qa-q .qa-mark{flex:none;width:26px;height:26px;border-radius:8px;background:var(--green);color:#fff;font-family:var(--ff-display);font-weight:900;font-size:14px;display:grid;place-items:center;}
+.qa-q .qa-text{flex:1;font-size:14px;font-weight:700;line-height:1.4;}
+.qa-q .qa-arrow{flex:none;color:var(--muted);transition:transform .25s;}
+.qa.open .qa-arrow{transform:rotate(180deg);}
+.qa-a{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;}
+.qa.open .qa-a{padding:0 18px 18px 56px;max-height:400px;}
+.qa-a p{font-size:13px;color:var(--ink-soft);line-height:1.75;}
+.qa-a b{color:var(--green-deep);}
+
+/* ⑤ 知っておきたいこと */
+.know{background:linear-gradient(150deg,var(--green-soft),var(--cream-soft));border-radius:var(--r-lg);padding:28px 24px;}
+.know-lead{font-size:16px;line-height:1.7;font-weight:700;margin-bottom:16px;}
+.know-lead b{color:var(--green-deep);}
+.know p{font-size:13.5px;line-height:1.8;color:var(--ink-soft);margin-bottom:13px;}
+.know p b{color:var(--green-deep);font-weight:700;}
+.know-foot{font-size:12.5px;color:var(--ink-soft);background:rgba(255,255,255,.6);border-radius:var(--r-md);padding:13px 15px;margin-top:6px;}
+
+/* CTA */
+.final-cta{text-align:center;padding:44px 0 10px;}
+.final-cta h2{font-family:var(--ff-display);font-weight:900;font-size:clamp(22px,5vw,30px);margin-bottom:10px;}
+.final-cta p{font-size:14px;color:var(--ink-soft);margin-bottom:22px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-weight:800;font-size:15px;padding:15px 30px;border-radius:var(--r-pill);box-shadow:0 10px 26px rgba(35,163,91,.32);transition:transform .15s;}
+.btn-primary:active{transform:scale(.97);}
+
+/* フッター */
+.ft{background:var(--green-ink);color:#cfe8d8;padding:34px 0;margin-top:30px;}
+.ft-in{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;}
+.ft-logo{font-family:var(--ff-display);font-weight:800;font-size:18px;color:#fff;}
+.ft-logo span{color:var(--gold);}
+.ft-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;}
+.ft-links a{font-size:13px;color:#cfe8d8;}
+.ft-links a:hover{color:#fff;}
+.ft-copy{font-size:11.5px;color:#8fbda3;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+<!-- ヘッダー -->
+<header class="hd" id="hd">
+  <div class="wrap hd-in">
+    <a class="logo" href="index.html"><span class="logo-mark"><svg width="17" height="17" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#fff" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="#fff"/><circle cx="6.4" cy="6.4" r="1" fill="#fff"/><circle cx="11.6" cy="6.4" r="1" fill="#fff"/><circle cx="6.4" cy="11.6" r="1" fill="#fff"/><circle cx="11.6" cy="11.6" r="1" fill="#fff"/></svg></span><span class="logo-text">Golf <span>Picks</span></span></a>
+    <nav class="hd-nav">
+      <a href="clubs.html">中古クラブ</a>
+      <a href="starter.html" class="on">ゴルフをはじめる</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> はじめてのゴルフガイド</span>
+    <h1>ゴルフ、<br><span class="hl">はじめてみよう。</span></h1>
+    <p class="hero-lead">何を買えばいい？いくらかかる？初めてだと分からないことだらけ。このページで、道具のそろえ方から最初の不安まで、まとめて解決します。</p>
+    <div class="hero-steps">
+      <span class="hero-step"><b>1</b>予算でセットを選ぶ</span>
+      <span class="hero-step"><b>2</b>必要な物をそろえる</span>
+      <span class="hero-step"><b>3</b>練習場でデビュー</span>
+    </div>
+  </div>
+</section>
+
+<!-- ① 予算で選ぶクラブセット -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Step 1</span>
+      <h2>予算で選ぶ、クラブセット</h2>
+      <p>初めての一式は、必要なクラブがまとまった「セット」が手軽でおすすめ。予算を選ぶと、その範囲で始められるセットと価格の相場がわかります。</p>
+    </div>
+    <!-- 利き手・性別 -->
+    <div class="st-must reveal">
+      <div class="st-must-grp">
+        <span class="st-must-lbl">利き手</span>
+        <div class="st-must-chips" id="stHandChips">
+          <button class="mchip on" data-val="right">右利き</button>
+          <button class="mchip" data-val="left">左利き</button>
+        </div>
+      </div>
+      <div class="st-must-grp">
+        <span class="st-must-lbl">性別</span>
+        <div class="st-must-chips" id="stGenderChips">
+          <button class="mchip on" data-val="mens">メンズ</button>
+          <button class="mchip" data-val="ladies">レディース</button>
+        </div>
+      </div>
+    </div>
+    <!-- 予算帯タブ -->
+    <div class="budget-tabs reveal" id="budgetTabs">
+      <button class="budget-tab on" data-band="b1">〜2万円</button>
+      <button class="budget-tab" data-band="b2">2〜3万円台</button>
+      <button class="budget-tab" data-band="b3">4〜5万円台</button>
+      <button class="budget-tab" data-band="b4">6万円〜</button>
+    </div>
+    <!-- 相場ライン -->
+    <div class="market-line reveal" id="marketLine"></div>
+    <!-- セットカード -->
+    <div class="starter-set" id="starterSet"></div>
+    <p class="set-note">価格・在庫は変動します。最新情報は各商品ページでご確認ください。</p>
+  </div>
+</section>
+
+<!-- ② クラブの構造（図解） -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Basics</span>
+      <h2>クラブは、どんな部品でできている？</h2>
+      <p>ゴルフクラブは、いくつかの部品の組み合わせです。それぞれが振りやすさや球の飛び方に関わります。まずはこの4つだけ知っておけば十分です。</p>
+    </div>
+    <div class="struct-wrap reveal">
+      <div class="struct-list">
+        <div class="struct-item"><span class="struct-no">1</span><div><h4>グリップ<em>Grip</em></h4><p>手で握る部分。太さや素材で握り心地が変わります。</p></div></div>
+        <div class="struct-item"><span class="struct-no">2</span><div><h4>シャフト<em>Shaft</em></h4><p>棒の部分。硬さ・重さ・長さで振りやすさが変わります。</p></div></div>
+        <div class="struct-item"><span class="struct-no">3</span><div><h4>ヘッド<em>Head</em></h4><p>ボールを打つ部分。大きさや重心でやさしさや飛び方が変わります。</p></div></div>
+        <div class="struct-item"><span class="struct-no">4</span><div><h4>フェース<em>Face</em></h4><p>ヘッドの中でボールが当たる面。角度（ロフト）で球の上がりやすさが決まります。</p></div></div>
+      </div>
+
+      <div class="struct-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 3.5M12 17h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <p>特に大事なのが<b>ヘッドとシャフト</b>。この2つは別々に選んで組み合わせることができ、その組み合わせは無数にあります。だから「自分にぴったりの1本」は奥が深いのですが、初めのうちは気にしなくて大丈夫。詳しくはこのページの最後で。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ クラブの種類 -->
+<section class="section" style="background:var(--bg-warm);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Basics</span>
+      <h2>クラブの種類を、ざっくり</h2>
+      <p>セットに入っているクラブは、同じ構造でも形が違い、それぞれ役割があります。難しく考えず「こういう時に使う」だけ知っておけば十分です。</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card reveal">
+        <span class="type-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 19l8-8M13 11l4-4a2.8 2.8 0 00-4-4l-4 4M13 11l-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><h3>ドライバー</h3><span class="type-en">Driver</span><p>一番飛ぶクラブ。各ホールの最初の一打で、できるだけ遠くへ飛ばすために使います。</p></div>
+      </div>
+      <div class="type-card reveal">
+        <span class="type-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 20l10-10M16 10l2-2M9 17l-3 3M16 10a3 3 0 00-3-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><h3>アイアン</h3><span class="type-en">Iron</span><p>距離を打ち分ける主力。番手（数字）が小さいほど遠く、大きいほど近くを狙えます。一番よく使います。</p></div>
+      </div>
+      <div class="type-card reveal">
+        <span class="type-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 21l5-12M12 9l3-5a2 2 0 013 2l-3 5M12 9l-2 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><h3>ウェッジ</h3><span class="type-en">Wedge</span><p>グリーン周りの短い距離や、バンカー（砂場）から脱出するときに使う、高く上げるためのクラブ。</p></div>
+      </div>
+      <div class="type-card reveal">
+        <span class="type-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M9 16h6M10 20h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg></span>
+        <div><h3>パター</h3><span class="type-en">Putter</span><p>グリーンの上で、ボールを転がしてカップに入れる仕上げの一本。最後は必ずこれを使います。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ そろえる物リスト -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Step 2</span>
+      <h2>クラブのほかに、そろえる物</h2>
+      <p>クラブだけでは始められません。とはいえ高価な物は不要。まずは「必須」だけあれば練習場デビューできます。</p>
+    </div>
+    <div class="gear-cols">
+      <div class="gear-col reveal">
+        <div class="gear-col-head"><span class="gear-badge must">まず必須</span><h3>これがあれば始められる</h3></div>
+        <div class="gear-list">
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>ゴルフボール</strong><span>練習場では借りられることが多いですが、コースでは自分の物が必要。最初は安いもので十分。</span></div></div>
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>グローブ</strong><span>手のすべり止め。利き手と逆の手に1枚つけます（右利きなら左手）。</span></div></div>
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>ティー</strong><span>最初の一打でボールを乗せる台。数本入りで安価。なくす物なので多めに。</span></div></div>
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>動きやすい服・靴</strong><span>練習場なら普段着でOK。コースに行くときだけ、襟付きシャツとゴルフシューズを用意。</span></div></div>
+        </div>
+      </div>
+      <div class="gear-col reveal">
+        <div class="gear-col-head"><span class="gear-badge nice">あると良い</span><h3>慣れてきたら</h3></div>
+        <div class="gear-list">
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>キャディバッグ</strong><span>クラブを入れて運ぶ袋。多くのセットには最初から付いています。</span></div></div>
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>マーカー・ボールマーカー</strong><span>グリーン上でボールの位置に置く目印。コースに出るときに。</span></div></div>
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>帽子・サングラス</strong><span>屋外スポーツなので日差し対策に。あると快適です。</span></div></div>
+          <div class="gear-item"><span class="gear-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>距離計</strong><span>残り距離を測る道具。最初は不要。上達して欲しくなったら。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ よくあるギモン -->
+<section class="section" style="background:var(--bg-warm);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Q&amp;A</span>
+      <h2>よくあるギモン</h2>
+      <p>初めての人が気になりやすいことを集めました。気になる質問をタップすると答えが開きます。</p>
+    </div>
+    <div class="qa-list" id="qaList">
+      <div class="qa reveal"><button class="qa-q"><span class="qa-mark">Q</span><span class="qa-text">中古クラブって、汚かったり壊れていたりしない？</span><span class="qa-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="qa-a"><p>多くの中古ショップは状態をチェックして「ランク」を付けて販売しています。<b>状態が気になる人は、ランクが高めの物や写真が多い商品</b>を選べば安心です。新品同様の美品もたくさんあります。初心者のうちはクラブをぶつけたり傷つけたりしがちなので、むしろ中古から始めるのは理にかなっています。</p></div></div>
+      <div class="qa reveal"><button class="qa-q"><span class="qa-mark">Q</span><span class="qa-text">右利き用と左利き用、間違えたらどうなる？</span><span class="qa-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="qa-a"><p>クラブは右利き用・左利き用で形が反対なので、<b>間違えると使えません</b>。日本では右利き用が圧倒的に多く、左利きの方は「レフティ」用を選ぶ必要があります。このページの利き手選択で、間違えないように絞り込めます。なお、左利きでも右利き用で打つ人もいるので、迷ったら一度試打できる場所で確認すると確実です。</p></div></div>
+      <div class="qa reveal"><button class="qa-q"><span class="qa-mark">Q</span><span class="qa-text">いきなりコースに行っても大丈夫？</span><span class="qa-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="qa-a"><p>おすすめは<b>まず練習場（打ちっぱなし）で何度か打ってから</b>です。ボールに当たるようになってから、ショートコースという短いコースで慣れ、それから本格的なコースへ、という流れが安心。最初は経験者と一緒に行くと、マナーやルールも教えてもらえて心強いです。</p></div></div>
+      <div class="qa reveal"><button class="qa-q"><span class="qa-mark">Q</span><span class="qa-text">全部そろえると、いくらくらいかかる？</span><span class="qa-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="qa-a"><p>中古のクラブセットなら<b>2〜3万円台から</b>始められます。これにボール・グローブ・ティーなどの小物を足しても、+3,000〜5,000円ほど。練習場は1回1,000〜2,000円程度。つまり<b>最初は3〜4万円ほどあれば、ひと通りそろえてデビューできます</b>。上達してから、自分に合うクラブに買い替えていくのが賢い始め方です。</p></div></div>
+      <div class="qa reveal"><button class="qa-q"><span class="qa-mark">Q</span><span class="qa-text">どのクラブから練習すればいい？</span><span class="qa-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="qa-a"><p>最初は<b>7番アイアンあたりの真ん中の番手</b>から始めるのが定番です。扱いやすく、スイングの基本が身につきます。いきなりドライバー（一番飛ぶけど難しい）から入ると挫折しやすいので、アイアンで「当てる感覚」をつかんでから他のクラブに広げていきましょう。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 知っておきたいこと -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Mindset</span>
+      <h2>クラブ選びで、覚えておくこと</h2>
+    </div>
+    <div class="know reveal">
+      <div class="know-lead">最初から「自分に完璧に合う1本」を、探さなくて大丈夫です。</div>
+      <p>ゴルフクラブは、ボールを打つ<b>ヘッド</b>と、棒の部分の<b>シャフト</b>の組み合わせでできています。この2つには重さ・硬さ・長さ・角度などの違いが無数にあり、組み合わせは事実上きりがありません。</p>
+      <p>そして、どの組み合わせが本当に自分に合うかは、<b>自分のスイングが固まって初めて分かる</b>もの。始めたばかりの段階では、振り方が毎回変わるので「合う・合わない」を判断する土台がまだありません。</p>
+      <p>だから初心者はまず、<b>無理なく始められるクラブ</b>で十分です。練習を重ねてスイングができあがってくると、自然と「こういう球を打ちたい」と感じるようになります。<b>そのときに、自分に合う1本を選べばいい</b>のです。</p>
+      <div class="know-foot">レビューの評価は参考になりますが、それは「他の人にとって」の評価です。クラブ選びの本番は、上達してから。まずは気軽に1本、始めてみてください。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 最終CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>準備はできましたか？</h2>
+    <p>気になるクラブを探しに行きましょう。</p>
+    <a href="clubs.html" class="btn-primary">中古クラブを探す <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer class="ft">
+  <div class="ft-in">
+    <div class="ft-logo">Golf <span>Picks</span></div>
+    <div class="ft-links"><a href="index.html">ホーム</a><a href="clubs.html">中古クラブ</a><a href="starter.html">ゴルフをはじめる</a></div>
+    <div class="ft-copy">© 2026 Golf Picks.</div>
+  </div>
+</footer>
+
+<script>
+/* ===================================================
+   楽天API（サーバー経由・キーはブラウザに露出しない）
+=================================================== */
+function buildApiUrl(keyword, page, sort, opts){
+  var params = new URLSearchParams({ keyword: keyword, page: page||1, sort: sort||"standard" });
+  if(opts){ if(opts.minPrice) params.set("minPrice", opts.minPrice); if(opts.maxPrice) params.set("maxPrice", opts.maxPrice); }
+  return "/api/clubs?" + params.toString();
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+var yen = function(n){return "¥"+n.toLocaleString("ja-JP");};
+var _idSeq = 0;
+function convertItem(item){
+  var name = item.itemName || "";
+  var price = item.itemPrice || 0;
+  var rating = item.reviewAverage ? parseFloat(item.reviewAverage) : 0;
+  var reviews = item.reviewCount || 0;
+  var img = (item.mediumImageUrls && item.mediumImageUrls[0]) ? item.mediumImageUrls[0].imageUrl : "";
+  if(img) img = img.replace(/_ex=\d+x\d+/, "_ex=300x300");
+  var url = item.itemUrl || "";
+  var affiliateUrl = item.affiliateUrl || url;
+  var hasReview = reviews > 0 && rating > 0;
+  return {
+    model: name.length > 60 ? name.slice(0,60)+"…" : name,
+    modelFull: name,
+    rating: rating, reviews: reviews, hasReview: hasReview,
+    lowest: price, imageUrl: img, itemUrl: url, affiliateUrl: affiliateUrl
+  };
+}
+
+/* ===================================================
+   予算で選ぶクラブセット
+=================================================== */
+var starterSet = document.getElementById("starterSet");
+var marketLine = document.getElementById("marketLine");
+var BUDGET_BANDS = {
+  b1: { label:"〜2万円",     rMin:0,     rMax:19999 },
+  b2: { label:"2〜3万円台",  rMin:20000, rMax:39999 },
+  b3: { label:"4〜5万円台",  rMin:40000, rMax:59999 },
+  b4: { label:"6万円以上",   rMin:60000, rMax:0 }
+};
+var activeBand = "b1";
+var starterOpts = { hand:"right", gender:"mens" };
+function starterKeywords(){
+  var parts = [];
+  parts.push(starterOpts.gender==="ladies" ? "レディース" : "メンズ");
+  if(starterOpts.hand==="left") parts.push("左利き");
+  return parts.join(" ");
+}
+var starterCache = {};
+var starterLoading = false;
+function starterCacheKey(){ return activeBand + "|" + starterOpts.gender + "|" + starterOpts.hand; }
+
+/* 利き手・性別チップ */
+function bindStarterChips(containerId, key){
+  var box = document.getElementById(containerId);
+  if(!box) return;
+  box.querySelectorAll(".mchip").forEach(function(b){
+    b.onclick = function(){
+      box.querySelectorAll(".mchip").forEach(function(c){c.classList.remove("on");});
+      b.classList.add("on");
+      starterOpts[key] = b.dataset.val;
+      loadStarterSets();
+    };
+  });
+}
+bindStarterChips("stHandChips", "hand");
+bindStarterChips("stGenderChips", "gender");
+
+/* 予算帯タブ */
+document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(tab){
+  tab.onclick = function(){
+    activeBand = tab.dataset.band;
+    document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(t){t.classList.remove("on");});
+    tab.classList.add("on");
+    loadStarterSets();
+  };
+});
+
+async function loadStarterSets(){
+  var key = starterCacheKey();
+  if(starterCache[key]){ renderStarter(); return; }
+  if(starterLoading) return;
+  starterLoading = true;
+  marketLine.className = "market-line loading";
+  marketLine.textContent = "この予算帯のセットを調べています...";
+  starterSet.innerHTML = "";
+  try {
+    var band = BUDGET_BANDS[activeBand];
+    var setKeyword = "ゴルフ クラブ セット " + starterKeywords();
+    var priceOpts = { minPrice: Math.max(band.rMin, 3000), maxPrice: band.rMax };
+    var all = [];
+    for(var pg=1; pg<=2; pg++){
+      var url = buildApiUrl(setKeyword, pg, "+itemPrice", priceOpts);
+      var res = await fetch(url);
+      var data = await res.json();
+      if(!res.ok) throw new Error(data.error || ("HTTP "+res.status));
+      var items = (data.Items||[]);
+      items.forEach(function(w){ var it = w.Item || w; all.push(convertItem(it)); });
+      if(items.length < 30) break;
+    }
+    var seen = {};
+    var list = all.filter(function(c){ var k=c.model.slice(0,30); if(seen[k]) return false; seen[k]=true; return true; });
+    starterCache[key] = list;
+    starterLoading = false;
+    renderStarter();
+  } catch(e){
+    starterLoading = false;
+    marketLine.className = "market-line loading";
+    marketLine.textContent = "セット情報の取得に失敗しました。時間をおいて再度お試しください。";
+    console.error(e);
+  }
+}
+
+function renderStarter(){
+  var list = starterCache[starterCacheKey()];
+  if(!list){ loadStarterSets(); return; }
+  var inBand = list.slice().sort(function(a,b){
+    if(a.hasReview !== b.hasReview) return a.hasReview ? -1 : 1;
+    if(b.rating !== a.rating) return b.rating - a.rating;
+    return a.lowest - b.lowest;
+  });
+  if(inBand.length){
+    var prices = inBand.map(function(c){return c.lowest;});
+    var min = Math.min.apply(null, prices);
+    var avg = Math.round(prices.reduce(function(a,b){return a+b;},0)/prices.length);
+    marketLine.className = "market-line";
+    marketLine.innerHTML =
+      '<div class="ml-cell"><span class="ml-lbl">最安</span><span class="ml-num gold">'+yen(min)+'</span><span class="ml-sub">この予算帯から</span></div>'+
+      '<div class="ml-cell"><span class="ml-lbl">平均価格</span><span class="ml-num">'+yen(avg)+'</span><span class="ml-sub">セット商品の目安</span></div>'+
+      '<div class="ml-cell"><span class="ml-lbl">見つかった数</span><span class="ml-num">'+inBand.length+'<span style="font-size:11px">件</span></span><span class="ml-sub">この予算帯のセット</span></div>';
+  } else {
+    marketLine.className = "market-line loading";
+    marketLine.textContent = "この予算帯のセットは見つかりませんでした。別の予算帯をお試しください。";
+  }
+  if(!inBand.length){ starterSet.innerHTML = ""; return; }
+  var html = "";
+  inBand.slice(0,5).forEach(function(c){
+    var link = c.affiliateUrl || c.itemUrl || "#";
+    var isUsed = /中古|used/i.test(c.modelFull||c.model);
+    var condTag = isUsed ? '<span class="set-card-tag used">中古</span>' : '<span class="set-card-tag new">新品</span>';
+    var reviewTag = c.hasReview ? '<span class="set-card-tag review">★'+c.rating.toFixed(1)+'（'+c.reviews+'）</span>' : '';
+    var thumb = c.imageUrl ? '<img src="'+c.imageUrl+'" alt="" loading="lazy">' : '';
+    html +=
+      '<a class="set-card" href="'+link+'" target="_blank" rel="noopener">'+
+        '<div class="set-card-thumb">'+thumb+'</div>'+
+        '<div class="set-card-body">'+
+          '<div class="set-card-tags">'+condTag+reviewTag+'</div>'+
+          '<div class="set-card-name">'+escapeHtml(c.model)+'</div>'+
+          '<div class="set-card-foot">'+
+            '<span class="set-card-price">'+yen(c.lowest)+'</span>'+
+            '<span class="set-card-go">商品を見る →</span>'+
+          '</div>'+
+        '</div>'+
+      '</a>';
+  });
+  starterSet.innerHTML = html;
+}
+
+/* 初回ロード */
+loadStarterSets();
+
+/* ===================================================
+   Q&A 開閉
+=================================================== */
+document.querySelectorAll("#qaList .qa").forEach(function(qa){
+  var q = qa.querySelector(".qa-q");
+  q.onclick = function(){ qa.classList.toggle("open"); };
+});
+
+/* ヘッダースクロール */
+addEventListener("scroll", function(){ document.getElementById("hd").classList.toggle("scrolled", scrollY>8); }, {passive:true});
+
+/* reveal */
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+}, {threshold:.12});
+document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

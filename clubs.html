@@ -375,7 +375,7 @@ a{color:inherit;text-decoration:none;}
   <div class="wrap hd-in">
     <a class="logo" href="index.html"><span class="logo-mark"><svg width="17" height="17" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#fff" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="#fff"/><circle cx="6.4" cy="6.4" r="1" fill="#fff"/><circle cx="11.6" cy="6.4" r="1" fill="#fff"/><circle cx="6.4" cy="11.6" r="1" fill="#fff"/><circle cx="11.6" cy="11.6" r="1" fill="#fff"/></svg></span><span class="logo-text">Golf <span>Picks</span></span></a>
     <nav class="hd-nav">
-      <a href="clubs.html" class="on">中古クラブ</a><a href="#">大会</a>
+      <a href="clubs.html" class="on">中古クラブ</a>
     </nav>
     <div class="hd-actions">
       <button class="burger" aria-label="メニュー"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="6" width="16" height="2" rx="1" fill="currentColor"/><rect x="3" y="10" width="16" height="2" rx="1" fill="currentColor"/><rect x="3" y="14" width="16" height="2" rx="1" fill="currentColor"/></svg></button>
@@ -395,22 +395,22 @@ a{color:inherit;text-decoration:none;}
   <!-- ① 「初めての方へ」呼び出しボタン（ページ上部） -->
   <section class="starter-cta-sec">
     <div class="wrap">
-      <button class="starter-cta" id="openStarter">
+      <a class="starter-cta" href="starter.html">
         <span class="starter-cta-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
         <span class="starter-cta-txt">
-          <b>初めてゴルフを始める方へ</b>
-          <small>予算からおすすめのクラブセットを探す</small>
+          <b>ゴルフをはじめる</b>
+          <small>予算で選ぶセット・必要な物・よくある疑問まで</small>
         </span>
         <span class="starter-cta-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </button>
+      </a>
     </div>
   </section>
 
   <!-- 右下に浮く呼び出しボタン -->
-  <button class="starter-fab" id="openStarterFab" aria-label="初めての方へ">
+  <a class="starter-fab" href="starter.html" aria-label="ゴルフをはじめる">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-    <span>初めての方</span>
-  </button>
+    <span>はじめる</span>
+  </a>
 
   <!-- ⑨ 専用入口：レフティ / レディース / シニア -->
   <div class="filter">
@@ -488,7 +488,7 @@ a{color:inherit;text-decoration:none;}
 <footer class="ft">
   <div class="ft-in">
     <div class="ft-logo">Golf <span>Picks</span></div>
-    <div class="ft-links"><a href="clubs.html">中古クラブ</a><a href="#">大会</a><a href="#">運営会社</a></div>
+    <div class="ft-links"><a href="clubs.html">中古クラブ</a><a href="index.html">ホーム</a></div>
     <div class="ft-copy">© 2026 Golf Picks.</div>
   </div>
 </footer>
@@ -500,71 +500,6 @@ a{color:inherit;text-decoration:none;}
   <div class="sheet-sub" id="sheetSub"></div>
   <div id="sheetShops"></div>
   <div class="sheet-note">価格・送料・在庫状況は変動します。最新情報は各ショップでご確認ください。</div>
-</div>
-
-<!-- 「初めての方へ」ポップアップシート -->
-<div class="sheet-bd" id="starterBd"></div>
-<div class="sheet starter-sheet" id="starterSheet">
-  <div class="sheet-handle"></div>
-  <button class="starter-close" id="starterClose" aria-label="閉じる"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-  <div class="starter-sheet-head">
-    <span class="starter-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> 初めての方へ</span>
-    <h2>予算で選ぶ、はじめてのクラブセット</h2>
-    <p>予算を選ぶと、その範囲で始められる初心者向けセットと、価格の相場感がわかります。</p>
-  </div>
-
-  <!-- 独自の利き手・性別（検索結果とは別物） -->
-  <div class="st-must">
-    <div class="st-must-grp">
-      <span class="st-must-lbl">利き手</span>
-      <div class="st-must-chips" id="stHandChips">
-        <button class="mchip on" data-val="right">右利き</button>
-        <button class="mchip" data-val="left">左利き</button>
-      </div>
-    </div>
-    <div class="st-must-grp">
-      <span class="st-must-lbl">性別</span>
-      <div class="st-must-chips" id="stGenderChips">
-        <button class="mchip on" data-val="mens">メンズ</button>
-        <button class="mchip" data-val="ladies">レディース</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 予算帯タブ -->
-  <div class="budget-tabs" id="budgetTabs">
-    <button class="budget-tab on" data-band="b1">〜2万円</button>
-    <button class="budget-tab" data-band="b2">2〜3万円台</button>
-    <button class="budget-tab" data-band="b3">4〜5万円台</button>
-    <button class="budget-tab" data-band="b4">6万円〜</button>
-  </div>
-
-  <!-- 相場ライン -->
-  <div class="market-line" id="marketLine"></div>
-
-  <!-- セットカード一覧 -->
-  <div class="starter-set" id="starterSet"></div>
-
-  <!-- 知っておきたいこと（ポップアップ内に統合） -->
-  <div class="know-block">
-    <button class="know-toggle" id="knowToggle" aria-expanded="false">
-      <span class="know-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-      <span class="know-ttl">クラブを選ぶ前に、知っておきたいこと</span>
-      <span class="know-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    </button>
-    <div class="know-body" id="knowBody" hidden>
-      <div class="know-lead">
-        結論から言うと、<b>最初から「自分に完璧に合う1本」を探さなくて大丈夫</b>です。
-      </div>
-      <p>ゴルフクラブは、ボールを打つ<b>ヘッド</b>と、棒の部分である<b>シャフト</b>の組み合わせでできています。このヘッドとシャフトには、それぞれ重さ・硬さ・長さ・角度などの違いが無数にあり、組み合わせは事実上きりがありません。</p>
-      <p>そして、どの組み合わせが本当に自分に合うかは、<b>自分のスイングが固まって初めて分かる</b>ものです。始めたばかりの段階では、そもそも振り方が毎回変わるので、「合う・合わない」を判断する土台がまだありません。</p>
-      <div class="know-point">
-        <span class="know-point-no">だから</span>
-        <p>初心者はまず、<b>無理なく始められるクラブ</b>で十分です。練習を重ねてスイングができあがってくると、自然と「自分はこういう球を打ちたい」「ここが合わない」と感じるようになります。<b>そのときに、自分に合う1本を選べばいい</b>のです。</p>
-      </div>
-      <p class="know-foot">レビューの評価は参考になりますが、それはあくまで「他の人にとって」の評価です。クラブ選びは、上達してからが本番。まずは気軽に1本、始めてみてください。</p>
-    </div>
-  </div>
 </div>
 
 <!-- ランク説明モーダル -->
@@ -639,12 +574,16 @@ var SORT_MAP = {
 };
 
 /* 自分のサイトのAPIエンドポイントURLを作る */
-function buildApiUrl(keyword, page, sort){
+function buildApiUrl(keyword, page, sort, opts){
   var params = new URLSearchParams({
     keyword: keyword,
     page: page || 1,
     sort: sort || "standard"
   });
+  if(opts){
+    if(opts.minPrice) params.set("minPrice", opts.minPrice);
+    if(opts.maxPrice) params.set("maxPrice", opts.maxPrice);
+  }
   return "/api/clubs?" + params.toString();
 }
 
@@ -1225,53 +1164,8 @@ document.querySelectorAll("[data-count]").forEach(function(el){cio.observe(el);}
 addEventListener("scroll",function(){document.getElementById("hd").classList.toggle("scrolled",scrollY>8);},{passive:true});
 
 /* ============================================================
-   ① 予算帯で選ぶ：初心者向けセット提案＋相場ライン
+   初めての方へ → starter.html に独立（このページでは扱わない）
 ============================================================ */
-var starterSet = document.getElementById("starterSet");
-var marketLine = document.getElementById("marketLine");
-
-/* 予算帯の定義 */
-var BUDGET_BANDS = {
-  b1: { label:"〜2万円",     min:0,     max:20000  },
-  b2: { label:"2〜3万円台",  min:20000, max:40000  },
-  b3: { label:"4〜5万円台",  min:40000, max:60000  },
-  b4: { label:"6万円以上",   min:60000, max:Infinity }
-};
-var activeBand = "b1";
-
-/* セット提案シート専用の利き手・性別（検索結果のmustOptsとは別物） */
-var starterOpts = { hand:"right", gender:"mens" };
-function starterKeywords(){
-  var parts = [];
-  parts.push(starterOpts.gender==="ladies" ? "レディース" : "メンズ");
-  if(starterOpts.hand==="left") parts.push("左利き");
-  return parts.join(" ");
-}
-
-/* セット商品のキャッシュ（一度取得したら使い回す） */
-var starterSets = null;
-var starterLoading = false;
-var starterOpened = false;  /* シートを一度でも開いたか */
-
-/* シート開閉 */
-var starterSheet = document.getElementById("starterSheet");
-var starterBd = document.getElementById("starterBd");
-var starterFab = document.getElementById("openStarterFab");
-function openStarterSheet(){
-  starterBd.classList.add("open");
-  starterSheet.classList.add("open");
-  document.body.style.overflow = "hidden";
-  if(!starterOpened){ starterOpened = true; loadStarterSets(); }
-}
-function closeStarterSheet(){
-  starterBd.classList.remove("open");
-  starterSheet.classList.remove("open");
-  document.body.style.overflow = "";
-}
-document.getElementById("openStarter").onclick = openStarterSheet;
-if(starterFab) starterFab.onclick = openStarterSheet;
-document.getElementById("starterClose").onclick = closeStarterSheet;
-starterBd.onclick = closeStarterSheet;
 
 /* ランク説明モーダルの開閉 */
 (function(){
@@ -1287,145 +1181,6 @@ starterBd.onclick = closeStarterSheet;
   rankBd.onclick = close;
 })();
 
-/* FABはトップ付近では隠す（CTAボタンと重複するため） */
-addEventListener("scroll", function(){
-  if(!starterFab) return;
-  starterFab.classList.toggle("hidden", scrollY < 260);
-}, {passive:true});
-if(starterFab) starterFab.classList.add("hidden");
-
-/* シート内の独自セレクタ（利き手・性別） */
-function bindStarterChips(containerId, key){
-  var box = document.getElementById(containerId);
-  if(!box) return;
-  box.querySelectorAll(".mchip").forEach(function(b){
-    b.onclick = function(){
-      box.querySelectorAll(".mchip").forEach(function(c){c.classList.remove("on");});
-      b.classList.add("on");
-      starterOpts[key] = b.dataset.val;
-      loadStarterSets(true);  /* 条件変更で取り直し */
-    };
-  });
-}
-bindStarterChips("stHandChips", "hand");
-bindStarterChips("stGenderChips", "gender");
-
-/* 予算帯タブのクリック */
-document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(tab){
-  tab.onclick = function(){
-    activeBand = tab.dataset.band;
-    document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(t){t.classList.remove("on");});
-    tab.classList.add("on");
-    renderStarter();
-  };
-});
-
-/* 初心者向けセットを楽天から取得（シート専用） */
-async function loadStarterSets(force){
-  if((starterSets && !force) || starterLoading) return;
-  if(force) starterSets = null;
-  starterLoading = true;
-  marketLine.className = "market-line loading";
-  marketLine.textContent = "初心者向けセットの相場を調べています...";
-  starterSet.innerHTML = "";
-
-  try {
-    /* シート独自の利き手・性別を反映したキーワード */
-    var setKeyword = "ゴルフ クラブ セット 初心者 " + starterKeywords();
-    /* 価格順で広めに2ページ取得して予算帯ごとに振り分ける */
-    var all = [];
-    for(var pg=1; pg<=2; pg++){
-      var url = buildApiUrl(setKeyword, pg, "+itemPrice");
-      var res = await fetch(url);
-      var data = await res.json();
-      if(!res.ok) throw new Error(data.error || ("HTTP "+res.status));
-      (data.Items||[]).forEach(function(w){
-        var it = w.Item || w;
-        all.push(convertItem(it));
-      });
-    }
-    /* 重複除去 */
-    var seen = {};
-    starterSets = all.filter(function(c){
-      var k = c.model.slice(0,30);
-      if(seen[k]) return false; seen[k]=true; return true;
-    });
-    starterLoading = false;
-    renderStarter();
-  } catch(e){
-    starterLoading = false;
-    marketLine.className = "market-line loading";
-    marketLine.textContent = "セット情報の取得に失敗しました。時間をおいて再度お試しください。";
-    console.error(e);
-  }
-}
-
-/* 現在の予算帯でセットと相場を描画 */
-function renderStarter(){
-  if(!starterSets){ loadStarterSets(); return; }
-  var band = BUDGET_BANDS[activeBand];
-  var inBand = starterSets.filter(function(c){ return c.lowest>=band.min && c.lowest<band.max; })
-    .sort(function(a,b){
-      /* ① レビューがある商品を優先 */
-      if(a.hasReview !== b.hasReview) return a.hasReview ? -1 : 1;
-      /* ② 評価が高い順 */
-      if(b.rating !== a.rating) return b.rating - a.rating;
-      /* ③ 同じなら安い順 */
-      return a.lowest - b.lowest;
-    });
-
-  /* 相場ライン（この予算帯の平均・最安・件数） */
-  if(inBand.length){
-    var prices = inBand.map(function(c){return c.lowest;});
-    var min = Math.min.apply(null, prices);
-    var avg = Math.round(prices.reduce(function(a,b){return a+b;},0)/prices.length);
-    marketLine.className = "market-line";
-    marketLine.innerHTML =
-      '<div class="ml-cell"><span class="ml-lbl">最安</span><span class="ml-num gold">'+yen(min)+'</span><span class="ml-sub">この予算帯から</span></div>'+
-      '<div class="ml-cell"><span class="ml-lbl">平均価格</span><span class="ml-num">'+yen(avg)+'</span><span class="ml-sub">セット商品の目安</span></div>'+
-      '<div class="ml-cell"><span class="ml-lbl">見つかった数</span><span class="ml-num">'+inBand.length+'<span style="font-size:11px">件</span></span><span class="ml-sub">初心者向けセット</span></div>';
-  } else {
-    marketLine.className = "market-line loading";
-    marketLine.textContent = "この予算帯のセットは見つかりませんでした。別の予算帯をお試しください。";
-  }
-
-  /* セットカード（上位5件） */
-  if(!inBand.length){
-    starterSet.innerHTML = "";
-    return;
-  }
-  var html = "";
-  inBand.slice(0,5).forEach(function(c){
-    var link = c.affiliateUrl || c.itemUrl || "#";
-    var isUsed = /中古|used/i.test(c.modelFull||c.model);
-    var condTag = isUsed
-      ? '<span class="set-card-tag used">中古</span>'
-      : '<span class="set-card-tag new">新品</span>';
-    var reviewTag = c.hasReview
-      ? '<span class="set-card-tag review">★'+c.rating.toFixed(1)+'（'+c.reviews+'）</span>'
-      : '';
-    var thumb = c.imageUrl
-      ? '<img src="'+c.imageUrl+'" alt="" loading="lazy">'
-      : (typeIcon.set||"");
-    html +=
-      '<a class="set-card" href="'+link+'" target="_blank" rel="noopener">'+
-        '<div class="set-card-thumb">'+thumb+'</div>'+
-        '<div class="set-card-body">'+
-          '<div class="set-card-tags">'+condTag+reviewTag+'</div>'+
-          '<div class="set-card-name">'+escapeHtml(c.model)+'</div>'+
-          '<div class="set-card-foot">'+
-            '<span class="set-card-price">'+yen(c.lowest)+'</span>'+
-            '<span class="set-card-go">商品を見る →</span>'+
-          '</div>'+
-        '</div>'+
-      '</a>';
-  });
-  starterSet.innerHTML = html;
-}
-
-/* buildStarter は他所から呼ばれているので互換のため残す（中身は新ロジック） */
-function buildStarter(){ if(!starterSets){ loadStarterSets(); } else { renderStarter(); } }
-function typeLabel(t){return {driver:"ドライバー",iron:"アイアン",wedge:"ウェッジ",putter:"パター",set:"セット"}[t]||t;}
 
 /* ============================================================
    ⑨ 「知っておきたいこと」開閉トグル
