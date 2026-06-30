@@ -439,41 +439,277 @@ input[type=range]#budgetRange::-moz-range-thumb{width:26px;height:26px;border-ra
 </div>
 
 <script>
-/* ===== データ（実在モデルベース・価格はサンプル） ===== */
-var clubs = [
-  {id:"c1",brand:"TaylorMade",model:"Qi10 MAX ドライバー",type:"driver",beginner:true,rank:"A",year:2024,flex:"S / SR",loft:"10.5°",rating:4.6,reviews:312,popRank:1,shopCount:24,lowest:48800,retail:79200,shops:[{name:"ゴルフドゥ オンライン",price:48800,ship:"送料無料",cond:"A・美品"},{name:"中古クラブ市場 GOLFRE",price:50400,ship:"¥770",cond:"A"},{name:"ゴルフパートナー 楽天市場店",price:51800,ship:"送料無料",cond:"A・純正シャフト"}]},
-  {id:"c2",brand:"PING",model:"G430 MAX 10K ドライバー",type:"driver",beginner:true,rank:"S",year:2024,flex:"S",loft:"9.0°",rating:4.7,reviews:268,popRank:2,shopCount:19,lowest:52000,retail:85800,shops:[{name:"ゴルフエース",price:52000,ship:"送料無料",cond:"S・極上"},{name:"ゴルフドゥ オンライン",price:53900,ship:"¥770",cond:"S"},{name:"中古クラブ市場 GOLFRE",price:55200,ship:"送料無料",cond:"S・保証付"}]},
-  {id:"c3",brand:"Callaway",model:"PARADYM Ai SMOKE MAX ドライバー",type:"driver",beginner:false,rank:"A",year:2024,flex:"S / X",loft:"9.0°",rating:4.5,reviews:197,popRank:5,shopCount:16,lowest:46200,retail:79200,shops:[{name:"ゴルフパートナー 楽天市場店",price:46200,ship:"送料無料",cond:"A・美品"},{name:"ゴルフエース",price:47800,ship:"¥770",cond:"A"}]},
-  {id:"c4",brand:"SRIXON",model:"ZX5 Mk II ドライバー",type:"driver",beginner:false,rank:"A",year:2023,flex:"S",loft:"10.5°",rating:4.4,reviews:143,popRank:9,shopCount:12,lowest:33800,retail:66000,shops:[{name:"ゴルフドゥ オンライン",price:33800,ship:"送料無料",cond:"A・美品"},{name:"中古クラブ市場 GOLFRE",price:35200,ship:"¥770",cond:"A"}]},
-  {id:"c5",brand:"Titleist",model:"T100 アイアン 6本セット (#5-PW)",type:"iron",beginner:false,rank:"S",year:2023,flex:"S (NS PRO)",loft:"—",rating:4.8,reviews:221,popRank:3,shopCount:14,lowest:96000,retail:168000,shops:[{name:"ゴルフエース",price:96000,ship:"送料無料",cond:"S・極上"},{name:"ゴルフパートナー 楽天市場店",price:99800,ship:"¥1,100",cond:"S"},{name:"ゴルフドゥ オンライン",price:102400,ship:"送料無料",cond:"S・保証付"}]},
-  {id:"c6",brand:"Mizuno",model:"JPX923 HOT METAL アイアン 6本",type:"iron",beginner:true,rank:"A",year:2022,flex:"R / S",loft:"—",rating:4.6,reviews:184,popRank:6,shopCount:18,lowest:58800,retail:112200,shops:[{name:"中古クラブ市場 GOLFRE",price:58800,ship:"送料無料",cond:"A・美品"},{name:"ゴルフドゥ オンライン",price:61200,ship:"¥1,100",cond:"A"}]},
-  {id:"c7",brand:"PING",model:"i230 アイアン 6本セット",type:"iron",beginner:false,rank:"A",year:2023,flex:"S (Modus)",loft:"—",rating:4.7,reviews:132,popRank:11,shopCount:9,lowest:78000,retail:138600,shops:[{name:"ゴルフエース",price:78000,ship:"送料無料",cond:"A・美品"},{name:"ゴルフパートナー 楽天市場店",price:81500,ship:"¥1,100",cond:"A"}]},
-  {id:"c8",brand:"Titleist",model:"Vokey SM10 ウェッジ 56°",type:"wedge",beginner:false,rank:"A",year:2024,flex:"Wedge",loft:"56°/10S",rating:4.7,reviews:256,popRank:4,shopCount:22,lowest:14800,retail:23100,shops:[{name:"ゴルフドゥ オンライン",price:14800,ship:"送料無料",cond:"A・美品"},{name:"中古クラブ市場 GOLFRE",price:15600,ship:"¥550",cond:"A"},{name:"ゴルフパートナー 楽天市場店",price:16200,ship:"送料無料",cond:"A・新溝"}]},
-  {id:"c9",brand:"Cleveland",model:"RTX 6 ZipCore ウェッジ 52°",type:"wedge",beginner:false,rank:"B",year:2023,flex:"Wedge",loft:"52°/10",rating:4.4,reviews:98,popRank:16,shopCount:11,lowest:9800,retail:20900,shops:[{name:"中古クラブ市場 GOLFRE",price:9800,ship:"¥550",cond:"B・実用品"},{name:"ゴルフドゥ オンライン",price:10800,ship:"送料無料",cond:"B"}]},
-  {id:"c10",brand:"Scotty Cameron",model:"Special Select Newport 2 パター 34inch",type:"putter",beginner:false,rank:"A",year:2023,flex:"—",loft:"—",rating:4.8,reviews:174,popRank:7,shopCount:13,lowest:52800,retail:79200,shops:[{name:"ゴルフエース",price:52800,ship:"送料無料",cond:"A・カバー付"},{name:"ゴルフパートナー 楽天市場店",price:55400,ship:"¥770",cond:"A"}]},
-  {id:"c11",brand:"Odyssey",model:"Ai-ONE ミルドパター 33inch",type:"putter",beginner:true,rank:"A",year:2024,flex:"—",loft:"—",rating:4.5,reviews:88,popRank:14,shopCount:10,lowest:26800,retail:46200,shops:[{name:"ゴルフドゥ オンライン",price:26800,ship:"送料無料",cond:"A・美品"},{name:"中古クラブ市場 GOLFRE",price:28200,ship:"¥770",cond:"A"}]},
-  {id:"c12",brand:"XXIO",model:"XXIO 12 オールインワンセット 10本",type:"set",beginner:true,rank:"A",year:2022,flex:"R / SR",loft:"—",rating:4.6,reviews:142,popRank:8,shopCount:8,lowest:118000,retail:231000,shops:[{name:"ゴルフエース",price:118000,ship:"送料無料",cond:"A・バッグ付"},{name:"ゴルフパートナー 楽天市場店",price:124800,ship:"¥1,100",cond:"A"}]},
-  {id:"c13",brand:"Callaway",model:"REVA レディース 11本セット",type:"set",beginner:true,rank:"A",year:2023,flex:"L",loft:"—",rating:4.7,reviews:119,popRank:10,shopCount:9,lowest:78000,retail:137500,shops:[{name:"ゴルフドゥ オンライン",price:78000,ship:"送料無料",cond:"A・バッグ付"},{name:"ゴルフパートナー 楽天市場店",price:82400,ship:"¥770",cond:"A"}]},
-  {id:"c14",brand:"Wilson",model:"プロスタッフ SGI メンズ 10本セット",type:"set",beginner:true,rank:"B",year:2022,flex:"R",loft:"—",rating:4.3,reviews:76,popRank:18,shopCount:7,lowest:39800,retail:79200,shops:[{name:"中古クラブ市場 GOLFRE",price:39800,ship:"送料無料",cond:"B・バッグ付"},{name:"ゴルフドゥ オンライン",price:42600,ship:"¥1,100",cond:"B"}]},
-  {id:"c15",brand:"PRGR",model:"egg レディース 軽量ドライバー",type:"driver",beginner:true,rank:"A",year:2023,flex:"L / A",loft:"12.5°",rating:4.5,reviews:64,popRank:13,shopCount:8,lowest:24800,retail:52800,shops:[{name:"ゴルフドゥ オンライン",price:24800,ship:"送料無料",cond:"A・美品"},{name:"中古クラブ市場 GOLFRE",price:26400,ship:"送料無料",cond:"A"}]}
-];
-/* 各クラブに初心者向け属性を補強（性別・利き手・シニア・やさしさ・練習場換算） */
-clubs.forEach(function(c){
-  var nm = c.brand+" "+c.model;
-  c.gender = (/レディース|レディ|REVA/.test(nm) || /^L$/.test((c.flex||"").trim()) || /(^|\W)L(\W|$)/.test(c.flex||"")) ? "ladies" : "mens";
-  c.senior = /XXIO|egg|SGI/.test(nm) || (c.beginner && c.type==="set");
-  c.lefty = ["c1","c2","c5","c8","c10","c12"].indexOf(c.id) >= 0;
+<script>
+/* ===================================================
+   楽天API設定（ブラウザ直接呼び出し・道B方式）
+=================================================== */
+var RAKUTEN_APP_ID = "";      // ← あとでLocalStorageから読む or 直接書く
+var RAKUTEN_ACCESS_KEY = "";
+var RAKUTEN_AFFILIATE_ID = "";
+
+/* LocalStorageからキーを読み込む */
+(function(){
+  RAKUTEN_APP_ID      = localStorage.getItem("r_app_id") || "";
+  RAKUTEN_ACCESS_KEY  = localStorage.getItem("r_access_key") || "";
+  RAKUTEN_AFFILIATE_ID= localStorage.getItem("r_affiliate_id") || "";
+})();
+
+var clubs = [];   /* 楽天APIから取得したデータを入れる */
+var clubsLoaded = false;
+
+/* ===================================================
+   楽天APIから中古クラブを取得
+=================================================== */
+var RAKUTEN_ENDPOINT = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20220601";
+
+/* キーワードリスト：複数キーワードで順に取得してマージ */
+var SEARCH_KEYWORDS = ["中古 ドライバー", "中古 アイアン", "中古 ウェッジ", "中古 パター", "中古 ゴルフ セット"];
+
+function buildRakutenUrl(keyword, page){
+  var params = [
+    "applicationId=" + encodeURIComponent(RAKUTEN_APP_ID),
+    "accessKey="     + encodeURIComponent(RAKUTEN_ACCESS_KEY),
+    "affiliateId="   + encodeURIComponent(RAKUTEN_AFFILIATE_ID),
+    "keyword="       + encodeURIComponent(keyword),
+    "genreId=101070",   /* スポーツ＞ゴルフ */
+    "hits=30",
+    "page=" + (page||1),
+    "sort=+itemPrice",
+    "imageFlag=1"
+  ];
+  return RAKUTEN_ENDPOINT + "?" + params.join("&");
+}
+
+/* 商品名からクラブ種別を推定 */
+function guessType(name){
+  var n = name;
+  if(/セット|set/i.test(n)) return "set";
+  if(/ドライバー|driver/i.test(n)) return "driver";
+  if(/アイアン|iron/i.test(n)) return "iron";
+  if(/ウェッジ|wedge/i.test(n)) return "wedge";
+  if(/パター|putter/i.test(n)) return "putter";
+  return "driver";
+}
+
+/* 商品名からブランドを推定 */
+function guessBrand(name){
+  var brands = [
+    "TaylorMade","テーラーメイド",
+    "PING","ピン",
+    "Callaway","キャロウェイ",
+    "SRIXON","スリクソン",
+    "Titleist","タイトリスト",
+    "Mizuno","ミズノ",
+    "Cleveland","クリーブランド",
+    "Scotty Cameron","スコッティキャメロン",
+    "Odyssey","オデッセイ",
+    "XXIO","ゼクシオ",
+    "DUNLOP","ダンロップ",
+    "PRGR",
+    "Yonex","ヨネックス",
+    "Bridgestone","ブリヂストン",
+    "Wilson","ウィルソン"
+  ];
+  for(var i=0;i<brands.length;i++){
+    if(name.toLowerCase().indexOf(brands[i].toLowerCase())>=0) return brands[i];
+  }
+  return "その他";
+}
+
+/* 楽天商品データ → clubs配列の1件に変換 */
+var _idSeq = 0;
+function convertItem(item){
+  var name = item.itemName || "";
+  var price = item.itemPrice || 0;
+  var retail = Math.round(price * 1.4);  /* 定価は推定（40%割引と仮定） */
+  var type = guessType(name);
+  var brand = guessBrand(name);
+  var rating = item.reviewAverage ? parseFloat(item.reviewAverage) : 0;
+  var reviews = item.reviewCount || 0;
+  var img = (item.mediumImageUrls && item.mediumImageUrls[0]) ? item.mediumImageUrls[0].imageUrl : "";
+  var url = item.itemUrl || "";
+  var affiliateUrl = item.affiliateUrl || url;
+  var shopName = item.shopName || "";
+
+  /* gender/senior/lefty推定 */
+  var gender = /レディース|レディ|ladies/i.test(name) ? "ladies" : "mens";
+  var senior = /XXIO|ゼクシオ|egg|シニア|senior|軽量/i.test(name);
+  var lefty = /左利き|レフティ|lefty|left/i.test(name);
+  var beginner = /初心者|beginner|easy|やさしい|MAX|HOT|REVA|SGI/i.test(name) || type==="set";
+
+  /* やさしさスコア（簡易） */
   var ease = 60;
-  if(c.beginner) ease += 18;
-  if(c.type==="set") ease += 12;
-  if(c.type==="driver") ease += 6;
-  if(c.type==="iron") ease += 2;
-  if(c.rank==="S") ease += 6; else if(c.rank==="A") ease += 3;
-  if(/MAX|HOT METAL|REVA|XXIO|egg|SGI|Ai-ONE/.test(nm)) ease += 8;
-  if(/T100|i230|ZX5|Vokey|Newport|RTX/.test(nm)) ease -= 14;
-  c.ease = Math.max(35, Math.min(98, ease));
-  c.savePractice = Math.max(1, Math.round((c.retail - c.lowest)/1000));
-});
+  if(beginner) ease+=18; if(type==="set") ease+=12; if(type==="driver") ease+=6;
+  if(rating>=4.5) ease+=6; else if(rating>=4.0) ease+=3;
+  if(senior) ease+=10;
+  ease = Math.max(35, Math.min(98, ease));
+
+  var savePractice = Math.max(1, Math.round((retail-price)/1000));
+  var off = Math.round((1-price/retail)*100);
+
+  return {
+    id: "r" + (++_idSeq),
+    brand: brand,
+    model: name.length > 60 ? name.slice(0,60)+"…" : name,
+    modelFull: name,
+    type: type,
+    beginner: beginner,
+    rank: rating>=4.5 ? "S" : rating>=4.0 ? "A" : "B",
+    year: new Date().getFullYear(),
+    flex: "—",
+    loft: "—",
+    rating: rating || 4.0,
+    reviews: reviews,
+    popRank: _idSeq,
+    shopCount: 1,
+    lowest: price,
+    retail: retail,
+    off: off,
+    imageUrl: img,
+    itemUrl: url,
+    affiliateUrl: affiliateUrl,
+    shopName: shopName,
+    gender: gender,
+    senior: senior,
+    lefty: lefty,
+    ease: ease,
+    savePractice: savePractice,
+    shops: [{name: shopName, price: price, ship:"送料確認要", cond:"楽天市場", url: affiliateUrl}]
+  };
+}
+
+/* ローディング表示 */
+function showLoading(){
+  document.getElementById("grid").innerHTML =
+    '<div class="uc-empty" id="loadingMsg">'+
+    '<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--line)" stroke-width="2"/><path d="M12 3a9 9 0 019 9" stroke="var(--green)" stroke-width="2" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg>'+
+    '<b>楽天市場から最新情報を取得中...</b><span>少々お待ちください</span></div>';
+}
+
+/* エラー表示 */
+function showApiError(msg){
+  document.getElementById("grid").innerHTML =
+    '<div class="uc-empty">'+
+    '<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--line)" stroke-width="1.6"/><path d="M12 8v5M12 16h.01" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/></svg>'+
+    '<b>データ取得エラー</b><span>'+msg+'</span>'+
+    '<div><button onclick="showApiKeyModal()" style="margin-top:14px;font-size:13px;font-weight:700;color:var(--gold-deep);background:var(--cream-soft);padding:9px 18px;border-radius:999px;">APIキーを設定する</button></div></div>';
+}
+
+/* APIキー設定モーダル */
+function showApiKeyModal(){
+  var modal = document.getElementById("apiKeyModal");
+  if(!modal){
+    modal = document.createElement("div");
+    modal.id = "apiKeyModal";
+    modal.style.cssText = "position:fixed;inset:0;z-index:400;background:rgba(12,68,41,.5);display:flex;align-items:flex-end;justify-content:center;";
+    modal.innerHTML =
+      '<div style="background:#fff;border-radius:24px 24px 0 0;padding:28px 22px 40px;width:100%;max-width:480px;box-shadow:0 -10px 40px rgba(0,0,0,.2)">'+
+      '<div style="width:40px;height:4px;background:#e3efe3;border-radius:2px;margin:0 auto 20px;"></div>'+
+      '<h3 style="font-family:Outfit,sans-serif;font-weight:800;font-size:18px;margin-bottom:6px;">楽天APIキー設定</h3>'+
+      '<p style="font-size:12.5px;color:#7c8d81;margin-bottom:18px;">webservice.rakuten.co.jp で確認できます</p>'+
+      '<label style="font-size:12px;font-weight:800;color:#46594d;display:block;margin-bottom:5px;">Application ID</label>'+
+      '<input id="m_appid" value="'+RAKUTEN_APP_ID+'" placeholder="0a2e6455-..." style="width:100%;border:1.5px solid #e3efe3;border-radius:10px;padding:10px 13px;font-size:14px;margin-bottom:12px;font-family:monospace;outline:none;">'+
+      '<label style="font-size:12px;font-weight:800;color:#46594d;display:block;margin-bottom:5px;">Access Key</label>'+
+      '<input id="m_key" value="'+RAKUTEN_ACCESS_KEY+'" placeholder="pk_..." style="width:100%;border:1.5px solid #e3efe3;border-radius:10px;padding:10px 13px;font-size:14px;margin-bottom:12px;font-family:monospace;outline:none;">'+
+      '<label style="font-size:12px;font-weight:800;color:#46594d;display:block;margin-bottom:5px;">Affiliate ID（任意）</label>'+
+      '<input id="m_aff" value="'+RAKUTEN_AFFILIATE_ID+'" placeholder="5529f321..." style="width:100%;border:1.5px solid #e3efe3;border-radius:10px;padding:10px 13px;font-size:14px;margin-bottom:20px;font-family:monospace;outline:none;">'+
+      '<button onclick="saveApiKeys()" style="width:100%;background:var(--green);color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:12px;border:none;cursor:pointer;">保存して取得開始</button>'+
+      '<button onclick="document.getElementById(\'apiKeyModal\').remove()" style="width:100%;margin-top:10px;color:#7c8d81;font-size:13px;padding:10px;background:none;border:none;cursor:pointer;">キャンセル</button>'+
+      '</div>';
+    document.body.appendChild(modal);
+  } else {
+    modal.style.display = "flex";
+  }
+}
+
+function saveApiKeys(){
+  RAKUTEN_APP_ID       = document.getElementById("m_appid").value.trim();
+  RAKUTEN_ACCESS_KEY   = document.getElementById("m_key").value.trim();
+  RAKUTEN_AFFILIATE_ID = document.getElementById("m_aff").value.trim();
+  localStorage.setItem("r_app_id",       RAKUTEN_APP_ID);
+  localStorage.setItem("r_access_key",   RAKUTEN_ACCESS_KEY);
+  localStorage.setItem("r_affiliate_id", RAKUTEN_AFFILIATE_ID);
+  document.getElementById("apiKeyModal").remove();
+  fetchAllClubs();
+}
+
+/* 全キーワードを順番に取得してclubsを埋める */
+async function fetchAllClubs(){
+  if(!RAKUTEN_APP_ID || !RAKUTEN_ACCESS_KEY){
+    showApiError("APIキーが未設定です。右上の⚙️ボタンから設定してください。");
+    return;
+  }
+  showLoading();
+  clubs = [];
+  _idSeq = 0;
+
+  try {
+    for(var ki=0; ki<SEARCH_KEYWORDS.length; ki++){
+      var url = buildRakutenUrl(SEARCH_KEYWORDS[ki], 1);
+      var res = await fetch(url);
+      if(!res.ok){
+        var errData = await res.json().catch(function(){return {};});
+        throw new Error("HTTP "+res.status+" : "+JSON.stringify(errData));
+      }
+      var data = await res.json();
+      var items = (data.Items || []);
+      items.forEach(function(wrapper){
+        var item = wrapper.Item || wrapper;
+        clubs.push(convertItem(item));
+      });
+    }
+
+    clubsLoaded = true;
+
+    /* 重複除去（商品名が近いもの） */
+    var seen = {};
+    clubs = clubs.filter(function(c){
+      var key = c.model.slice(0,30);
+      if(seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+
+    /* popRankをリセット */
+    clubs.forEach(function(c,i){ c.popRank = i+1; });
+
+    /* メーカーチップを再構築 */
+    rebuildBrandChips();
+
+    /* 件数表示更新 */
+    var heroCount = document.getElementById("heroCount");
+    if(heroCount) heroCount.textContent = clubs.length.toLocaleString("ja-JP");
+
+    render();
+    buildStarter();
+
+  } catch(e) {
+    console.error(e);
+    showApiError(e.message || "通信エラーが発生しました");
+  }
+}
+
+/* メーカーチップを動的再構築 */
+function rebuildBrandChips(){
+  var brandChips = document.getElementById("brandChips");
+  if(!brandChips) return;
+  brandChips.innerHTML = "";
+  var brandList = [];
+  clubs.forEach(function(c){ if(brandList.indexOf(c.brand)<0 && c.brand!=="その他") brandList.push(c.brand); });
+  brandList.sort();
+  brandList.forEach(function(br){
+    var b = document.createElement("button");
+    b.className = "rchip"; b.textContent = br;
+    b.onclick = function(){
+      activeBrand = (activeBrand===br)?null:br;
+      brandChips.querySelectorAll(".rchip").forEach(function(c){c.classList.remove("on");});
+      if(activeBrand) b.classList.add("on");
+      render();
+    };
+    brandChips.appendChild(b);
+  });
+}
+
 var types = [
   {id:"all",label:"すべて"},{id:"beginner",label:"初心者向け"},{id:"driver",label:"ドライバー"},
   {id:"iron",label:"アイアン"},{id:"wedge",label:"ウェッジ"},{id:"putter",label:"パター"},{id:"set",label:"セット"}
@@ -548,22 +784,8 @@ var rankChips = document.getElementById("rankChips");
   rankChips.appendChild(b);
 });
 
-/* メーカーチップ（データから自動生成） */
+/* メーカーチップは fetchAllClubs 完了後に rebuildBrandChips() で生成 */
 var brandChips = document.getElementById("brandChips");
-var brandList = [];
-clubs.forEach(function(c){ if(brandList.indexOf(c.brand)<0) brandList.push(c.brand); });
-brandList.sort();
-brandList.forEach(function(br){
-  var b = document.createElement("button");
-  b.className = "rchip"; b.textContent = br;
-  b.onclick = function(){
-    activeBrand = (activeBrand===br)?null:br;
-    brandChips.querySelectorAll(".rchip").forEach(function(c){c.classList.remove("on");});
-    if(activeBrand) b.classList.add("on");
-    render();
-  };
-  brandChips.appendChild(b);
-});
 
 /* 検索窓 */
 var ucKw = document.getElementById("ucKw");
@@ -642,30 +864,39 @@ function render(){
     var off = Math.round((1 - c.lowest/c.retail)*100);
     var el = document.createElement("article");
     el.className = "club reveal";
+
+    /* サムネイル：楽天画像があればimg、なければSVGアイコン */
+    var thumbInner = c.imageUrl
+      ? '<img src="'+c.imageUrl+'" alt="'+c.model+'" style="width:100%;height:100%;object-fit:contain;padding:8px;" loading="lazy">'
+      : (typeIcon[c.type]||"");
+
+    /* 楽天リンク（アフィリエイトURLがあればそちらを使用） */
+    var linkUrl = c.affiliateUrl || c.itemUrl || "#";
+
     el.innerHTML =
-      '<div class="club-thumb">'+ (typeIcon[c.type]||"") +
+      '<a href="'+linkUrl+'" target="_blank" rel="noopener" style="display:contents;">'+
+      '<div class="club-thumb">'+ thumbInner +
         '<span class="club-rank" style="background:'+rankColor[c.rank]+'">ランク '+c.rank+'</span>'+
         (c.popRank<=10?'<span class="club-pop">人気 #'+c.popRank+'</span>':'')+
         (c.beginner?'<span class="club-beginner">初心者向け</span>':'')+
       '</div>'+
+      '</a>'+
       '<div class="club-body">'+
         '<div class="club-brand">'+c.brand+'</div>'+
-        '<div class="club-model">'+c.model+'</div>'+
+        '<a href="'+linkUrl+'" target="_blank" rel="noopener" style="color:inherit;"><div class="club-model">'+c.model+'</div></a>'+
         '<div class="club-meta">'+
-          '<span class="tag">'+c.year+'年</span>'+
-          (c.flex!=="—"?'<span class="tag">'+c.flex+'</span>':'')+
-          (c.loft!=="—"?'<span class="tag">'+c.loft+'</span>':'')+
+          '<span class="tag">楽天市場</span>'+
+          (c.shopName?'<span class="tag" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+c.shopName+'</span>':'')+
         '</div>'+
-        '<div class="club-rating"><span class="stars">'+stars(c.rating)+'</span> '+c.rating.toFixed(1)+' ('+c.reviews+'件)</div>'+
-        '<div class="club-ease"><span class="ease-label">やさしさ</span><span class="ease-bar"><span class="ease-fill" style="width:'+c.ease+'%"></span></span><span class="ease-num">'+c.ease+'</span></div>'+
+        (c.rating>0?'<div class="club-rating"><span class="stars">'+stars(c.rating)+'</span> '+c.rating.toFixed(1)+' ('+c.reviews+'件)</div>':'')+
+        '<div class="club-ease"><span class="ease-label">やさしさ推定</span><span class="ease-bar"><span class="ease-fill" style="width:'+c.ease+'%"></span></span><span class="ease-num">'+c.ease+'</span></div>'+
         '<div class="club-price">'+
-          '<div class="price-label">最安値</div>'+
-          '<div class="price-row"><span class="price-now">'+yen(c.lowest)+'</span><span class="price-retail">'+yen(c.retail)+'</span><span class="price-off">'+off+'%OFF</span></div>'+
-          '<div class="shop-count"><b>'+c.shopCount+'店舗</b>が在庫あり</div>'+
-          '<div class="club-save"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.3-7-11a7 7 0 0114 0c0 4.7-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/></svg> 新品より'+yen(c.retail-c.lowest)+'お得。練習場 約'+c.savePractice+'回ぶん！</div>'+
+          '<div class="price-label">楽天価格</div>'+
+          '<div class="price-row"><span class="price-now">'+yen(c.lowest)+'</span></div>'+
+          '<div class="shop-count">楽天市場で購入できます</div>'+
         '</div>'+
         '<div class="club-cta">'+
-          '<button class="btn-compare" data-id="'+c.id+'">最安値を比較する</button>'+
+          '<a href="'+linkUrl+'" target="_blank" rel="noopener" class="btn-compare" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">楽天で見る →</a>'+
           '<button class="btn-fav'+(favs[c.id]?" on":"")+'" data-fav="'+c.id+'" aria-label="お気に入り"><svg width="18" height="18" viewBox="0 0 24 24" fill="'+(favs[c.id]?"currentColor":"none")+'"><path d="M12 21s-7-4.5-9.5-8.5C.5 9 2 5 5.5 5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3C17 5 18.5 9 16.5 12.5 14 16.5 12 18 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>'+
         '</div>'+
       '</div>';
@@ -946,9 +1177,23 @@ document.addEventListener("click", function(e){
 })();
 
 updateFavCount();
-buildStarter();
-render();
+/* buildStarter / render は fetchAllClubs の完了後に呼ばれる */
+/* ページ読み込み時に楽天APIを自動起動 */
+fetchAllClubs();
 observeReveals();
+
+/* ⚙️ APIキー設定ボタンをヘッダーに追加 */
+(function(){
+  var actions = document.querySelector(".hd-actions");
+  if(actions){
+    var btn = document.createElement("button");
+    btn.title = "APIキー設定";
+    btn.style.cssText = "width:38px;height:38px;border-radius:10px;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-soft);cursor:pointer;font-size:18px;margin-right:6px;";
+    btn.innerHTML = "⚙️";
+    btn.onclick = showApiKeyModal;
+    actions.insertBefore(btn, actions.firstChild);
+  }
+})();
 </script>
 </body>
 </html>
