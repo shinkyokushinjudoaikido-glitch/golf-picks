@@ -303,6 +303,33 @@ a{color:inherit;text-decoration:none;}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:301;background:#fff;border-radius:24px 24px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.2);transform:translateY(100%);transition:transform .4s cubic-bezier(.5,0,0,1);max-height:88vh;overflow-y:auto;padding:8px 20px calc(28px + env(safe-area-inset-bottom));}
 .sheet.open{transform:translateY(0);}
 .sheet-handle{width:40px;height:4px;background:var(--line);border-radius:2px;margin:8px auto 16px;}
+
+/* ★ 「初めての方へ」CTAボタン（ページ上部） */
+.starter-cta-sec{padding:14px 0 4px;}
+.starter-cta{width:100%;display:flex;align-items:center;gap:13px;background:linear-gradient(135deg,var(--green),var(--green-deep));border-radius:var(--r-lg);padding:16px 18px;cursor:pointer;box-shadow:0 8px 24px rgba(35,163,91,.28);transition:transform .15s;text-align:left;}
+.starter-cta:active{transform:scale(.98);}
+.starter-cta-ico{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.2);display:grid;place-items:center;color:#fff;}
+.starter-cta-txt{flex:1;display:flex;flex-direction:column;gap:2px;color:#fff;}
+.starter-cta-txt b{font-size:15px;font-weight:800;}
+.starter-cta-txt small{font-size:12px;opacity:.92;}
+.starter-cta-arrow{flex:none;color:#fff;opacity:.85;}
+
+/* ★ 右下に浮くFAB */
+.starter-fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:200;display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--green-deep);color:#fff;border-radius:50%;width:62px;height:62px;justify-content:center;box-shadow:0 8px 22px rgba(12,68,41,.35);cursor:pointer;transition:transform .15s,opacity .25s;}
+.starter-fab:active{transform:scale(.92);}
+.starter-fab span{font-size:9.5px;font-weight:800;line-height:1;}
+.starter-fab.hidden{opacity:0;visibility:hidden;transform:scale(.8);}
+
+/* ★ 初めての方シート */
+.starter-sheet{padding-top:8px;}
+.starter-close{position:absolute;top:14px;right:16px;width:34px;height:34px;border-radius:50%;background:var(--bg-soft);display:grid;place-items:center;color:var(--ink-soft);cursor:pointer;z-index:2;}
+.starter-sheet-head{margin-bottom:16px;}
+.starter-sheet-head h2{font-family:var(--ff-display);font-size:clamp(19px,4.6vw,24px);font-weight:900;letter-spacing:-.01em;margin:11px 0 5px;}
+.starter-sheet-head>p{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.st-must{display:flex;gap:16px;flex-wrap:wrap;background:var(--green-soft);border-radius:var(--r-md);padding:13px 15px;margin-bottom:16px;}
+.st-must-grp{display:flex;align-items:center;gap:9px;}
+.st-must-lbl{font-size:12px;font-weight:800;color:var(--green-deep);}
+.st-must-chips{display:flex;gap:6px;}
 .sheet h3{font-family:var(--ff-display);font-size:18px;font-weight:800;line-height:1.3;margin-bottom:4px;}
 .sheet-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px;}
 .shop{display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--r-md);border:1px solid var(--line);margin-bottom:10px;transition:all .18s;}
@@ -357,30 +384,25 @@ a{color:inherit;text-decoration:none;}
     </div>
   </section>
 
-  <!-- ① 予算スライダー：この範囲で揃う一式 -->
-  <section class="starter">
+  <!-- ① 「初めての方へ」呼び出しボタン（ページ上部） -->
+  <section class="starter-cta-sec">
     <div class="wrap">
-      <div class="starter-card reveal">
-        <span class="starter-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> はじめての方へ</span>
-        <h2>予算で選ぶ、はじめてのクラブセット</h2>
-        <p>予算を選ぶと、その範囲で始められる初心者向けセットと、価格の相場感がわかります。</p>
-
-        <!-- 予算帯タブ -->
-        <div class="budget-tabs" id="budgetTabs">
-          <button class="budget-tab on" data-band="b1">〜2万円</button>
-          <button class="budget-tab" data-band="b2">2〜3万円台</button>
-          <button class="budget-tab" data-band="b3">4〜5万円台</button>
-          <button class="budget-tab" data-band="b4">6万円〜</button>
-        </div>
-
-        <!-- 相場ライン -->
-        <div class="market-line" id="marketLine"></div>
-
-        <!-- セットカード一覧 -->
-        <div class="starter-set" id="starterSet"></div>
-      </div>
+      <button class="starter-cta" id="openStarter">
+        <span class="starter-cta-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+        <span class="starter-cta-txt">
+          <b>初めてゴルフを始める方へ</b>
+          <small>予算からおすすめのクラブセットを探す</small>
+        </span>
+        <span class="starter-cta-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
     </div>
   </section>
+
+  <!-- 右下に浮く呼び出しボタン -->
+  <button class="starter-fab" id="openStarterFab" aria-label="初めての方へ">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+    <span>初めての方</span>
+  </button>
 
   <!-- ⑨ 専用入口：レフティ / レディース / シニア -->
   <section class="know-sec">
@@ -504,6 +526,50 @@ a{color:inherit;text-decoration:none;}
   <div class="sheet-sub" id="sheetSub"></div>
   <div id="sheetShops"></div>
   <div class="sheet-note">価格・送料・在庫状況は変動します。最新情報は各ショップでご確認ください。</div>
+</div>
+
+<!-- 「初めての方へ」ポップアップシート -->
+<div class="sheet-bd" id="starterBd"></div>
+<div class="sheet starter-sheet" id="starterSheet">
+  <div class="sheet-handle"></div>
+  <button class="starter-close" id="starterClose" aria-label="閉じる"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="starter-sheet-head">
+    <span class="starter-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> 初めての方へ</span>
+    <h2>予算で選ぶ、はじめてのクラブセット</h2>
+    <p>予算を選ぶと、その範囲で始められる初心者向けセットと、価格の相場感がわかります。</p>
+  </div>
+
+  <!-- 独自の利き手・性別（検索結果とは別物） -->
+  <div class="st-must">
+    <div class="st-must-grp">
+      <span class="st-must-lbl">利き手</span>
+      <div class="st-must-chips" id="stHandChips">
+        <button class="mchip on" data-val="right">右利き</button>
+        <button class="mchip" data-val="left">左利き</button>
+      </div>
+    </div>
+    <div class="st-must-grp">
+      <span class="st-must-lbl">性別</span>
+      <div class="st-must-chips" id="stGenderChips">
+        <button class="mchip on" data-val="mens">メンズ</button>
+        <button class="mchip" data-val="ladies">レディース</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 予算帯タブ -->
+  <div class="budget-tabs" id="budgetTabs">
+    <button class="budget-tab on" data-band="b1">〜2万円</button>
+    <button class="budget-tab" data-band="b2">2〜3万円台</button>
+    <button class="budget-tab" data-band="b3">4〜5万円台</button>
+    <button class="budget-tab" data-band="b4">6万円〜</button>
+  </div>
+
+  <!-- 相場ライン -->
+  <div class="market-line" id="marketLine"></div>
+
+  <!-- セットカード一覧 -->
+  <div class="starter-set" id="starterSet"></div>
 </div>
 
 <script>
@@ -931,7 +997,6 @@ function bindMustChips(containerId, key){
       mustOpts[key] = b.dataset.val;
       currentSearch.page = 1;  /* 条件が変わるので1ページ目から */
       fetchAllClubs();
-      loadStarterSets(true);   /* セット提案も条件に合わせて取り直す */
     };
   });
 }
@@ -1155,9 +1220,62 @@ var BUDGET_BANDS = {
 };
 var activeBand = "b1";
 
+/* セット提案シート専用の利き手・性別（検索結果のmustOptsとは別物） */
+var starterOpts = { hand:"right", gender:"mens" };
+function starterKeywords(){
+  var parts = [];
+  parts.push(starterOpts.gender==="ladies" ? "レディース" : "メンズ");
+  if(starterOpts.hand==="left") parts.push("左利き");
+  return parts.join(" ");
+}
+
 /* セット商品のキャッシュ（一度取得したら使い回す） */
 var starterSets = null;
 var starterLoading = false;
+var starterOpened = false;  /* シートを一度でも開いたか */
+
+/* シート開閉 */
+var starterSheet = document.getElementById("starterSheet");
+var starterBd = document.getElementById("starterBd");
+var starterFab = document.getElementById("openStarterFab");
+function openStarterSheet(){
+  starterBd.classList.add("open");
+  starterSheet.classList.add("open");
+  document.body.style.overflow = "hidden";
+  if(!starterOpened){ starterOpened = true; loadStarterSets(); }
+}
+function closeStarterSheet(){
+  starterBd.classList.remove("open");
+  starterSheet.classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.getElementById("openStarter").onclick = openStarterSheet;
+if(starterFab) starterFab.onclick = openStarterSheet;
+document.getElementById("starterClose").onclick = closeStarterSheet;
+starterBd.onclick = closeStarterSheet;
+
+/* FABはトップ付近では隠す（CTAボタンと重複するため） */
+addEventListener("scroll", function(){
+  if(!starterFab) return;
+  starterFab.classList.toggle("hidden", scrollY < 260);
+}, {passive:true});
+if(starterFab) starterFab.classList.add("hidden");
+
+/* シート内の独自セレクタ（利き手・性別） */
+function bindStarterChips(containerId, key){
+  var box = document.getElementById(containerId);
+  if(!box) return;
+  box.querySelectorAll(".mchip").forEach(function(b){
+    b.onclick = function(){
+      box.querySelectorAll(".mchip").forEach(function(c){c.classList.remove("on");});
+      b.classList.add("on");
+      starterOpts[key] = b.dataset.val;
+      loadStarterSets(true);  /* 条件変更で取り直し */
+    };
+  });
+}
+bindStarterChips("stHandChips", "hand");
+bindStarterChips("stGenderChips", "gender");
 
 /* 予算帯タブのクリック */
 document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(tab){
@@ -1169,7 +1287,7 @@ document.querySelectorAll("#budgetTabs .budget-tab").forEach(function(tab){
   };
 });
 
-/* 初心者向けセットを楽天から取得（セクション専用・1回だけ） */
+/* 初心者向けセットを楽天から取得（シート専用） */
 async function loadStarterSets(force){
   if((starterSets && !force) || starterLoading) return;
   if(force) starterSets = null;
@@ -1179,8 +1297,8 @@ async function loadStarterSets(force){
   starterSet.innerHTML = "";
 
   try {
-    /* 利き手・性別を反映したキーワード */
-    var setKeyword = "ゴルフ クラブ セット 初心者 " + mustKeywords();
+    /* シート独自の利き手・性別を反映したキーワード */
+    var setKeyword = "ゴルフ クラブ セット 初心者 " + starterKeywords();
     /* 価格順で広めに2ページ取得して予算帯ごとに振り分ける */
     var all = [];
     for(var pg=1; pg<=2; pg++){
