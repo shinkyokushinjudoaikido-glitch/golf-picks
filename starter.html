@@ -194,7 +194,7 @@ img{max-width:100%;display:block;}
   <div class="wrap hd-in">
     <a class="logo" href="index.html"><span class="logo-mark"><svg width="17" height="17" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#fff" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="#fff"/><circle cx="6.4" cy="6.4" r="1" fill="#fff"/><circle cx="11.6" cy="6.4" r="1" fill="#fff"/><circle cx="6.4" cy="11.6" r="1" fill="#fff"/><circle cx="11.6" cy="11.6" r="1" fill="#fff"/></svg></span><span class="logo-text">Golf <span>Picks</span></span></a>
     <nav class="hd-nav">
-      <a href="clubs.html">中古クラブ</a>
+      <a href="clubs.html">クラブを探す</a>
       <a href="starter.html" class="on">ゴルフをはじめる</a>
     </nav>
   </div>
@@ -386,7 +386,7 @@ img{max-width:100%;display:block;}
 <footer class="ft">
   <div class="ft-in">
     <div class="ft-logo">Golf <span>Picks</span></div>
-    <div class="ft-links"><a href="index.html">ホーム</a><a href="clubs.html">中古クラブ</a><a href="starter.html">ゴルフをはじめる</a></div>
+    <div class="ft-links"><a href="index.html">ホーム</a><a href="clubs.html">クラブを探す</a><a href="starter.html">ゴルフをはじめる</a></div>
     <div class="ft-copy">© 2026 Golf Picks.</div>
   </div>
 </footer>
@@ -419,6 +419,18 @@ function convertItem(item){
     rating: rating, reviews: reviews, hasReview: hasReview,
     lowest: price, imageUrl: img, itemUrl: url, affiliateUrl: affiliateUrl
   };
+}
+
+/* クラブセットらしい商品かを判定（小物セットを除外） */
+function isClubSet(c){
+  var n = (c.modelFull || c.model || "");
+  /* まず「クラブセットらしい語」を含むか（フルセット/○本/クラブセット等） */
+  var OK = /(クラブ\s*セット|クラブセット|フルセット|ハーフセット|\d+\s*本|本セット|ドライバー.*アイアン|アイアン.*セット|メンズセット|レディースセット)/i;
+  if(!OK.test(n)) return false;
+  /* クラブセットらしい語があっても、明らかに小物単体なら除外 */
+  var NG = /(靴下|ソックス|ボール\s*\d|ティー\s*セット|マーカー|グローブ|手袋|ウェア|シャツ|パンツ|サンバイザー|タオル|お手入れ|クリーナ|練習\s*マット|練習\s*ネット|練習器具|素振り)/i;
+  if(NG.test(n)) return false;
+  return true;
 }
 
 /* ===================================================
@@ -480,10 +492,13 @@ async function loadStarterSets(){
   starterSet.innerHTML = "";
   try {
     var band = BUDGET_BANDS[activeBand];
-    var setKeyword = "ゴルフ クラブ セット " + starterKeywords();
-    var priceOpts = { minPrice: Math.max(band.rMin, 3000), maxPrice: band.rMax };
+    /* 「クラブセット」を1語にし、一式が出やすいキーワードに */
+    var setKeyword = "ゴルフ クラブセット フルセット " + starterKeywords();
+    /* クラブセットは1万円以上が中心。安すぎる小物セットを避ける */
+    var floor = activeBand==="b1" ? 8000 : band.rMin;
+    var priceOpts = { minPrice: Math.max(floor, 8000), maxPrice: band.rMax };
     var all = [];
-    for(var pg=1; pg<=2; pg++){
+    for(var pg=1; pg<=3; pg++){
       var url = buildApiUrl(setKeyword, pg, "+itemPrice", priceOpts);
       var res = await fetch(url);
       var data = await res.json();
@@ -492,6 +507,8 @@ async function loadStarterSets(){
       items.forEach(function(w){ var it = w.Item || w; all.push(convertItem(it)); });
       if(items.length < 30) break;
     }
+    /* クラブセットらしい商品だけ残す（靴下・ボール等の小物セットを除外） */
+    all = all.filter(isClubSet);
     var seen = {};
     var list = all.filter(function(c){ var k=c.model.slice(0,30); if(seen[k]) return false; seen[k]=true; return true; });
     starterCache[key] = list;
@@ -528,7 +545,7 @@ function renderStarter(){
   }
   if(!inBand.length){ starterSet.innerHTML = ""; return; }
   var html = "";
-  inBand.slice(0,5).forEach(function(c){
+  inBand.slice(0,30).forEach(function(c){
     var link = c.affiliateUrl || c.itemUrl || "#";
     var isUsed = /中古|used/i.test(c.modelFull||c.model);
     var condTag = isUsed ? '<span class="set-card-tag used">中古</span>' : '<span class="set-card-tag new">新品</span>';
