@@ -15,8 +15,12 @@ export default async function handler(req, res) {
   const ENDPOINT = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20220601";
 
   // 検索キーワード（クライアントから受け取る or デフォルト）
-  const keyword = (req.query.keyword || "中古 ドライバー").toString();
+  const keyword = (req.query.keyword || "中古 ゴルフ クラブ").toString();
   const page    = (req.query.page || "1").toString();
+  // 並び順（クライアントから受け取る。許可された値のみ通す）
+  const allowedSorts = ["+itemPrice", "-itemPrice", "-updateTimestamp", "+reviewCount", "-reviewCount", "standard"];
+  let sort = (req.query.sort || "standard").toString();
+  if (!allowedSorts.includes(sort)) sort = "standard";
 
   const params = new URLSearchParams({
     applicationId: APP_ID,
@@ -25,7 +29,7 @@ export default async function handler(req, res) {
     genreId:       "101070",   // スポーツ＞ゴルフ
     hits:          "30",
     page:          page,
-    sort:          "+itemPrice",
+    sort:          sort,
     imageFlag:     "1"
   });
   if (AFFILIATE_ID) params.set("affiliateId", AFFILIATE_ID);
